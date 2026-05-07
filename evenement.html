@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nuit des Sons Open Air #4 : quatre artistes, scène acoustique alimentée à l'énergie solaire, au Parc des Berges de VillaNova. Samedi 9 mai 2026.">
+    <meta name="theme-color" content="#1B4D3E">
+    <title>Nuit des Sons Open Air #4 - VillaNova</title>
+
+    <!-- Polices Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Lien d'évitement pour l'accessibilité -->
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="VillaNova - retour à l'accueil">
+                <span class="logo-icon" aria-hidden="true">V</span>
+                <span class="logo-text">VillaNova</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navigation principale">
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="evenements.html" aria-current="page">Événements</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="carte.html">Carte</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="evenements.html" class="btn-icon" aria-label="Rechercher un événement">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.3-4.3"/>
+                    </svg>
+                </a>
+                <a href="creer-compte.html" class="btn btn-ghost">Créer un compte</a>
+                <a href="connexion.html" class="btn btn-primary">Connexion</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- Fil d'Ariane -->
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="evenements.html">Événements</a></li>
+                    <li><a href="concerts.html">Concerts</a></li>
+                    <li aria-current="page">Nuit des Sons Open Air #4</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- ARTICLE PRINCIPAL : la fiche événement -->
+        <article class="event-page" aria-labelledby="event-title">
+
+            <!-- En-tête de l'événement -->
+            <header class="event-header">
+                <div class="container">
+                    <div class="event-tags">
+                        <span class="tag tag-concert">Concert</span>
+                        <span class="tag tag-eco">Éco-événement</span>
+                    </div>
+
+                    <h1 id="event-title" class="event-title">
+                        Nuit des Sons<br>
+                        <i class="italic">Open Air</i> #4
+                    </h1>
+
+                    <p class="event-lede">
+                        Quatre artistes, une scène acoustique alimentée par énergie solaire, et la Loire en toile de fond. La quatrième édition de la Nuit des Sons promet une soirée intime sous les étoiles.
+                    </p>
+
+                    <dl class="event-meta">
+                        <div>
+                            <dt>Date</dt>
+                            <dd>
+                                <time datetime="2026-05-09T20:00">Samedi 9 mai 2026, 20h00</time>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>Lieu</dt>
+                            <dd>Parc des Berges, VillaNova</dd>
+                        </div>
+                        <div>
+                            <dt>Durée</dt>
+                            <dd>3h environ</dd>
+                        </div>
+                        <div>
+                            <dt>Tarif</dt>
+                            <dd>18 € · gratuit pour les -18 ans</dd>
+                        </div>
+                    </dl>
+
+                    <div class="event-cta">
+                        <a href="reservation.html" class="btn btn-primary">Réserver ma place</a>
+                        <button type="button" class="btn btn-ghost" aria-label="Ajouter à mes favoris">
+                            ♡ Ajouter aux favoris
+                        </button>
+                        <button type="button" class="btn btn-ghost" aria-label="Partager cet événement">
+                            Partager
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Image principale (au-dessus de la ligne de flottaison sur mobile) -->
+            <figure class="event-cover">
+                <picture>
+                    <source type="image/avif"
+                            media="(max-width: 768px)"
+                            srcset="assets/img/event-nuit-sons-cover-mobile.avif">
+                    <source type="image/webp"
+                            media="(max-width: 768px)"
+                            srcset="assets/img/event-nuit-sons-cover-mobile.webp">
+                    <source type="image/avif"
+                            srcset="assets/img/event-nuit-sons-cover.avif">
+                    <source type="image/webp"
+                            srcset="assets/img/event-nuit-sons-cover.webp">
+                    <img src="assets/img/event-nuit-sons-cover.webp"
+                         alt="Scène acoustique en plein air au Parc des Berges, illuminée par des guirlandes lumineuses, avec la Loire en arrière-plan au coucher du soleil"
+                         width="1600" height="900"
+                         fetchpriority="high"
+                         decoding="async">
+                </picture>
+                <figcaption>Édition 2026 de la Nuit des Sons, Parc des Berges (VillaNova)</figcaption>
+            </figure>
+
+
+            <!-- Corps de la fiche : description + barre latérale -->
+            <div class="container event-body">
+
+                <div class="event-main">
+
+                    <!-- Présentation -->
+                    <section aria-labelledby="presentation-title">
+                        <h2 id="presentation-title">L'événement</h2>
+                        <p>
+                            Pour sa quatrième édition, la <strong>Nuit des Sons</strong> revient au Parc des Berges avec une formule resserrée : quatre artistes en acoustique, sur une scène 100 % autonome alimentée par panneaux solaires et batteries de stockage. Pas d'amplification massive, pas de fumigènes, pas de gobelets jetables. Une soirée à hauteur d'humain.
+                        </p>
+                        <p>
+                            Le public est invité à venir avec sa propre couverture pour s'installer sur les pelouses. Restauration locale assurée par trois food-trucks partenaires de la <abbr title="Société Coopérative d'Intérêt Collectif">SCIC</abbr> agricole de VillaNova.
+                        </p>
+                    </section>
+
+                    <!-- Bande-annonce vidéo -->
+                    <section aria-labelledby="teaser-title">
+                        <h2 id="teaser-title">Le teaser de l'édition</h2>
+                        <p>
+                            Retour en images sur l'édition 2025 et avant-goût de ce qui vous attend cette année.
+                        </p>
+
+                        <figure class="event-video">
+                            <video poster="assets/img/event-nuit-sons-teaser-poster.webp"
+                                   preload="metadata"
+                                   controls
+                                   playsinline
+                                   aria-label="Teaser de la Nuit des Sons Open Air, édition 2026">
+                                <source src="assets/video/event-nuit-sons-teaser.webm" type="video/webm">
+                                <source src="assets/video/event-nuit-sons-teaser.mp4" type="video/mp4">
+                                <p>
+                                    Votre navigateur ne prend pas en charge la lecture vidéo.
+                                    <a href="assets/video/event-nuit-sons-teaser.mp4">Télécharger le teaser</a>
+                                    (MP4, ~4 Mo).
+                                </p>
+                            </video>
+                            <figcaption>Teaser officiel · 1 min 12 · Réalisation : Studio Mistral</figcaption>
+                        </figure>
+                    </section>
+
+                    <!-- Programmation -->
+                    <section aria-labelledby="lineup-title">
+                        <h2 id="lineup-title">La programmation</h2>
+                        <ol class="lineup-list">
+                            <li>
+                                <article>
+                                    <picture>
+                                        <source type="image/avif"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-mara-lou-mobile.avif">
+                                        <source type="image/webp"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-mara-lou-mobile.webp">
+                                        <source type="image/avif"
+                                                srcset="assets/img/artist-mara-lou.avif">
+                                        <source type="image/webp"
+                                                srcset="assets/img/artist-mara-lou.webp">
+                                        <img src="assets/img/artist-mara-lou.webp"
+                                             alt="Portrait de Mara Lou, chanteuse française"
+                                             width="400" height="400"
+                                             loading="lazy"
+                                             decoding="async">
+                                    </picture>
+                                    <div>
+                                        <p class="lineup-time"><time datetime="2026-05-09T20:15">20h15</time></p>
+                                        <h3>Mara Lou</h3>
+                                        <p>Folk introspective · Lyon</p>
+                                    </div>
+                                </article>
+                            </li>
+                            <li>
+                                <article>
+                                    <picture>
+                                        <source type="image/avif"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-kosmik-mobile.avif">
+                                        <source type="image/webp"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-kosmik-mobile.webp">
+                                        <source type="image/avif"
+                                                srcset="assets/img/artist-kosmik.avif">
+                                        <source type="image/webp"
+                                                srcset="assets/img/artist-kosmik.webp">
+                                        <img src="assets/img/artist-kosmik.webp"
+                                             alt="Portrait du duo Kosmik en répétition"
+                                             width="400" height="400"
+                                             loading="lazy"
+                                             decoding="async">
+                                    </picture>
+                                    <div>
+                                        <p class="lineup-time"><time datetime="2026-05-09T21:00">21h00</time></p>
+                                        <h3>Kosmik</h3>
+                                        <p>Néo-soul · Marseille</p>
+                                    </div>
+                                </article>
+                            </li>
+                            <li>
+                                <article>
+                                    <picture>
+                                        <source type="image/avif"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-yann-eole-mobile.avif">
+                                        <source type="image/webp"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-yann-eole-mobile.webp">
+                                        <source type="image/avif"
+                                                srcset="assets/img/artist-yann-eole.avif">
+                                        <source type="image/webp"
+                                                srcset="assets/img/artist-yann-eole.webp">
+                                        <img src="assets/img/artist-yann-eole.webp"
+                                             alt="Yann Éole, chanteur breton"
+                                             width="400" height="400"
+                                             loading="lazy"
+                                             decoding="async">
+                                    </picture>
+                                    <div>
+                                        <p class="lineup-time"><time datetime="2026-05-09T21:45">21h45</time></p>
+                                        <h3>Yann Éole</h3>
+                                        <p>Chanson française · Rennes</p>
+                                    </div>
+                                </article>
+                            </li>
+                            <li>
+                                <article>
+                                    <picture>
+                                        <source type="image/avif"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-collectif-mobile.avif">
+                                        <source type="image/webp"
+                                                media="(max-width: 768px)"
+                                                srcset="assets/img/artist-collectif-mobile.webp">
+                                        <source type="image/avif"
+                                                srcset="assets/img/artist-collectif.avif">
+                                        <source type="image/webp"
+                                                srcset="assets/img/artist-collectif.webp">
+                                        <img src="assets/img/artist-collectif.webp"
+                                             alt="Le Collectif Lumen sur scène"
+                                             width="400" height="400"
+                                             loading="lazy"
+                                             decoding="async">
+                                    </picture>
+                                    <div>
+                                        <p class="lineup-time"><time datetime="2026-05-09T22:30">22h30</time></p>
+                                        <h3>Collectif Lumen</h3>
+                                        <p>Jazz manouche · VillaNova</p>
+                                    </div>
+                                </article>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <!-- Engagement éco -->
+                    <section class="event-eco" aria-labelledby="eco-event-title">
+                        <h2 id="eco-event-title">Un événement éco-conçu</h2>
+                        <ul role="list">
+                            <li>Scène alimentée à 100 % par énergie solaire (panneaux + batteries de stockage)</li>
+                            <li>Vaisselle consignée et compostable, zéro plastique à usage unique</li>
+                            <li>Restauration 100 % locale, à moins de 30 km du site</li>
+                            <li>Site accessible à pied, à vélo, et desservi par le tram (ligne T1, arrêt « Les Berges »)</li>
+                            <li>Bilan carbone publié sous 30 jours après l'événement</li>
+                        </ul>
+                    </section>
+
+                    <!-- Accessibilité -->
+                    <section class="event-access" aria-labelledby="access-title">
+                        <h2 id="access-title">Accessibilité</h2>
+                        <p>
+                            Le site est entièrement accessible aux personnes à mobilité réduite. Une zone réservée est prévue à proximité immédiate de la scène, avec accompagnant gratuit.
+                        </p>
+                        <ul role="list">
+                            <li>Concert traduit en <abbr title="Langue des Signes Française">LSF</abbr> par l'association Mains Ouvertes</li>
+                            <li>Boucle magnétique disponible sur demande</li>
+                            <li>Tarif solidaire : 5 € sur présentation d'un justificatif (étudiants, RSA, demandeurs d'emploi)</li>
+                        </ul>
+                        <p>
+                            Pour toute demande spécifique, contactez le service culturel à
+                            <a href="mailto:culture@villanova.fr">culture@villanova.fr</a>.
+                        </p>
+                    </section>
+
+                </div>
+
+
+                <!-- Barre latérale : carte, infos pratiques -->
+                <aside class="event-aside" aria-label="Informations pratiques">
+
+                    <section class="card-info">
+                        <h2>Comment venir ?</h2>
+                        <address>
+                            <strong>Parc des Berges</strong><br>
+                            12 quai de la Loire<br>
+                            45000 VillaNova
+                        </address>
+
+                        <h3>Tram</h3>
+                        <p>Ligne T1 · arrêt « Les Berges » (3 min à pied)</p>
+
+                        <h3>Vélo</h3>
+                        <p>Stationnement sécurisé pour 200 vélos à l'entrée du parc</p>
+
+                        <h3>Voiture</h3>
+                        <p>Parking-relais conseillé : place de la Mairie + tram T1</p>
+
+                        <a href="carte.html?lieu=parc-berges" class="btn btn-ghost">Voir sur la carte</a>
+                    </section>
+
+                    <section class="card-info">
+                        <h2>Dates voisines</h2>
+                        <ul role="list" class="related-events">
+                            <li>
+                                <a href="evenement.html">
+                                    <time datetime="2026-05-10">Dim. 10 mai</time>
+                                    <span>Brunch musical au Parc des Berges</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="evenement.html">
+                                    <time datetime="2026-05-15">Ven. 15 mai</time>
+                                    <span>Le Tartuffe, version 2026</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="evenement.html">
+                                    <time datetime="2026-05-17">Dim. 17 mai</time>
+                                    <span>Atelier sérigraphie zéro déchet</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="card-info card-organizer">
+                        <h2>L'organisateur</h2>
+                        <p>
+                            <strong>Direction de la Culture</strong><br>
+                            Mairie de VillaNova
+                        </p>
+                        <p>
+                            <a href="mailto:culture@villanova.fr">culture@villanova.fr</a><br>
+                            <a href="tel:+33245000000">02 45 00 00 00</a>
+                        </p>
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </article>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo logo-footer" aria-label="VillaNova - retour à l'accueil">
+                        <span class="logo-icon" aria-hidden="true">V</span>
+                        <span class="logo-text">VillaNova</span>
+                    </a>
+                    <p>
+                        La plateforme culturelle officielle de la Ville. Centralise concerts, expositions, spectacles et ateliers toute l'année, en accès libre.
+                    </p>
+                    <ul class="socials" aria-label="Réseaux sociaux">
+                        <li><a href="#" aria-label="VillaNova sur Instagram">IG</a></li>
+                        <li><a href="#" aria-label="VillaNova sur Facebook">FB</a></li>
+                        <li><a href="#" aria-label="VillaNova sur YouTube">YT</a></li>
+                        <li><a href="#" aria-label="VillaNova sur Mastodon">@</a></li>
+                    </ul>
+                </div>
+
+                <nav class="footer-cols" aria-label="Liens du pied de page">
+                    <div class="footer-column">
+                        <h3>Découvrir</h3>
+                        <ul>
+                            <li><a href="evenements.html">Tous les événements</a></li>
+                            <li><a href="categories.html">Catégories</a></li>
+                            <li><a href="carte.html">Carte interactive</a></li>
+                            <li><a href="articles.html">Articles & dossiers</a></li>
+                            <li><a href="calendrier.html">Calendrier officiel</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Pratique</h3>
+                        <ul>
+                            <li><a href="compte.html">Mon compte VillaNova</a></li>
+                            <li><a href="tarifs.html">Tarifs solidaires</a></li>
+                            <li><a href="accessibilite.html">Accessibilité</a></li>
+                            <li><a href="pass-jeunes.html">Pass culture jeunes</a></li>
+                            <li><a href="faq.html">Foire aux questions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>La Ville</h3>
+                        <ul>
+                            <li><a href="contact.html">Contact mairie</a></li>
+                            <li><a href="culture.html">Service culturel</a></li>
+                            <li><a href="partenaires.html">Devenir partenaire</a></li>
+                            <li><a href="mecenat.html">Mécénat & subventions</a></li>
+                            <li><a href="presse.html">Presse</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Mentions</h3>
+                        <ul>
+                            <li><a href="mentions.html">Mentions légales</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+                            <li><a href="rgaa.html">Déclaration d'accessibilité</a></li>
+                            <li><a href="cookies.html">Gestion des cookies</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <p class="footer-wordmark" aria-hidden="true">VillaNova<span>.</span></p>
+
+            <div class="footer-bottom">
+                <small>© 2026 Mairie de VillaNova Direction de la Culture</small>
+                <small>● Site éco-conçu · 0,8 g CO₂/page</small>
+                <small><a href="rgaa.html">Accessibilité : conforme RGAA 4.1</a></small>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
