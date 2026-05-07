@@ -22,14 +22,14 @@
     <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
-            <a href="#accueil" class="logo" aria-label="VillaNova - retour à l'accueil">
+            <a href="index.html" class="logo" aria-label="VillaNova - retour à l'accueil">
                 <span class="logo-icon" aria-hidden="true">V</span>
                 <span class="logo-text">VillaNova</span>
             </a>
 
             <nav class="main-nav" aria-label="Navigation principale">
                 <ul class="nav-links">
-                    <li><a href="#accueil" aria-current="page">Accueil</a></li>
+                    <li><a href="index.html" aria-current="page">Accueil</a></li>
                     <li><a href="#evenements">Événements</a></li>
                     <li><a href="#categories">Catégories</a></li>
                     <li><a href="#carte">Carte</a></li>
@@ -38,7 +38,7 @@
             </nav>
 
             <div class="header-actions">
-                <button type="button" class="btn-icon" aria-label="Rechercher un événement">
+                <button type="submit" form="hero-search" class="btn-icon" aria-label="Rechercher un événement">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="m21 21-4.3-4.3"/>
@@ -54,36 +54,49 @@
 
         <!-- HERO -->
         <section id="accueil" class="hero" aria-labelledby="hero-title">
-            <picture>
-                <source media="(max-width: 768px)"
-                        srcset="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80&auto=format&fit=crop&fm=webp">
-                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1800&q=85&auto=format&fit=crop&fm=webp"
-                     alt="Foule lors d'un festival en plein air à VillaNova"
-                     width="1800" height="1200"
-                     class="hero-bg">
-            </picture>
+            <video class="hero-bg"
+                   poster="assets/img/hero-poster.webp"
+                   preload="metadata"
+                   muted
+                   loop
+                   playsinline
+                   controls
+                   aria-label="Survol aérien de la ville de VillaNova">
+                <source src="assets/video/hero-villanova.webm" type="video/webm">
+                <source src="assets/video/hero-villanova.mp4" type="video/mp4">
+                <track kind="captions"
+                       src="assets/video/hero-villanova.fr.vtt"
+                       srclang="fr"
+                       label="Français"
+                       default>
+                <p>
+                    Votre navigateur ne prend pas en charge la lecture vidéo.
+                    <a href="assets/video/hero-villanova.mp4">Télécharger la vidéo</a>
+                    (MP4, ~5 Mo) pour la visionner.
+                </p>
+            </video>
 
             <div class="hero-overlay"></div>
 
             <div class="hero-content">
                 <p class="hero-eyebrow">Semaine du 9 au 17 mai · 128 événements en cours</p>
                 <h1 id="hero-title" class="hero-title">
-                    La culture<br> <em>vit</em> ici.
+                    La culture<br> <i class="italic">vit</i> ici.
                 </h1>
                 <p class="hero-lede">
                     Découvrez tout ce qui vibre à VillaNova cette semaine concerts, expositions, ateliers, spectacles. Un seul endroit, toute la programmation.
                 </p>
 
                 <!-- Barre de recherche -->
-                <form class="search-bar" role="search" aria-label="Rechercher un événement">
+                <form id="hero-search" class="search-bar" role="search" action="evenements.html" method="get" aria-label="Rechercher un événement">
                     <label class="search-field">
                         <span class="field-label">Date</span>
                         <select name="date">
                             <option value="">Toutes les dates</option>
-                            <option>Aujourd'hui</option>
-                            <option>Demain</option>
-                            <option>Cette semaine</option>
-                            <option>Ce week-end</option>
+                            <option value="aujourdhui">Aujourd'hui</option>
+                            <option value="demain">Demain</option>
+                            <option value="semaine">Cette semaine</option>
+                            <option value="weekend">Ce week-end</option>
                         </select>
                     </label>
 
@@ -91,11 +104,11 @@
                         <span class="field-label">Catégorie</span>
                         <select name="category">
                             <option value="">Toutes les catégories</option>
-                            <option>Concerts</option>
-                            <option>Expositions</option>
-                            <option>Théâtre</option>
-                            <option>Festivals</option>
-                            <option>Ateliers</option>
+                            <option value="concerts">Concerts</option>
+                            <option value="expos">Expositions</option>
+                            <option value="theatre">Théâtre</option>
+                            <option value="festivals">Festivals</option>
+                            <option value="ateliers">Ateliers</option>
                         </select>
                     </label>
 
@@ -103,9 +116,9 @@
                         <span class="field-label">Lieu</span>
                         <select name="location">
                             <option value="">Tout VillaNova</option>
-                            <option>Centre-ville</option>
-                            <option>Quartier des Berges</option>
-                            <option>Quartier ancien</option>
+                            <option value="centre">Centre-ville</option>
+                            <option value="berges">Quartier des Berges</option>
+                            <option value="ancien">Quartier ancien</option>
                         </select>
                     </label>
 
@@ -120,112 +133,167 @@
             <div class="container">
                 <header class="section-header">
                     <p class="eyebrow">À l'affiche cette semaine</p>
-                    <h2 id="featured-title">Sélection <em>de la rédac'</em></h2>
+                    <h2 id="featured-title">Sélection <i class="italic">de la rédac'</i></h2>
                     <a href="evenements.html" class="section-link">Voir les 128 événements →</a>
                 </header>
 
                 <ul class="featured-grid" role="list">
                     <li>
                         <article class="card card-large">
-                            <a href="evenement.html">
-                                <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=900&q=80&auto=format&fit=crop&fm=webp"
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-nuit-sons-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-nuit-sons-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-nuit-sons.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-nuit-sons.webp">
+                                <img src="assets/img/featured/event-nuit-sons.webp"
                                      alt="Scène acoustique en plein air au bord de la Loire"
                                      width="900" height="600"
-                                     loading="lazy">
-                                <div class="card-body">
-                                    <span class="tag tag-concert">Concert</span>
-                                    <span class="tag tag-eco">Éco</span>
-                                    <p class="card-meta">Sam. 9 mai · 20h00</p>
-                                    <h3>Nuit des Sons Open Air #4</h3>
-                                    <p class="card-desc">Quatre artistes, une scène acoustique alimentée par énergie solaire, et la Loire en toile de fond.</p>
-                                    <p class="card-footer">
-                                        <span>Parc des Berges</span>
-                                        <span class="card-price">18€</span>
-                                    </p>
-                                </div>
-                            </a>
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-concert">Concert</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Sam. 9 mai · 20h00</p>
+                                <h3><a href="evenement.html">Nuit des Sons Open Air #4</a></h3>
+                                <p class="card-desc">Quatre artistes, une scène acoustique alimentée par énergie solaire, et la Loire en toile de fond.</p>
+                                <p class="card-footer">
+                                    <span>Parc des Berges</span>
+                                    <span class="card-price">18€</span>
+                                </p>
+                            </div>
                         </article>
                     </li>
 
                     <li>
                         <article class="card">
-                            <a href="evenement.html">
-                                <img src="https://images.unsplash.com/photo-1545989253-02cc26577f88?w=600&q=80&auto=format&fit=crop&fm=webp"
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-sara-berthier-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-sara-berthier-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-sara-berthier.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-sara-berthier.webp">
+                                <img src="assets/img/featured/event-sara-berthier.webp"
                                      alt="Vue d'une exposition de peinture contemporaine"
                                      width="600" height="400"
-                                     loading="lazy">
-                                <div class="card-body">
-                                    <span class="tag tag-expo">Exposition</span>
-                                    <p class="card-meta">Jusqu'au 12 juin · 10h–18h</p>
-                                    <h3>Lumière sur Sara Berthier</h3>
-                                    <p class="card-footer">
-                                        <span>Musée des Beaux-Arts</span>
-                                        <span class="card-price card-price-free">Gratuit</span>
-                                    </p>
-                                </div>
-                            </a>
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-expo">Exposition</span>
+                                <p class="card-meta">Jusqu'au 12 juin · 10h–18h</p>
+                                <h3><a href="evenement.html">Lumière sur Sara Berthier</a></h3>
+                                <p class="card-footer">
+                                    <span>Musée des Beaux-Arts</span>
+                                    <span class="card-price card-price-free">Gratuit</span>
+                                </p>
+                            </div>
                         </article>
                     </li>
 
                     <li>
                         <article class="card">
-                            <a href="evenement.html">
-                                <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&q=80&auto=format&fit=crop&fm=webp"
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-tartuffe-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-tartuffe-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-tartuffe.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-tartuffe.webp">
+                                <img src="assets/img/featured/event-tartuffe.webp"
                                      alt="Rideau rouge de scène de théâtre"
                                      width="600" height="400"
-                                     loading="lazy">
-                                <div class="card-body">
-                                    <span class="tag tag-theatre">Théâtre</span>
-                                    <p class="card-meta">Ven. 15 mai · 20h30</p>
-                                    <h3>Le Tartuffe, version 2026</h3>
-                                    <p class="card-footer">
-                                        <span>Théâtre Mitterrand</span>
-                                        <span class="card-price">24€</span>
-                                    </p>
-                                </div>
-                            </a>
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-theatre">Théâtre</span>
+                                <p class="card-meta">Ven. 15 mai · 20h30</p>
+                                <h3><a href="evenement.html">Le Tartuffe, version 2026</a></h3>
+                                <p class="card-footer">
+                                    <span>Théâtre Mitterrand</span>
+                                    <span class="card-price">24€</span>
+                                </p>
+                            </div>
                         </article>
                     </li>
 
                     <li>
                         <article class="card">
-                            <a href="evenement.html">
-                                <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=600&q=80&auto=format&fit=crop&fm=webp"
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-serigraphie-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-serigraphie-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-serigraphie.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-serigraphie.webp">
+                                <img src="assets/img/featured/event-serigraphie.webp"
                                      alt="Atelier de sérigraphie textile"
                                      width="600" height="400"
-                                     loading="lazy">
-                                <div class="card-body">
-                                    <span class="tag tag-atelier">Atelier</span>
-                                    <span class="tag tag-eco">Éco</span>
-                                    <p class="card-meta">Dim. 17 mai · 14h–17h</p>
-                                    <h3>Atelier sérigraphie zéro déchet</h3>
-                                    <p class="card-footer">
-                                        <span>Maison des Arts</span>
-                                        <span class="card-price">12€</span>
-                                    </p>
-                                </div>
-                            </a>
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-atelier">Atelier</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Dim. 17 mai · 14h–17h</p>
+                                <h3><a href="evenement.html">Atelier sérigraphie zéro déchet</a></h3>
+                                <p class="card-footer">
+                                    <span>Maison des Arts</span>
+                                    <span class="card-price">12€</span>
+                                </p>
+                            </div>
                         </article>
                     </li>
 
                     <li>
                         <article class="card">
-                            <a href="evenement.html">
-                                <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=600&q=80&auto=format&fit=crop&fm=webp"
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-bouge-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-bouge-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-bouge.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-bouge.webp">
+                                <img src="assets/img/featured/event-bouge.webp"
                                      alt="Danseuse contemporaine en mouvement"
                                      width="600" height="400"
-                                     loading="lazy">
-                                <div class="card-body">
-                                    <span class="tag tag-danse">Danse</span>
-                                    <span class="tag tag-eco">Éco</span>
-                                    <p class="card-meta">Sam.–Dim. 9–10 mai · Dès 14h</p>
-                                    <h3>Festival Bouge ! Danse contemporaine</h3>
-                                    <p class="card-footer">
-                                        <span>Place Centrale</span>
-                                        <span class="card-price card-price-free">Gratuit</span>
-                                    </p>
-                                </div>
-                            </a>
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-danse">Danse</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Sam.–Dim. 9–10 mai · Dès 14h</p>
+                                <h3><a href="evenement.html">Festival Bouge ! Danse contemporaine</a></h3>
+                                <p class="card-footer">
+                                    <span>Place Centrale</span>
+                                    <span class="card-price card-price-free">Gratuit</span>
+                                </p>
+                            </div>
                         </article>
                     </li>
                 </ul>
@@ -248,7 +316,7 @@
                     <li>
                         <a href="#" class="mood-card mood-poser">
                             <span class="mood-num">01</span>
-                            <h3>Me poser<em>.</em></h3>
+                            <h3>Me poser<span aria-hidden="true">.</span></h3>
                             <p>Cinéma, lectures, jazz feutré</p>
                             <span class="mood-link">Voir la sélection →</span>
                         </a>
@@ -256,7 +324,7 @@
                     <li>
                         <a href="#" class="mood-card mood-vibrer">
                             <span class="mood-num">02</span>
-                            <h3>Vibrer<em>.</em></h3>
+                            <h3>Vibrer<span aria-hidden="true">.</span></h3>
                             <p>Concerts, clubs, scènes électro</p>
                             <span class="mood-link">Voir la sélection →</span>
                         </a>
@@ -264,7 +332,7 @@
                     <li>
                         <a href="#" class="mood-card mood-decouvrir">
                             <span class="mood-num">03</span>
-                            <h3>Découvrir<em>.</em></h3>
+                            <h3>Découvrir<span aria-hidden="true">.</span></h3>
                             <p>Expositions, patrimoine, balades</p>
                             <span class="mood-link">Voir la sélection →</span>
                         </a>
@@ -272,7 +340,7 @@
                     <li>
                         <a href="#" class="mood-card mood-apprendre">
                             <span class="mood-num">04</span>
-                            <h3>Apprendre<em>.</em></h3>
+                            <h3>Apprendre<span aria-hidden="true">.</span></h3>
                             <p>Ateliers, conférences, rencontres</p>
                             <span class="mood-link">Voir la sélection →</span>
                         </a>
@@ -287,7 +355,7 @@
             <div class="container">
                 <header class="section-header">
                     <p class="eyebrow">Explorer par catégorie</p>
-                    <h2 id="categories-title">Huit univers, <em>une seule</em> ville.</h2>
+                    <h2 id="categories-title">Huit univers, <i class="italic">une seule</i> ville.</h2>
                     <p class="section-lede">
                         De l'opéra à la sérigraphie en passant par le hip-hop. Plongez par genre.
                     </p>
@@ -296,64 +364,184 @@
                 <ul class="categories-grid" role="list">
                     <li>
                         <a href="concerts.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-concerts-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-concerts-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-concerts.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-concerts.webp">
+                                <img src="assets/img/categories/cat-concerts.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">01</span>
                             <span class="cat-label">Concerts</span>
                         </a>
                     </li>
                     <li>
                         <a href="expos.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1577720580479-7d839d829c73?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-expos-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-expos-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-expos.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-expos.webp">
+                                <img src="assets/img/categories/cat-expos.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">02</span>
                             <span class="cat-label">Expos</span>
                         </a>
                     </li>
                     <li>
                         <a href="theatre.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/cat-theatre-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-theatre-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-theatre.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-theatre.webp">
+                                <img src="assets/img/categories/cat-theatre.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">03</span>
                             <span class="cat-label">Théâtre</span>
                         </a>
                     </li>
                     <li>
                         <a href="festivals.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-festivals-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-festivals-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-festivals.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-festivals.webp">
+                                <img src="assets/img/categories/cat-festivals.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">04</span>
                             <span class="cat-label">Festivals</span>
                         </a>
                     </li>
                     <li>
                         <a href="ateliers.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-ateliers-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-ateliers-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-ateliers.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-ateliers.webp">
+                                <img src="assets/img/categories/cat-ateliers.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">05</span>
                             <span class="cat-label">Ateliers</span>
                         </a>
                     </li>
                     <li>
                         <a href="cinema.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-cinema-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-cinema-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-cinema.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-cinema.webp">
+                                <img src="assets/img/categories/cat-cinema.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">06</span>
                             <span class="cat-label">Cinéma</span>
                         </a>
                     </li>
                     <li>
                         <a href="danse.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-danse-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-danse-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-danse.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-danse.webp">
+                                <img src="assets/img/categories/cat-danse.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">07</span>
                             <span class="cat-label">Danse</span>
                         </a>
                     </li>
                     <li>
                         <a href="patrimoine.html" class="cat-card">
-                            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80&auto=format&fit=crop&fm=webp"
-                                 alt="" width="500" height="500" loading="lazy">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-patrimoine-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-patrimoine-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-patrimoine.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-patrimoine.webp">
+                                <img src="assets/img/categories/cat-patrimoine.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
                             <span class="cat-num">08</span>
                             <span class="cat-label">Patrimoine</span>
                         </a>
@@ -368,7 +556,7 @@
             <div class="container free-layout">
                 <aside class="free-intro">
                     <p class="eyebrow">Gratuit cette semaine</p>
-                    <h2 id="free-title">La culture <em>pour tous</em>, sans ticket d'entrée.</h2>
+                    <h2 id="free-title">La culture <i class="italic">pour tous</i>, sans ticket d'entrée.</h2>
                     <p>
                         Chaque semaine, la Ville sélectionne plusieurs événements ouverts à toutes et tous, gratuitement. Parce que la culture appartient d'abord à celles et ceux qui la vivent.
                     </p>
@@ -377,44 +565,36 @@
 
                 <ol class="free-list">
                     <li>
-                        <a href="evenement.html">
-                            <span class="free-num">01</span>
-                            <div>
-                                <h3>Lectures publiques au Jardin</h3>
-                                <p>Littérature · Jardin Mistral</p>
-                            </div>
-                            <time datetime="2026-05-13">Mer. 13 mai</time>
-                        </a>
+                        <span class="free-num">01</span>
+                        <div>
+                            <h3><a href="evenement.html">Lectures publiques au Jardin</a></h3>
+                            <p>Littérature · Jardin Mistral</p>
+                        </div>
+                        <time datetime="2026-05-13">Mer. 13 mai</time>
                     </li>
                     <li>
-                        <a href="evenement.html">
-                            <span class="free-num">02</span>
-                            <div>
-                                <h3>Visite guidée du quartier ancien</h3>
-                                <p>Patrimoine · Départ Hôtel de Ville</p>
-                            </div>
-                            <time datetime="2026-05-16">Sam. 16 mai</time>
-                        </a>
+                        <span class="free-num">02</span>
+                        <div>
+                            <h3><a href="evenement.html">Visite guidée du quartier ancien</a></h3>
+                            <p>Patrimoine · Départ Hôtel de Ville</p>
+                        </div>
+                        <time datetime="2026-05-16">Sam. 16 mai</time>
                     </li>
                     <li>
-                        <a href="evenement.html">
-                            <span class="free-num">03</span>
-                            <div>
-                                <h3>Bal trad. ouvert à tous</h3>
-                                <p>Danse · Halles couvertes</p>
-                            </div>
-                            <time datetime="2026-05-16">Sam. 16 mai</time>
-                        </a>
+                        <span class="free-num">03</span>
+                        <div>
+                            <h3><a href="evenement.html">Bal trad. ouvert à tous</a></h3>
+                            <p>Danse · Halles couvertes</p>
+                        </div>
+                        <time datetime="2026-05-16">Sam. 16 mai</time>
                     </li>
                     <li>
-                        <a href="evenement.html">
-                            <span class="free-num">04</span>
-                            <div>
-                                <h3>Ciné-club en plein air : « Les Quatre Cents Coups »</h3>
-                                <p>Cinéma · Parvis de la Médiathèque</p>
-                            </div>
-                            <time datetime="2026-05-22">Ven. 22 mai</time>
-                        </a>
+                        <span class="free-num">04</span>
+                        <div>
+                            <h3><a href="evenement.html">Ciné-club en plein air : « Les Quatre Cents Coups »</a></h3>
+                            <p>Cinéma · Parvis de la Médiathèque</p>
+                        </div>
+                        <time datetime="2026-05-22">Ven. 22 mai</time>
                     </li>
                 </ol>
             </div>
@@ -426,7 +606,7 @@
             <div class="container eco-band">
                 <header class="eco-intro">
                     <p class="eyebrow eyebrow-light">Engagements 2026</p>
-                    <h2 id="eco-title">Une culture <em>responsable</em>, par défaut.</h2>
+                    <h2 id="eco-title">Une culture <i class="italic">responsable</i>, par défaut.</h2>
                     <p>
                         VillaNova s'engage pour une scène culturelle accessible, inclusive et sobre en carbone.
                     </p>
@@ -465,7 +645,7 @@
                     </p>
                 </header>
 
-                <form class="newsletter-form" aria-label="Inscription à la newsletter VillaNova">
+                <form class="newsletter-form" action="newsletter.html" method="post" aria-label="Inscription à la newsletter VillaNova">
                     <label for="email">Votre adresse email</label>
                     <div class="newsletter-input">
                         <input type="email" id="email" name="email" required placeholder="prenom@email.fr">
@@ -487,7 +667,7 @@
 
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#accueil" class="logo logo-footer" aria-label="VillaNova">
+                    <a href="index.html" class="logo logo-footer" aria-label="VillaNova - retour à l'accueil">
                         <span class="logo-icon" aria-hidden="true">V</span>
                         <span class="logo-text">VillaNova</span>
                     </a>
@@ -549,7 +729,7 @@
                 </nav>
             </div>
 
-            <p class="footer-wordmark" aria-hidden="true">VillaNova<em>.</em></p>
+            <p class="footer-wordmark" aria-hidden="true">VillaNova<span>.</span></p>
 
             <div class="footer-bottom">
                 <small>© 2026 Mairie de VillaNova Direction de la Culture</small>
