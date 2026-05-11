@@ -1,4 +1,4 @@
-# VillaNova La culture vit ici
+# VillaNova, La culture vit ici
 
 Plateforme culturelle web qui centralise les événements d'une ville (concerts, expos, théâtre, ateliers, festivals…) en s'appuyant sur l'API OpenAgenda.
 
