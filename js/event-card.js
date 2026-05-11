@@ -1,7 +1,5 @@
-// =========================================================
 // VillaNova - Event Card Builder
 // Construit les cartes evenement via createElement (anti-XSS).
-// =========================================================
 
 window.VillaNova = window.VillaNova || {};
 
@@ -140,9 +138,9 @@ window.VillaNova = window.VillaNova || {};
 
   /**
    * Cree un element de carte evenement (DOM pur).
-   * @param {Object} event - Objet evenement de l'API OpenAgenda
-   * @param {Object} options - { large: boolean }
-   * @returns {HTMLElement} Un <li> contenant la carte
+   * @param {Object} event
+   * @param {Object} options
+   * @returns {HTMLElement}
    */
   function createEventCard(event, options) {
     options = options || {};
@@ -154,7 +152,7 @@ window.VillaNova = window.VillaNova || {};
     var article = document.createElement('article');
     article.className = large ? 'event-card event-card--large' : 'event-card';
 
-    // ---- Media ----
+    // Media
     var media = document.createElement('div');
     media.className = large ? 'event-card__media' : 'event-card__media event-card__media--small';
 
@@ -185,11 +183,11 @@ window.VillaNova = window.VillaNova || {};
 
     article.appendChild(media);
 
-    // ---- Body ----
+    // Body
     var body = document.createElement('div');
     body.className = 'event-card__body';
 
-    // Date dans le body (cartes petites)
+    // Date dans le body
     if (!large && event.firstTiming) {
       var dateP = document.createElement('p');
       dateP.className = 'event-card__date';

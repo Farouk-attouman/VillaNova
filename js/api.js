@@ -1,7 +1,5 @@
-// =========================================================
 // VillaNova - API OpenAgenda
 // Configuration et fonctions fetch async/await.
-// =========================================================
 
 window.VillaNova = window.VillaNova || {};
 

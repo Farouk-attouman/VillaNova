@@ -1,6 +1,4 @@
-// =========================================================
-// VilleNova - Typographie globale & utilitaires
-// =========================================================
+// VilleNova Typographie globale & utilitaires
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -13,7 +11,7 @@ body {
   background: $color-bg;
 }
 
-// ---------- Hiérarchie ----------
+// Hiérarchie
 h1, h2, h3, h4 {
   font-family: $font-serif;
   font-weight: $weight-semibold;
@@ -31,7 +29,7 @@ p {
   max-width: 65ch;
 }
 
-// ---------- Italique stylistique (sans sémantique d'emphase) ----------
+// Italique stylistique
 .italic {
   font-family: $font-serif;
   font-style: italic;
@@ -39,7 +37,7 @@ p {
   color: $color-terracotta;
 }
 
-// ---------- Eyebrow ----------
+// Eyebrow
 .eyebrow {
   @include eyebrow;
   display: block;
@@ -49,7 +47,7 @@ p {
   &--light { color: rgba(white, 0.85); }
 }
 
-// ---------- Skip-link (a11y) ----------
+//  Skip-link
 .skip-link {
   position: absolute;
   top: $space-3;
@@ -70,7 +68,7 @@ p {
   }
 }
 
-// ---------- Container ----------
+// Container
 .container {
   @include container(wide);
 }

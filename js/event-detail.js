@@ -1,7 +1,5 @@
-// =========================================================
 // VillaNova - Page detail evenement (evenements.html)
 // Lit ?uid= dans l'URL, fetch l'evenement, peuple le DOM.
-// =========================================================
 
 (function () {
   'use strict';
@@ -19,7 +17,7 @@
     return;
   }
 
-  // ---- Chargement ----
+  // Chargement
 
   init();
 
@@ -210,7 +208,7 @@
     }
   }
 
-  // ---- Helpers ----
+  // Helpers
 
   function getText(field) {
     if (!field) return '';
