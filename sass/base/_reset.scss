@@ -1,0 +1,73 @@
+// =========================================================
+// VilleNova - Reset moderne minimal
+// =========================================================
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, h1, h2, h3, h4, p, ul, ol, dl, figure, blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul[role="list"], ol[role="list"] { list-style: none; }
+
+img, picture, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+address { font-style: normal; }
+
+// Classe utilitaire a11y : masque visuellement mais reste lisible par les lecteurs d'ecran
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Espace en bas du main pour la bottom-nav mobile
+main {
+  padding-bottom: 5rem;
+
+  @media (min-width: 960px) {
+    padding-bottom: 0;
+  }
+}

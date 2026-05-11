@@ -1,0 +1,296 @@
+// =========================================================
+// VilleNova - Header
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba($color-bg, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $color-line;
+  padding-block: $space-4;
+
+  &__inner {
+    @include container(wide);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-5;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+
+    .btn--ghost { display: none; }
+    .btn--primary { display: none; }
+
+    @include respond-to(tablet) {
+      gap: $space-3;
+      .btn--primary { display: inline-flex; }
+    }
+
+    @include respond-to(desktop) {
+      .btn--ghost { display: inline-flex; }
+    }
+  }
+}
+
+// ---------- Bouton hamburger (mobile) ----------
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-btn;
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  cursor: pointer;
+
+  @include respond-to(desktop) {
+    display: none;
+  }
+}
+
+// ---------- Menu mobile (panneau latéral) ----------
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  @include respond-to(desktop) {
+    display: none !important;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(#0F1412, 0.5);
+    backdrop-filter: blur(4px);
+    animation: mobile-menu-fade 0.2s ease;
+  }
+
+  &__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 88%;
+    background: $color-bg;
+    display: flex;
+    flex-direction: column;
+    animation: mobile-menu-slide 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-5 $space-5;
+    border-bottom: 1px solid $color-line;
+  }
+
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-btn;
+    background: $color-bg-elev;
+    border: 1px solid $color-line;
+    cursor: pointer;
+  }
+
+  &__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: $space-3;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: $space-4;
+      padding: $space-4 $space-3;
+      border-radius: $radius-btn;
+      text-decoration: none;
+      color: $color-ink;
+      font-size: 1rem;
+      font-weight: $weight-medium;
+      min-height: 52px;
+      transition: background $transition-base;
+
+      @include focus-ring;
+      @include hover { background: rgba($color-forest, 0.05); }
+
+      img {
+        width: 36px;
+        height: 36px;
+        padding: 10px;
+        background: $color-bg-elev;
+        border: 1px solid $color-line;
+        border-radius: $radius-btn;
+      }
+
+      &[aria-current="page"] {
+        color: $color-forest;
+        font-weight: $weight-semibold;
+      }
+    }
+  }
+
+  &__actions {
+    padding: $space-4;
+    border-top: 1px solid $color-line;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+}
+
+@keyframes mobile-menu-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mobile-menu-slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+// ---------- Bottom navigation (mobile) ----------
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba($color-bg, 0.92);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-top: 1px solid $color-line;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: $space-2 $space-2;
+
+  @include respond-to(desktop) {
+    display: none;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: $space-2 $space-1;
+    text-decoration: none;
+    color: $color-ink-soft;
+    font-size: 10px;
+    font-weight: $weight-semibold;
+    min-height: 56px;
+    justify-content: center;
+    border: none;
+    background: transparent;
+
+    img {
+      padding: 5px;
+      border-radius: $radius-pill;
+      transition: background $transition-base;
+    }
+
+    &--active {
+      color: $color-forest;
+
+      img {
+        background: rgba($color-forest, 0.12);
+      }
+    }
+  }
+}
+
+// ---------- Bouton pleine largeur ----------
+.btn--full {
+  width: 100%;
+  justify-content: center;
+}
+
+// ---------- Logo ----------
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3;
+  text-decoration: none;
+  color: $color-ink;
+
+  @include focus-ring;
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: $color-forest;
+    color: $color-yellow;
+    font-family: $font-serif;
+    font-weight: $weight-bold;
+    font-size: 1.375rem;
+    border-radius: $radius-btn;
+  }
+
+  &__text {
+    font-family: $font-serif;
+    font-weight: $weight-semibold;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+}
+
+// ---------- Navigation principale ----------
+.primary-nav {
+  display: none;
+
+  @include respond-to(desktop) {
+    display: block;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    gap: $space-6;
+
+    a {
+      font-size: $fs-small;
+      font-weight: $weight-medium;
+      color: $color-ink;
+      padding: $space-2 0;
+      position: relative;
+      transition: color $transition-base;
+
+      @include focus-ring;
+      @include hover { color: $color-forest; }
+
+      &[aria-current="page"]::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: $color-terracotta;
+      }
+    }
+  }
+}

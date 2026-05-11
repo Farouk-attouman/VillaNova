@@ -1,0 +1,140 @@
+// =========================================================
+// VilleNova - Footer
+// Fond crème avec wordmark VilleNova énorme en bas.
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.site-footer {
+  background: $color-bg;
+  color: $color-ink;
+  padding-top: $space-8;
+  border-top: 1px solid $color-line;
+
+  // ---------- Bloc supérieur ----------
+  &__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-7;
+    padding-bottom: $space-7;
+
+    @include respond-to(desktop) {
+      grid-template-columns: 1.2fr 2.5fr;
+      gap: $space-9;
+    }
+  }
+
+  &__brand {
+    p {
+      font-size: $fs-small;
+      max-width: 28rem;
+      margin-block: $space-4 $space-5;
+      color: $color-ink-soft;
+      line-height: $lh-normal;
+    }
+  }
+
+  // ---------- Colonnes ----------
+  &__cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-6 $space-5;
+
+    @include respond-to(tablet) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__col {
+    h3 {
+      @include eyebrow($color-ink-soft);
+      margin-bottom: $space-4;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $space-3;
+      list-style: none;
+
+      a {
+        color: $color-ink;
+        font-size: $fs-small;
+        transition: color $transition-base;
+
+        @include focus-ring;
+        @include hover { color: $color-terracotta; }
+      }
+    }
+  }
+
+  // ---------- Wordmark décoratif ----------
+  &__wordmark {
+    font-family: $font-serif;
+    font-weight: $weight-bold;
+    font-size: clamp(5rem, 18vw, 14rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: $color-forest;
+    text-align: center;
+    margin-block: $space-7 0;
+    padding-bottom: $space-5;
+    border-bottom: 1px solid $color-line;
+    overflow: hidden;
+  }
+
+  &__wordmark-dot {
+    color: $color-terracotta;
+  }
+
+  // ---------- Mentions du bas ----------
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: $space-3;
+    padding-block: $space-5;
+
+    small {
+      font-size: $fs-tiny;
+      color: $color-ink-soft;
+    }
+
+    a {
+      color: $color-ink-soft;
+      transition: color $transition-base;
+      @include focus-ring;
+      @include hover { color: $color-forest; }
+    }
+  }
+}
+
+// ---------- Réseaux sociaux ----------
+.socials {
+  display: flex;
+  gap: $space-2;
+  list-style: none;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: $color-bg-elev;
+    border: 1px solid $color-line;
+    border-radius: $radius-btn;
+    color: $color-ink;
+    transition: background $transition-base, color $transition-base, transform $transition-base;
+
+    @include focus-ring;
+
+    @include hover {
+      background: $color-forest;
+      color: $color-yellow;
+      border-color: $color-forest;
+      transform: translateY(-2px);
+    }
+  }
+}

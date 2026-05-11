@@ -1,0 +1,165 @@
+// =========================================================
+// VilleNova - Hero
+// Image de fond pleine largeur, overlay sombre,
+// contenu centré, badges aux coins, crédit en bas.
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 28rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  padding: $space-6 clamp(1rem, 4vw, 3rem);
+  // Pleine largeur sauf petite gouttière crème pour le côté "carte XXL arrondie"
+  margin: $hero-gutter $hero-gutter 0;
+  border-radius: $radius-card;
+
+  @include respond-to(tablet) {
+    min-height: 38rem;
+    padding: $space-8 clamp(1rem, 4vw, 3rem);
+  }
+
+  @include respond-to(desktop) {
+    min-height: 44rem;
+    padding-block: $space-9;
+  }
+
+  // Image de fond
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    img, picture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // Overlay vert pour la lisibilité
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      180deg,
+      rgba($color-forest-deep, 0.35) 0%,
+      rgba($color-forest-deep, 0.5) 60%,
+      rgba($color-forest-deep, 0.7) 100%
+    );
+  }
+
+  // Coins décoratifs (mono uppercase)
+  &__corner {
+    position: absolute;
+    top: $space-5;
+    z-index: 3;
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(white, 0.7);
+    display: none;
+
+    @include respond-to(desktop) {
+      display: block;
+    }
+
+    &--left  { left: clamp(1.5rem, 3vw, 2.5rem); }
+    &--right { right: clamp(1.5rem, 3vw, 2.5rem); }
+  }
+
+  // Crédit photo en bas
+  &__credit {
+    position: relative;
+    z-index: 3;
+    margin-top: auto;
+    padding-top: $space-7;
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(white, 0.6);
+  }
+
+  // ---------- Contenu central ----------
+  &__content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 56rem;
+    text-align: center;
+    margin: auto 0;
+  }
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    border-radius: $radius-pill;
+    background: rgba(white, 0.15);
+    border: 1px solid rgba(white, 0.25);
+    backdrop-filter: blur(8px);
+    font-size: $fs-small;
+    color: white;
+    margin-bottom: $space-5;
+  }
+
+  &__pill-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: $color-yellow;
+    border-radius: 50%;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: $weight-semibold;
+    font-size: $fs-display;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: white;
+    margin-bottom: $space-5;
+
+    .italic {
+      color: $color-yellow;
+      font-family: $font-serif;
+      font-style: italic;
+    }
+  }
+
+  &__lede {
+    font-size: $fs-small;
+    line-height: $lh-normal;
+    color: rgba(white, 0.85);
+    max-width: 32rem;
+    margin: 0 auto;
+
+    @include respond-to(tablet) {
+      font-size: $fs-lead;
+    }
+  }
+
+  // ---------- CTA mobile (2 boutons côte à côte) ----------
+  &__cta-mobile {
+    display: flex;
+    gap: $space-3;
+    justify-content: center;
+    margin-top: $space-5;
+
+    @include respond-to(tablet) {
+      display: none;
+    }
+  }
+}

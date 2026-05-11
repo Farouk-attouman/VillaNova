@@ -1,0 +1,80 @@
+// =========================================================
+// VilleNova - Filtres
+// quick-filters : pills sous le hero (Aujourd'hui, Cette semaine...)
+// cat-filters   : pills sous "Sélection de la rédac'"
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- Filtres rapides du hero (verre dépoli) ----------
+.quick-filters {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $space-2;
+  list-style: none;
+  margin-top: $space-5;
+
+  @include respond-to(tablet) {
+    display: flex;
+  }
+}
+
+.quick-filter {
+  padding: $space-3 1.125rem;
+  border-radius: $radius-pill;
+  background: rgba(white, 0.12);
+  border: 1px solid rgba(white, 0.25);
+  color: white;
+  font-size: $fs-small;
+  font-weight: $weight-medium;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background $transition-base, color $transition-base, border-color $transition-base;
+
+  @include focus-ring($color-yellow);
+
+  @include hover {
+    background: rgba(white, 0.2);
+  }
+
+  &--active {
+    background: $color-yellow;
+    color: $color-ink;
+    border-color: $color-yellow;
+  }
+}
+
+// ---------- Filtres catégorie (section featured) ----------
+.cat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  list-style: none;
+  margin-bottom: $space-7;
+}
+
+.cat-filter {
+  padding: $space-2 $space-4;
+  border-radius: $radius-pill;
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  color: $color-ink;
+  font-size: $fs-small;
+  font-weight: $weight-medium;
+  cursor: pointer;
+  transition: background $transition-base, color $transition-base, border-color $transition-base;
+
+  @include focus-ring;
+
+  @include hover {
+    border-color: $color-ink;
+  }
+
+  &--active {
+    background: $color-ink;
+    color: $color-bg;
+    border-color: $color-ink;
+  }
+}

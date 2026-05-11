@@ -1,0 +1,347 @@
+// =========================================================
+// VilleNova - Cartes
+//   .event-card   = carte événement (À l'affiche)
+//   .cat-card     = vignette catégorie (Concerts, Expos…)
+//   .mood-card    = mood picker
+//   .aside-card   = sidebar fiche événement
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- Carte événement ----------
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+  overflow: hidden;
+  height: 100%;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  @include hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+  }
+
+  &__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    picture, img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      top: $space-3;
+      &:nth-of-type(1) { left: $space-3; }
+      &:nth-of-type(2) { right: $space-3; }
+    }
+
+    // Petites cartes : image = 66% de la hauteur de la carte
+    &--small {
+      aspect-ratio: 6.5 / 3.9;
+    }
+  }
+
+  // Date affichée en bas de l'image (sur les cartes large)
+  &__date {
+    position: absolute;
+    bottom: $space-3;
+    left: $space-3;
+    padding: $space-1 $space-3;
+    background: rgba(white, 0.92);
+    color: $color-ink;
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    font-weight: $weight-semibold;
+    border-radius: $radius-pill;
+    backdrop-filter: blur(8px);
+  }
+
+  // Sur les cartes "small", la date est en haut du body, pas sur l'image
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    padding: $space-3 $space-4;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+
+    .event-card__date {
+      position: static;
+      align-self: flex-start;
+      background: transparent;
+      padding: 0;
+      color: $color-ink-soft;
+      font-family: $font-mono;
+      font-size: $fs-tiny;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      line-height: $lh-snug;
+
+      a {
+        color: $color-ink;
+        transition: color $transition-base;
+        @include focus-ring;
+        @include hover { color: $color-forest; }
+
+        // Etend la zone cliquable a toute la carte
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+        }
+      }
+    }
+  }
+
+  &__desc {
+    color: $color-ink-soft;
+    font-size: $fs-small;
+    line-height: $lh-normal;
+    margin: 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $space-2;
+    margin-top: auto;
+    border-top: 1px solid $color-line;
+    font-size: $fs-small;
+  }
+
+  &__location {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    color: $color-ink-soft;
+  }
+
+  &__price {
+    font-family: $font-mono;
+    font-weight: $weight-semibold;
+    color: $color-ink;
+
+    &--free { color: $color-forest; }
+  }
+
+  // ---------- Variante carte large ----------
+  &--large {
+    .event-card__media {
+      aspect-ratio: 9.1 / 7.8;
+    }
+
+    .event-card__body h3 {
+      font-size: 1.5rem;
+
+      @include respond-to(desktop) {
+        font-size: 1.75rem;
+      }
+    }
+  }
+}
+
+// ---------- Carte catégorie (vignette) ----------
+.cat-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: $radius-card;
+  overflow: hidden;
+  background: $color-forest-deep;
+  transition: transform $transition-base;
+
+  @include focus-ring($color-yellow);
+
+  picture, img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow, opacity $transition-base;
+    opacity: 0.8;
+  }
+
+  // Voile sombre pour la lisibilité du texte blanc
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(black, 0.1) 30%, rgba(black, 0.65) 100%);
+    pointer-events: none;
+  }
+
+  @include hover {
+    transform: translateY(-2px);
+    img {
+      transform: scale(1.05);
+      opacity: 0.6;
+    }
+  }
+
+  &__num {
+    position: absolute;
+    top: $space-4;
+    left: $space-4;
+    z-index: 1;
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    color: rgba(white, 0.85);
+    letter-spacing: 0.08em;
+  }
+
+  // Label : "Concerts" en gros, en bas-gauche
+  &__label {
+    position: absolute;
+    bottom: 2.5rem;        // place le label assez haut pour laisser place au CTA dessous
+    left: $space-4;
+    right: $space-4;
+    z-index: 1;
+    font-family: $font-serif;
+    font-size: 1.625rem;
+    font-weight: $weight-semibold;
+    color: white;
+    letter-spacing: -0.01em;
+    line-height: $lh-tight;
+  }
+
+  // CTA : "Voir ↗" sous le label
+  &__cta {
+    position: absolute;
+    bottom: $space-4;      // collé en bas avec une vraie marge
+    left: $space-4;
+    z-index: 1;
+    font-family: $font-sans;
+    font-size: $fs-small;
+    color: rgba(white, 0.85);
+    transition: color $transition-base;
+  }
+
+  @include hover {
+    .cat-card__cta { color: white; }
+  }
+}
+
+// ---------- Carte mood ----------
+.mood-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 18rem;
+  padding: $space-5;
+  border-radius: $radius-card;
+  background: $color-forest;   // par défaut : vert (mood "Me poser")
+  color: white;
+  text-decoration: none;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  @include focus-ring($color-yellow);
+
+  @include hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-7;
+  }
+
+  &__num {
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  &__icon {
+    opacity: 0.7;
+  }
+
+  &__body {
+    flex-grow: 1;
+
+    h3 {
+      font-family: $font-serif;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: $space-3;
+      color: inherit;
+    }
+
+    p {
+      font-size: $fs-small;
+      opacity: 0.8;
+      line-height: $lh-normal;
+    }
+  }
+
+  &__link {
+    margin-top: $space-5;
+    padding-top: $space-4;
+    border-top: 1px solid currentColor;
+    border-color: rgb(255 255 255 / 0.2);
+    font-size: $fs-small;
+    opacity: 0.85;
+  }
+
+  // ---------- Variantes par humeur ----------
+  &--poser     { background: $color-forest;    color: white; }
+  &--vibrer    { background: $color-terracotta; color: white; }
+  &--decouvrir { background: $color-yellow;     color: $color-ink; }
+  &--apprendre { background: $color-line-strong; color: $color-ink; }
+}
+
+// ---------- Aside-card (sidebar fiche événement) ----------
+.aside-card {
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+  padding: $space-5;
+
+  & + & { margin-top: $space-4; }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: $space-4;
+  }
+
+  h3 {
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-ink-soft;
+    margin-top: $space-4;
+    margin-bottom: $space-2;
+  }
+
+  &__address {
+    line-height: $lh-loose;
+  }
+
+  p { margin-bottom: $space-3; font-size: $fs-small; }
+
+  a {
+    color: $color-forest;
+    @include hover { color: $color-terracotta; }
+  }
+}

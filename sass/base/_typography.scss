@@ -1,0 +1,82 @@
+// =========================================================
+// VilleNova - Typographie globale & utilitaires
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body {
+  font-family: $font-sans;
+  font-size: $fs-body;
+  line-height: $lh-normal;
+  color: $color-ink;
+  background: $color-bg;
+}
+
+// ---------- Hiérarchie ----------
+h1, h2, h3, h4 {
+  font-family: $font-serif;
+  font-weight: $weight-semibold;
+  line-height: $lh-snug;
+  letter-spacing: -0.02em;
+  color: $color-ink;
+}
+
+h1 { font-size: $fs-h1; line-height: $lh-tight; letter-spacing: -0.03em; }
+h2 { font-size: $fs-h2; }
+h3 { font-size: $fs-h3; }
+
+p {
+  line-height: $lh-normal;
+  max-width: 65ch;
+}
+
+// ---------- Italique stylistique (sans sémantique d'emphase) ----------
+.italic {
+  font-family: $font-serif;
+  font-style: italic;
+  font-weight: $weight-medium;
+  color: $color-terracotta;
+}
+
+// ---------- Eyebrow ----------
+.eyebrow {
+  @include eyebrow;
+  display: block;
+  margin-bottom: $space-3;
+
+  &--ink   { color: $color-ink; }
+  &--light { color: rgba(white, 0.85); }
+}
+
+// ---------- Skip-link (a11y) ----------
+.skip-link {
+  position: absolute;
+  top: $space-3;
+  left: $space-3;
+  padding: $space-3 $space-4;
+  background: $color-forest;
+  color: $color-bg;
+  border-radius: $radius-btn;
+  z-index: 1000;
+  font-weight: $weight-medium;
+  transform: translateY(-200%);
+  transition: transform $transition-base;
+
+  &:focus, &:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid $color-yellow;
+    outline-offset: 3px;
+  }
+}
+
+// ---------- Container ----------
+.container {
+  @include container(wide);
+}
+
+// ---------- Sélection ----------
+::selection {
+  background: $color-yellow;
+  color: $color-ink;
+}

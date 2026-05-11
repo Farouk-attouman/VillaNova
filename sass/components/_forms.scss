@@ -1,0 +1,166 @@
+// =========================================================
+// VilleNova - Formulaires
+// search-bar : barre de recherche du hero (3 selects + bouton)
+// newsletter  : inscription mail
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- Barre de recherche hero ----------
+.search-bar {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: $space-2;
+  background: $color-bg-elev;
+  border-radius: $radius-card;
+  padding: $space-3;
+  box-shadow: $shadow-md;
+  margin-top: $space-5;
+  text-align: left;
+
+  @include respond-to(tablet) {
+    display: grid;
+    border-radius: $radius-pill;
+    gap: $space-3;
+    margin-top: $space-6;
+  }
+
+  @include respond-to(desktop) {
+    grid-template-columns: repeat(3, 1fr) auto;
+    gap: 0;
+    padding: $space-2 $space-2 $space-2 $space-5;
+    align-items: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    padding: $space-2 $space-3;
+
+    @include respond-to(tablet) {
+      padding: $space-3 $space-4;
+    }
+
+    @include respond-to(desktop) {
+      padding: $space-2 $space-4;
+      border-right: 1px solid $color-line;
+
+      &:last-of-type { border-right: none; }
+    }
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-ink-soft;
+  }
+
+  select {
+    border: none;
+    background: transparent;
+    font-family: $font-sans;
+    font-size: $fs-body;
+    font-weight: $weight-semibold;
+    color: $color-ink;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+
+    @include focus-ring;
+  }
+
+  &__submit {
+    margin-left: auto;
+
+    @include respond-to(desktop) {
+      padding: 0.875rem 1.5rem;
+    }
+  }
+}
+
+// ---------- Newsletter ----------
+.newsletter-wrap {
+  padding-block: $space-9;
+}
+
+.newsletter {
+  display: grid;
+  gap: $space-7;
+  background: $color-yellow;
+  border-radius: $radius-card;
+  padding: clamp($space-6, 5vw, $space-9);
+
+  @include respond-to(desktop) {
+    grid-template-columns: 1fr 1.1fr;
+    gap: $space-8;
+    align-items: center;
+  }
+
+  &__intro {
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-block: $space-3 $space-4;
+      line-height: $lh-snug;
+    }
+    p { color: rgba($color-ink, 0.75); }
+  }
+
+  &__form {
+    width: 100%;
+  }
+
+  &__label {
+    display: block;
+    font-size: $fs-small;
+    font-weight: $weight-medium;
+    margin-bottom: $space-3;
+    color: $color-ink;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+
+    @include respond-to(tablet) {
+      flex-direction: row;
+      gap: $space-2;
+      background: $color-bg-elev;
+      border-radius: $radius-pill;
+      padding: $space-2;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    padding: $space-3 $space-5;
+    border: 1px solid $color-line;
+    background: $color-bg-elev;
+    border-radius: $radius-btn;
+    font-size: $fs-body;
+    color: $color-ink;
+
+    @include respond-to(tablet) {
+      border: none;
+      background: transparent;
+    }
+
+    @include focus-ring;
+    &::placeholder { color: $color-ink-soft; }
+  }
+
+  &__note {
+    font-size: $fs-small;
+    color: rgba($color-ink, 0.7);
+    margin-top: $space-4;
+    max-width: none;
+  }
+}

@@ -1,0 +1,291 @@
+// =========================================================
+// VilleNova - Fiche événement (evenement.html)
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.event-page {
+  background: $color-bg;
+}
+
+// ---------- Contenu article (style marseille.fr) ----------
+.event-article {
+  @include container;
+  padding-block: $space-6 $space-8;
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-bottom: $space-4;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: $weight-semibold;
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: $space-5;
+  }
+}
+
+// ---------- Méta : date / lieu / durée / tarif ----------
+.event-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  padding: $space-5;
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+  margin-bottom: $space-6;
+
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+  }
+
+  dt {
+    font-family: $font-mono;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-ink-soft;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: $weight-medium;
+  }
+}
+
+// ---------- Image principale ----------
+.event-cover {
+  margin: 0 0 $space-5;
+  overflow: hidden;
+  border-radius: $radius-card;
+
+  img {
+    width: 100%;
+    max-height: 26rem;
+    object-fit: cover;
+    display: block;
+
+    @include respond-to(desktop) {
+      max-height: 30rem;
+    }
+  }
+}
+
+// ---------- Corps : article + sidebar ----------
+.event-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-7;
+  padding-top: $space-7;
+
+  @include respond-to(desktop) {
+    grid-template-columns: 1fr 22rem;
+    gap: $space-8;
+    align-items: start;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: $space-7;
+
+    section {
+      h2 {
+        font-size: $fs-h2;
+        margin-bottom: $space-4;
+      }
+
+      p {
+        margin-bottom: $space-4;
+      }
+
+      ul, ol {
+        padding-left: $space-5;
+
+        li { margin-bottom: $space-2; }
+      }
+    }
+
+    abbr {
+      text-decoration: underline dotted;
+      cursor: help;
+    }
+
+    a {
+      color: $color-forest;
+      text-decoration: underline;
+      text-decoration-color: rgba($color-forest, 0.4);
+      text-underline-offset: 3px;
+
+      @include focus-ring;
+      @include hover {
+        color: $color-terracotta;
+        text-decoration-color: $color-terracotta;
+      }
+    }
+  }
+}
+
+// ---------- Vidéo teaser ----------
+.event-video {
+  border-radius: $radius-card;
+  overflow: hidden;
+  border: 1px solid $color-line;
+
+  video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: $color-forest-deep;
+    display: block;
+  }
+
+  figcaption {
+    padding: $space-3 $space-4;
+    background: $color-bg-elev;
+    font-size: $fs-small;
+    color: $color-ink-soft;
+  }
+}
+
+// ---------- Programmation : ligne d'artistes ----------
+.lineup-list {
+  list-style: none !important;
+  padding: 0 !important;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.lineup-card {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4;
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+
+  picture, img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: $radius-pill;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    margin-bottom: $space-1;
+  }
+
+  p {
+    font-size: $fs-small;
+    color: $color-ink-soft;
+    margin: 0;
+  }
+
+  &__time {
+    font-family: $font-mono;
+    color: $color-terracotta;
+    font-size: $fs-tiny;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: $space-2;
+  }
+}
+
+// ---------- Engagement éco (variante claire) ----------
+.event-eco-block {
+  background: $color-eco-bg;
+  border: 1px solid $color-eco-border;
+  border-radius: $radius-card;
+  padding: $space-6;
+
+  h2 { color: $color-forest; }
+  ul li { color: $color-eco-text; }
+}
+
+// ---------- Accessibilité section ----------
+.event-access {
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+  padding: $space-6;
+}
+
+// ---------- Aside / sidebar ----------
+.event-aside {
+  position: sticky;
+  top: 5rem;
+}
+
+.aside-related {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    padding: $space-3;
+    border-radius: $radius-btn;
+    text-decoration: none;
+    color: $color-ink;
+    transition: background $transition-base;
+
+    @include focus-ring;
+    @include hover { background: $color-bg; }
+
+    time {
+      font-family: $font-mono;
+      font-size: $fs-tiny;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $color-terracotta;
+      margin-bottom: $space-1;
+    }
+  }
+}
+
+// ---------- Etats dynamiques (chargement / erreur) ----------
+.event-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $space-9 $space-5;
+  color: $color-ink-soft;
+  font-family: $font-mono;
+  font-size: $fs-small;
+}
+
+.event-error {
+  text-align: center;
+  padding: $space-9 $space-5;
+
+  h2 {
+    font-size: $fs-h2;
+    margin-bottom: $space-4;
+  }
+
+  p {
+    color: $color-ink-soft;
+    margin-bottom: $space-6;
+  }
+}

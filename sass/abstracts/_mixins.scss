@@ -1,0 +1,73 @@
+// =========================================================
+// VilleNova - Mixins
+// Patterns réutilisables : on les écrit une fois.
+// =========================================================
+
+@use 'variables' as *;
+
+// ---------- Responsive (Mobile First) ----------
+// On démarre sur mobile, on enrichit avec min-width.
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: $bp-tablet) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $bp-desktop) { @content; }
+  } @else if $breakpoint == wide {
+    @media (min-width: $bp-wide) { @content; }
+  } @else {
+    @error "Breakpoint inconnu : #{$breakpoint}.";
+  }
+}
+
+// ---------- Focus visible (a11y) ----------
+@mixin focus-ring($color: $color-forest) {
+  &:focus { outline: none; }
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 3px;
+    border-radius: $radius-btn;
+  }
+}
+
+// ---------- Container ----------
+@mixin container($size: default) {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $container-pad;
+
+  @if $size == wide {
+    max-width: $container-max-wide;
+  } @else {
+    max-width: $container-max;
+  }
+}
+
+// ---------- Visually hidden (a11y) ----------
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ---------- Hover propre (sans coller sur tactile) ----------
+@mixin hover {
+  @media (hover: hover) {
+    &:hover { @content; }
+  }
+}
+
+// ---------- Eyebrow (label mono terracotta au-dessus des titres) ----------
+@mixin eyebrow($color: $color-terracotta) {
+  font-family: $font-mono;
+  font-size: $fs-eyebrow;
+  font-weight: $weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: $color;
+}

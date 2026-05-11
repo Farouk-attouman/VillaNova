@@ -1,0 +1,33 @@
+// =========================================================
+// VilleNova - Feuille de style principale
+// Compile vers css/style.css avec Live Sass Compiler.
+//
+// Architecture :
+//   abstracts → variables et mixins (rien d'imprimé en CSS)
+//   base      → reset, typo, utilitaires globaux
+//   components → boutons, tags, filtres, cartes, formulaires
+//   layout    → header, hero, sections, fiche événement, footer
+// =========================================================
+
+// 1. Abstracts
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+// 2. Base
+@use 'base/reset';
+@use 'base/typography';
+
+// 3. Composants
+@use 'components/buttons';
+@use 'components/tags';
+@use 'components/filters';
+@use 'components/cards';
+@use 'components/forms';
+
+// 4. Layout
+@use 'layout/header';
+@use 'layout/hero';
+@use 'layout/sections';
+@use 'layout/event-page';
+@use 'layout/events-listing';
+@use 'layout/footer';

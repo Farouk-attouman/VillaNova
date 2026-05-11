@@ -1,0 +1,71 @@
+// =========================================================
+// VilleNova - Tags & Pills
+// .tag = badge sur les cartes (Concert, Expo, Éco)
+// .pill = pastille décorative (Engagements, Gratuit cette semaine)
+// =========================================================
+
+@use '../abstracts/variables' as *;
+
+// ---------- Tag (sur les cartes événement) ----------
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  font-family: $font-sans;
+  font-size: $fs-tiny;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  background: $color-bg-elev;
+  color: $color-ink;
+  border: 1px solid $color-line;
+  white-space: nowrap;
+
+  // Catégories pleines
+  &--concert,
+  &--theatre,
+  &--atelier,
+  &--danse {
+    background: $color-terracotta;
+    color: white;
+    border-color: transparent;
+  }
+
+  &--expo {
+    background: $color-forest;
+    color: white;
+    border-color: transparent;
+  }
+
+  // Éco (vert pâle)
+  &--eco {
+    background: $color-eco-bg;
+    color: $color-eco-text;
+    border-color: $color-eco-border;
+  }
+}
+
+// ---------- Pill (badges décoratifs sections) ----------
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 0.4rem 0.875rem;
+  border-radius: $radius-pill;
+  font-size: $fs-small;
+  font-weight: $weight-medium;
+  line-height: 1;
+
+  &--terracotta {
+    background: $color-terracotta;
+    color: white;
+  }
+
+  &--ghost-light {
+    background: rgba(white, 0.1);
+    color: $color-yellow;
+    border: 1px solid rgba(white, 0.2);
+  }
+}

@@ -1,0 +1,70 @@
+// =========================================================
+// VilleNova - Page listing événements (tous-les-evenements.html)
+// =========================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- En-tete de page ----------
+.listing-page {
+  padding-block: $space-5 $space-8;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    margin-bottom: $space-5;
+
+    @include respond-to(desktop) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-7;
+    }
+
+    h1 {
+      font-size: clamp(1.875rem, 3.6vw, 3rem);
+    }
+  }
+
+  &__count {
+    font-family: $font-mono;
+    font-size: $fs-small;
+    color: $color-ink-soft;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: $space-7;
+  }
+}
+
+// ---------- Grille listing (uniforme, pas de bento) ----------
+.listing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+  list-style: none;
+
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(desktop) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+  }
+
+  &__loading {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20rem;
+    color: $color-ink-soft;
+    font-family: $font-mono;
+    font-size: $fs-small;
+  }
+}

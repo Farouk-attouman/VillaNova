@@ -1,0 +1,130 @@
+// =========================================================
+// VilleNova - Boutons
+// =========================================================
+
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- Base ----------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: 0.875rem 1.375rem;       // 14px 22px
+  border-radius: $radius-btn;
+  font-family: $font-sans;
+  font-weight: $weight-medium;
+  font-size: $fs-body;
+  line-height: 1;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background $transition-base,
+              transform $transition-base,
+              box-shadow $transition-base,
+              border-color $transition-base,
+              color $transition-base;
+
+  @include focus-ring;
+
+  // ---------- Variantes ----------
+  &--primary {
+    background: $color-forest;
+    color: $color-bg;
+
+    @include hover {
+      background: $color-forest-deep;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+
+    &:active { transform: translateY(0); }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-ink;
+    border-color: $color-line-strong;
+
+    @include hover {
+      background: $color-bg-elev;
+      border-color: $color-ink;
+    }
+  }
+
+  &--yellow {
+    background: $color-yellow;
+    color: $color-ink;
+
+    @include hover {
+      background: color.adjust($color-yellow, $lightness: -5%);
+    }
+  }
+
+  &--ghost-light {
+    background: rgba(white, 0.12);
+    color: white;
+    border-color: rgba(white, 0.3);
+    backdrop-filter: blur(8px);
+
+    @include hover {
+      background: rgba(white, 0.22);
+    }
+  }
+
+  // ---------- Tailles ----------
+  &--sm {
+    padding: 0.625rem 0.875rem;
+    font-size: $fs-small;
+  }
+
+  &--block {
+    width: 100%;
+    margin-top: $space-3;
+  }
+}
+
+// ---------- Bouton icône (header) ----------
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-pill;
+  color: $color-ink;
+  background: transparent;
+  transition: background $transition-base, color $transition-base;
+
+  @include focus-ring;
+
+  @include hover {
+    background: $color-line;
+    color: $color-forest;
+  }
+}
+
+// ---------- Lien-bouton (style "Voir les 128 événements →") ----------
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  border: 1px solid $color-line-strong;
+  border-radius: $radius-pill;
+  font-size: $fs-small;
+  font-weight: $weight-medium;
+  color: $color-ink;
+  background: $color-bg-elev;
+  transition: background $transition-base, border-color $transition-base;
+
+  @include focus-ring;
+
+  @include hover {
+    background: $color-ink;
+    color: $color-bg;
+    border-color: $color-ink;
+  }
+}
