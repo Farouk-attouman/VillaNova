@@ -14,10 +14,10 @@ VillaNova permet aux habitants de découvrir facilement l'offre culturelle local
 ## Stack technique
 
 - **HTML5** sémantique avec attributs d'accessibilité (ARIA, skip-link…)
-- **SASS / CSS** — architecture modulaire (abstracts, base, components, layout)
+- **SASS / CSS** architecture modulaire (abstracts, base, components, layout)
 - **JavaScript vanilla** (ES6+, async/await) — aucun framework
 - **API OpenAgenda v2** pour la récupération dynamique des événements
-- **Google Fonts** — Fraunces, Inter, JetBrains Mono
+- **Google Fonts** Fraunces, Inter, JetBrains Mono
 
 Pas de bundler ni de dépendances npm. Le projet tourne en statique.
 
