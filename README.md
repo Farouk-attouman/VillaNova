@@ -1,4 +1,5 @@
 # VillaNova, La culture vit ici
+# VillaNova, La culture vit ici
 
 Plateforme culturelle web qui centralise les événements d'une ville (concerts, expos, théâtre, ateliers, festivals…) en s'appuyant sur l'API OpenAgenda.
 
@@ -15,7 +16,7 @@ VillaNova permet aux habitants de découvrir facilement l'offre culturelle local
 
 - **HTML5** sémantique avec attributs d'accessibilité (ARIA, skip-link…)
 - **SASS / CSS** architecture modulaire (abstracts, base, components, layout)
-- **JavaScript vanilla** (ES6+, async/await) aucun framework
+- **JavaScript vanilla** (ES6+, async/await), aucun framework
 - **API OpenAgenda v2** pour la récupération dynamique des événements
 - **Google Fonts** Fraunces, Inter, JetBrains Mono
 
