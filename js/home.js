@@ -1,8 +1,6 @@
-// =========================================================
 // VillaNova - Homepage (index.html)
 // Chargement dynamique de la section "A l'affiche",
 // filtres categorie, recherche hero.
-// =========================================================
 
 (function () {
   'use strict';
@@ -19,7 +17,7 @@
 
   if (!featuredGrid) return;
 
-  // ---- Chargement des evenements ----
+  // Chargement des evenements
 
   async function loadFeaturedEvents(params) {
     params = params || {};
@@ -122,7 +120,7 @@
     }
   }
 
-  // ---- Filtres categorie ----
+  // Filtres categorie
 
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -140,7 +138,7 @@
     });
   });
 
-  // ---- Recherche hero ----
+  // Recherche hero
 
   if (heroSearch) {
     heroSearch.addEventListener('submit', function (e) {
@@ -157,13 +155,13 @@
     });
   }
 
-  // ---- Bouton "Voir plus" ----
+  // Bouton "Voir plus"
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadMore);
   }
 
-  // ---- Helpers ----
+  // Helpers
 
   function showGridError(message) {
     var li = document.createElement('li');
@@ -187,7 +185,7 @@
     }, 3000);
   }
 
-  // ---- Init ----
+  // Init
   loadFeaturedEvents();
 
 })();

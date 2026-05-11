@@ -1,7 +1,5 @@
-// =========================================================
-// VillaNova - Page listing (tous-les-evenements.html)
+// VillaNova - Page listing
 // Chargement dynamique, filtres categorie, pagination.
-// =========================================================
 
 (function () {
   'use strict';
@@ -17,7 +15,7 @@
 
   if (!listingGrid) return;
 
-  // ---- Chargement des evenements ----
+  // Chargement des evenements
 
   async function loadEvents(params) {
     params = params || {};
@@ -68,7 +66,7 @@
   }
 
   /**
-   * Rend les cartes evenement dans la grille (toutes en taille normale).
+   *les cartes evenement dans la grille.
    */
   function renderEvents(events) {
     events.forEach(function (event) {
@@ -78,7 +76,7 @@
   }
 
   /**
-   * Charge plus d'evenements (pagination).
+   * Charge plus d'evenements
    */
   async function loadMore() {
     currentOffset += PAGE_SIZE;
@@ -108,7 +106,7 @@
     }
   }
 
-  // ---- Filtres categorie ----
+  // Filtres categorie
 
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -125,13 +123,13 @@
     });
   });
 
-  // ---- Bouton "Voir plus" ----
+  // Bouton "Voir plus"
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadMore);
   }
 
-  // ---- Helpers ----
+  // Helpers
 
   function showGridError(message) {
     var li = document.createElement('li');
@@ -154,7 +152,7 @@
     }, 3000);
   }
 
-  // ---- Init ----
+  // Init
   loadEvents();
 
 })();
