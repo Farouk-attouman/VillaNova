@@ -29,7 +29,7 @@
   }
 }
 
-// ---------- Méta : date / lieu / durée / tarif ----------
+// Méta : date / lieu / durée / tarif
 .event-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -137,7 +137,7 @@
   }
 }
 
-// ---------- Vidéo teaser ----------
+// Vidéo teaser 
 .event-video {
   border-radius: $radius-card;
   overflow: hidden;
@@ -158,7 +158,7 @@
   }
 }
 
-// ---------- Programmation : ligne d'artistes ----------
+// Programmation : ligne d'artistes
 .lineup-list {
   list-style: none !important;
   padding: 0 !important;

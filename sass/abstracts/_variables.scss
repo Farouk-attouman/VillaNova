@@ -1,29 +1,25 @@
-// =========================================================
-// VilleNova - Variables
-// Tokens issus du design system officiel.
-// Une seule source de vérité : on modifie ici, ça change partout.
-// =========================================================
+// VilleNova Variables
 
-// ---------- Palette ----------
-$color-forest:        #1B4D3E;  // primaire (vert profond)
-$color-forest-deep:   #143A2E;  // hover du primaire
-$color-terracotta:    #E76F51;  // accent (eyebrows, tags)
-$color-terracotta-bg: #FBE9E2;  // fond doux terracotta
-$color-yellow:        #F4D35E;  // accent secondaire (CTA jaune, mood)
+// Palette
+$color-forest:        #1B4D3E;  
+$color-forest-deep:   #143A2E;  
+$color-terracotta:    #E76F51;  
+$color-terracotta-bg: #FBE9E2; 
+$color-yellow:        #F4D35E; 
 
-$color-bg:            #FAF7F2;  // fond crème de la page
-$color-bg-elev:       #FFFFFF;  // fond surface élevée (cartes)
-$color-ink:           #1A1A1A;  // texte principal
-$color-ink-soft:      #6B7280;  // texte secondaire
-$color-line:          #E7E2D7;  // bordures discrètes
-$color-line-strong:   #CFC8B8;  // bordures marquées
+$color-bg:            #FAF7F2;  
+$color-bg-elev:       #FFFFFF;  
+$color-ink:           #1A1A1A;  
+$color-ink-soft:      #6B7280; 
+$color-line:          #E7E2D7;
+$color-line-strong:   #CFC8B8;
 
-// Tags catégories (couleurs sémantiques)
+// Tags catégories
 $color-eco-bg:     #E6F0E5;
 $color-eco-text:   #1B4D3E;
 $color-eco-border: #C9DEC4;
 
-// ---------- Typographies ----------
+// Typographies 
 $font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 $font-sans:  'Inter', system-ui, -apple-system, sans-serif;
 $font-mono:  'JetBrains Mono', ui-monospace, 'Courier New', monospace;
@@ -34,10 +30,10 @@ $weight-medium:   500;
 $weight-semibold: 600;
 $weight-bold:     700;
 
-// Tailles fluides — clamp(min, idéal-en-vw, max)
-$fs-display: clamp(3rem, 7vw, 5.5rem);     // titre hero
-$fs-h1:      clamp(2.25rem, 5vw, 4rem);    // h1 page
-$fs-h2:      clamp(1.875rem, 3.6vw, 3rem); // section
+// Tailles fluides (min, idéal-en-vw, max)
+$fs-display: clamp(3rem, 7vw, 5.5rem);     
+$fs-h1:      clamp(2.25rem, 5vw, 4rem);    
+$fs-h2:      clamp(1.875rem, 3.6vw, 3rem);
 $fs-h3:      clamp(1.125rem, 1.5vw, 1.375rem);
 $fs-lead:    clamp(1rem, 1.15vw, 1.0625rem);
 $fs-body:    1rem;
@@ -51,7 +47,7 @@ $lh-snug:   1.15;
 $lh-normal: 1.55;
 $lh-loose:  1.75;
 
-// ---------- Espacements (échelle progressive) ----------
+//
 $space-1: 0.25rem;   //  4px
 $space-2: 0.5rem;    //  8px
 $space-3: 0.75rem;   // 12px
@@ -62,30 +58,30 @@ $space-7: 3rem;      // 48px
 $space-8: 4rem;      // 64px
 $space-9: 6rem;      // 96px
 
-// ---------- Layout ----------
-$container-max:      1480px;   // largeur normale (sections)
-$container-max-wide: 1440px;   // largeur étendue (toutes les sections de la home)
+// Layout
+$container-max:      1480px;   
+$container-max-wide: 1440px; 
 $container-pad:      clamp(1rem, 3vw, 2.5rem);
 
-// Marge latérale extérieure du hero (petite gouttière crème autour)
+// Marge latérale extérieure du hero
 $hero-gutter: clamp(0.75rem, 1.5vw, 1.25rem);
 
-// ---------- Bordures ----------
+// Bordures
 $radius-btn:   8px;
 $radius-card:  16px;
 $radius-pill:  999px;
 
-// ---------- Ombres ----------
+// Ombres
 $shadow-sm: 0 1px 2px rgba(20,30,25,.04), 0 2px 6px rgba(20,30,25,.04);
 $shadow-md: 0 6px 16px rgba(20,30,25,.08);
 $shadow-lg: 0 24px 48px rgba(20,30,25,.14);
 
-// ---------- Transitions ----------
+// Transitions
 $transition-fast: 0.15s ease;
 $transition-base: 0.2s ease;
 $transition-slow: 0.3s ease;
 
-// ---------- Breakpoints (Mobile First) ----------
+// Breakpoints (Mobile First)
 $bp-tablet:  640px;
 $bp-desktop: 960px;
 $bp-wide:    1280px;

@@ -4,14 +4,14 @@
 (function () {
   'use strict';
 
-  var listingGrid = document.querySelector('.listing-grid');
-  var catFilters = document.querySelectorAll('.cat-filter');
-  var loadMoreBtn = document.getElementById('load-more');
-  var countEl = document.getElementById('listing-count');
+  const listingGrid = document.querySelector('.listing-grid');
+  const catFilters = document.querySelectorAll('.cat-filter');
+  const loadMoreBtn = document.getElementById('load-more');
+  const countEl = document.getElementById('listing-count');
 
-  var currentOffset = 0;
-  var currentSearch = '';
-  var PAGE_SIZE = 12;
+  let currentOffset = 0;
+  let currentSearch = '';
+  const PAGE_SIZE = 12;
 
   if (!listingGrid) return;
 
@@ -26,15 +26,15 @@
     VillaNova.clearChildren(listingGrid);
 
     // Placeholder de chargement
-    var loadingLi = document.createElement('li');
+    const loadingLi = document.createElement('li');
     loadingLi.className = 'listing-grid__loading';
-    var loadingP = document.createElement('p');
+    const loadingP = document.createElement('p');
     loadingP.textContent = 'Chargement des événements…';
     loadingLi.appendChild(loadingP);
     listingGrid.appendChild(loadingLi);
 
     try {
-      var data = await VillaNova.api.fetchEvents({
+      const data = await VillaNova.api.fetchEvents({
         limit: PAGE_SIZE,
         offset: 0,
         search: params.search || undefined
@@ -70,7 +70,7 @@
    */
   function renderEvents(events) {
     events.forEach(function (event) {
-      var card = VillaNova.createEventCard(event, { large: false });
+      const card = VillaNova.createEventCard(event, { large: false });
       listingGrid.appendChild(card);
     });
   }
@@ -84,7 +84,7 @@
     loadMoreBtn.textContent = 'Chargement…';
 
     try {
-      var data = await VillaNova.api.fetchEvents({
+      const data = await VillaNova.api.fetchEvents({
         limit: PAGE_SIZE,
         offset: currentOffset,
         search: currentSearch || undefined
@@ -110,11 +110,11 @@
 
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var active = document.querySelector('.cat-filter--active');
+      const active = document.querySelector('.cat-filter--active');
       if (active) active.classList.remove('cat-filter--active');
       btn.classList.add('cat-filter--active');
 
-      var category = btn.textContent.trim();
+      const category = btn.textContent.trim();
       if (category === 'Tout') {
         loadEvents();
       } else {
@@ -132,17 +132,17 @@
   // Helpers
 
   function showGridError(message) {
-    var li = document.createElement('li');
+    const li = document.createElement('li');
     li.className = 'listing-grid__loading';
     li.setAttribute('role', 'alert');
-    var p = document.createElement('p');
+    const p = document.createElement('p');
     p.textContent = message;
     li.appendChild(p);
     listingGrid.appendChild(li);
   }
 
   function announceToSR(message) {
-    var el = document.createElement('p');
+    const el = document.createElement('p');
     el.className = 'visually-hidden';
     el.setAttribute('role', 'status');
     el.textContent = message;

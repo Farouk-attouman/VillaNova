@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VillaNova la plateforme culturelle officielle de la Ville. Concerts, expositions, théâtre, ateliers et festivals.">
+    <meta name="theme-color" content="#1B4D3E">
+    <title>VillaNova La culture vit ici</title>
+
+    <!-- Polices Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Lien d'évitement pour l'accessibilité -->
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" aria-label="VillaNova - retour à l'accueil">
+                <span class="logo-icon" aria-hidden="true">V</span>
+                <span class="logo-text">VillaNova</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navigation principale">
+                <ul class="nav-links">
+                    <li><a href="index.html" aria-current="page">Accueil</a></li>
+                    <li><a href="#evenements">Événements</a></li>
+                    <li><a href="#categories">Catégories</a></li>
+                    <li><a href="#carte">Carte</a></li>
+                    <li><a href="#articles">Articles</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button type="submit" form="hero-search" class="btn-icon" aria-label="Rechercher un événement">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.3-4.3"/>
+                    </svg>
+                </button>
+                <a href="creer-compte.html" class="btn btn-ghost">Créer un compte</a>
+                <a href="connexion.html" class="btn btn-primary">Connexion</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- HERO -->
+        <section id="accueil" class="hero" aria-labelledby="hero-title">
+            <video class="hero-bg"
+                   poster="assets/img/hero-poster.webp"
+                   preload="metadata"
+                   muted
+                   loop
+                   playsinline
+                   controls
+                   aria-label="Survol aérien de la ville de VillaNova">
+                <source src="assets/video/hero-villanova.webm" type="video/webm">
+                <source src="assets/video/hero-villanova.mp4" type="video/mp4">
+                <p>
+                    Votre navigateur ne prend pas en charge la lecture vidéo.
+                    <a href="assets/video/hero-villanova.mp4">Télécharger la vidéo</a>
+                    (MP4, ~5 Mo) pour la visionner.
+                </p>
+            </video>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <p class="hero-eyebrow">Semaine du 9 au 17 mai · 128 événements en cours</p>
+                <h1 id="hero-title" class="hero-title">
+                    La culture<br> <i class="italic">vit</i> ici.
+                </h1>
+                <p class="hero-lede">
+                    Découvrez tout ce qui vibre à VillaNova cette semaine concerts, expositions, ateliers, spectacles. Un seul endroit, toute la programmation.
+                </p>
+
+                <!-- Barre de recherche -->
+                <form id="hero-search" class="search-bar" role="search" action="evenements.html" method="get" aria-label="Rechercher un événement">
+                    <label class="search-field">
+                        <span class="field-label">Date</span>
+                        <select name="date">
+                            <option value="">Toutes les dates</option>
+                            <option value="aujourdhui">Aujourd'hui</option>
+                            <option value="demain">Demain</option>
+                            <option value="semaine">Cette semaine</option>
+                            <option value="weekend">Ce week-end</option>
+                        </select>
+                    </label>
+
+                    <label class="search-field">
+                        <span class="field-label">Catégorie</span>
+                        <select name="category">
+                            <option value="">Toutes les catégories</option>
+                            <option value="concerts">Concerts</option>
+                            <option value="expos">Expositions</option>
+                            <option value="theatre">Théâtre</option>
+                            <option value="festivals">Festivals</option>
+                            <option value="ateliers">Ateliers</option>
+                        </select>
+                    </label>
+
+                    <label class="search-field">
+                        <span class="field-label">Lieu</span>
+                        <select name="location">
+                            <option value="">Tout VillaNova</option>
+                            <option value="centre">Centre-ville</option>
+                            <option value="berges">Quartier des Berges</option>
+                            <option value="ancien">Quartier ancien</option>
+                        </select>
+                    </label>
+
+                    <button type="submit" class="btn btn-primary">Explorer</button>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- À L'AFFICHE -->
+        <section id="evenements" class="section featured" aria-labelledby="featured-title">
+            <div class="container">
+                <header class="section-header">
+                    <p class="eyebrow">À l'affiche cette semaine</p>
+                    <h2 id="featured-title">Sélection <i class="italic">de la rédac'</i></h2>
+                    <a href="evenements.html" class="section-link">Voir les 128 événements →</a>
+                </header>
+
+                <ul class="featured-grid" role="list">
+                    <li>
+                        <article class="card card-large">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-nuit-sons-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-nuit-sons-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-nuit-sons.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-nuit-sons.webp">
+                                <img src="assets/img/featured/event-nuit-sons.webp"
+                                     alt="Scène acoustique en plein air au bord de la Loire"
+                                     width="900" height="600"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-concert">Concert</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Sam. 9 mai · 20h00</p>
+                                <h3><a href="evenement.html">Nuit des Sons Open Air #4</a></h3>
+                                <p class="card-desc">Quatre artistes, une scène acoustique alimentée par énergie solaire, et la Loire en toile de fond.</p>
+                                <p class="card-footer">
+                                    <span>Parc des Berges</span>
+                                    <span class="card-price">18€</span>
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article class="card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-sara-berthier-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-sara-berthier-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-sara-berthier.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-sara-berthier.webp">
+                                <img src="assets/img/featured/event-sara-berthier.webp"
+                                     alt="Vue d'une exposition de peinture contemporaine"
+                                     width="600" height="400"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-expo">Exposition</span>
+                                <p class="card-meta">Jusqu'au 12 juin · 10h–18h</p>
+                                <h3><a href="evenement.html">Lumière sur Sara Berthier</a></h3>
+                                <p class="card-footer">
+                                    <span>Musée des Beaux-Arts</span>
+                                    <span class="card-price card-price-free">Gratuit</span>
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article class="card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-tartuffe-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-tartuffe-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-tartuffe.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-tartuffe.webp">
+                                <img src="assets/img/featured/event-tartuffe.webp"
+                                     alt="Rideau rouge de scène de théâtre"
+                                     width="600" height="400"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-theatre">Théâtre</span>
+                                <p class="card-meta">Ven. 15 mai · 20h30</p>
+                                <h3><a href="evenement.html">Le Tartuffe, version 2026</a></h3>
+                                <p class="card-footer">
+                                    <span>Théâtre Mitterrand</span>
+                                    <span class="card-price">24€</span>
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article class="card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-serigraphie-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-serigraphie-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-serigraphie.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-serigraphie.webp">
+                                <img src="assets/img/featured/event-serigraphie.webp"
+                                     alt="Atelier de sérigraphie textile"
+                                     width="600" height="400"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-atelier">Atelier</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Dim. 17 mai · 14h–17h</p>
+                                <h3><a href="evenement.html">Atelier sérigraphie zéro déchet</a></h3>
+                                <p class="card-footer">
+                                    <span>Maison des Arts</span>
+                                    <span class="card-price">12€</span>
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article class="card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-bouge-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/featured/event-bouge-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/featured/event-bouge.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/featured/event-bouge.webp">
+                                <img src="assets/img/featured/event-bouge.webp"
+                                     alt="Danseuse contemporaine en mouvement"
+                                     width="600" height="400"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <div class="card-body">
+                                <span class="tag tag-danse">Danse</span>
+                                <span class="tag tag-eco">Éco</span>
+                                <p class="card-meta">Sam.–Dim. 9–10 mai · Dès 14h</p>
+                                <h3><a href="evenement.html">Festival Bouge ! Danse contemporaine</a></h3>
+                                <p class="card-footer">
+                                    <span>Place Centrale</span>
+                                    <span class="card-price card-price-free">Gratuit</span>
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- MOOD PICKER -->
+        <section id="mood" class="section mood" aria-labelledby="mood-title">
+            <div class="container">
+                <header class="section-header">
+                    <p class="eyebrow">Mood Picker</p>
+                    <h2 id="mood-title">Ce soir, j'ai envie de…</h2>
+                    <p class="section-lede">
+                        Quatre humeurs, quatre programmations curées par notre équipe culturelle. Choisissez la vôtre.
+                    </p>
+                </header>
+
+                <ul class="mood-grid" role="list">
+                    <li>
+                        <a href="#" class="mood-card mood-poser">
+                            <span class="mood-num">01</span>
+                            <h3>Me poser<span aria-hidden="true">.</span></h3>
+                            <p>Cinéma, lectures, jazz feutré</p>
+                            <span class="mood-link">Voir la sélection →</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mood-card mood-vibrer">
+                            <span class="mood-num">02</span>
+                            <h3>Vibrer<span aria-hidden="true">.</span></h3>
+                            <p>Concerts, clubs, scènes électro</p>
+                            <span class="mood-link">Voir la sélection →</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mood-card mood-decouvrir">
+                            <span class="mood-num">03</span>
+                            <h3>Découvrir<span aria-hidden="true">.</span></h3>
+                            <p>Expositions, patrimoine, balades</p>
+                            <span class="mood-link">Voir la sélection →</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mood-card mood-apprendre">
+                            <span class="mood-num">04</span>
+                            <h3>Apprendre<span aria-hidden="true">.</span></h3>
+                            <p>Ateliers, conférences, rencontres</p>
+                            <span class="mood-link">Voir la sélection →</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- CATÉGORIES -->
+        <section id="categories" class="section categories" aria-labelledby="categories-title">
+            <div class="container">
+                <header class="section-header">
+                    <p class="eyebrow">Explorer par catégorie</p>
+                    <h2 id="categories-title">Huit univers, <i class="italic">une seule</i> ville.</h2>
+                    <p class="section-lede">
+                        De l'opéra à la sérigraphie en passant par le hip-hop. Plongez par genre.
+                    </p>
+                </header>
+
+                <ul class="categories-grid" role="list">
+                    <li>
+                        <a href="concerts.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-concerts-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-concerts-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-concerts.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-concerts.webp">
+                                <img src="assets/img/categories/cat-concerts.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">01</span>
+                            <span class="cat-label">Concerts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="expos.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-expos-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-expos-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-expos.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-expos.webp">
+                                <img src="assets/img/categories/cat-expos.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">02</span>
+                            <span class="cat-label">Expos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="theatre.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-theatre-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-theatre-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-theatre.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-theatre.webp">
+                                <img src="assets/img/categories/cat-theatre.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">03</span>
+                            <span class="cat-label">Théâtre</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="festivals.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-festivals-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-festivals-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-festivals.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-festivals.webp">
+                                <img src="assets/img/categories/cat-festivals.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">04</span>
+                            <span class="cat-label">Festivals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ateliers.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-ateliers-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-ateliers-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-ateliers.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-ateliers.webp">
+                                <img src="assets/img/categories/cat-ateliers.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">05</span>
+                            <span class="cat-label">Ateliers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cinema.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-cinema-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-cinema-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-cinema.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-cinema.webp">
+                                <img src="assets/img/categories/cat-cinema.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">06</span>
+                            <span class="cat-label">Cinéma</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="danse.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-danse-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-danse-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-danse.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-danse.webp">
+                                <img src="assets/img/categories/cat-danse.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">07</span>
+                            <span class="cat-label">Danse</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="patrimoine.html" class="cat-card">
+                            <picture>
+                                <source type="image/avif"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-patrimoine-mobile.avif">
+                                <source type="image/webp"
+                                        media="(max-width: 768px)"
+                                        srcset="assets/img/categories/cat-patrimoine-mobile.webp">
+                                <source type="image/avif"
+                                        srcset="assets/img/categories/cat-patrimoine.avif">
+                                <source type="image/webp"
+                                        srcset="assets/img/categories/cat-patrimoine.webp">
+                                <img src="assets/img/categories/cat-patrimoine.webp"
+                                     alt=""
+                                     width="500" height="500"
+                                     loading="lazy"
+                                     decoding="async">
+                            </picture>
+                            <span class="cat-num">08</span>
+                            <span class="cat-label">Patrimoine</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- GRATUIT CETTE SEMAINE -->
+        <section id="gratuit" class="section free-week" aria-labelledby="free-title">
+            <div class="container free-layout">
+                <aside class="free-intro">
+                    <p class="eyebrow">Gratuit cette semaine</p>
+                    <h2 id="free-title">La culture <i class="italic">pour tous</i>, sans ticket d'entrée.</h2>
+                    <p>
+                        Chaque semaine, la Ville sélectionne plusieurs événements ouverts à toutes et tous, gratuitement. Parce que la culture appartient d'abord à celles et ceux qui la vivent.
+                    </p>
+                    <a href="gratuit.html" class="btn btn-primary">Voir tous les événements gratuits</a>
+                </aside>
+
+                <ol class="free-list">
+                    <li>
+                        <span class="free-num">01</span>
+                        <div>
+                            <h3><a href="evenement.html">Lectures publiques au Jardin</a></h3>
+                            <p>Littérature · Jardin Mistral</p>
+                        </div>
+                        <time datetime="2026-05-13">Mer. 13 mai</time>
+                    </li>
+                    <li>
+                        <span class="free-num">02</span>
+                        <div>
+                            <h3><a href="evenement.html">Visite guidée du quartier ancien</a></h3>
+                            <p>Patrimoine · Départ Hôtel de Ville</p>
+                        </div>
+                        <time datetime="2026-05-16">Sam. 16 mai</time>
+                    </li>
+                    <li>
+                        <span class="free-num">03</span>
+                        <div>
+                            <h3><a href="evenement.html">Bal trad. ouvert à tous</a></h3>
+                            <p>Danse · Halles couvertes</p>
+                        </div>
+                        <time datetime="2026-05-16">Sam. 16 mai</time>
+                    </li>
+                    <li>
+                        <span class="free-num">04</span>
+                        <div>
+                            <h3><a href="evenement.html">Ciné-club en plein air : « Les Quatre Cents Coups »</a></h3>
+                            <p>Cinéma · Parvis de la Médiathèque</p>
+                        </div>
+                        <time datetime="2026-05-22">Ven. 22 mai</time>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+
+        <!-- ENGAGEMENTS ÉCO -->
+        <section id="eco" class="section eco" aria-labelledby="eco-title">
+            <div class="container eco-band">
+                <header class="eco-intro">
+                    <p class="eyebrow eyebrow-light">Engagements 2026</p>
+                    <h2 id="eco-title">Une culture <i class="italic">responsable</i>, par défaut.</h2>
+                    <p>
+                        VillaNova s'engage pour une scène culturelle accessible, inclusive et sobre en carbone.
+                    </p>
+                </header>
+
+                <ul class="eco-list" role="list">
+                    <li>
+                        <h3>Mobilités douces</h3>
+                        <p>Tous nos lieux culturels sont accessibles à vélo, en tram ou en bus.</p>
+                    </li>
+                    <li>
+                        <h3>Zéro déchet</h3>
+                        <p>80 % des festivals VillaNova sont labellisés zéro plastique en 2026.</p>
+                    </li>
+                    <li>
+                        <h3>Énergie locale</h3>
+                        <p>Scènes alimentées par le mix solaire-hydraulique de la régie municipale.</p>
+                    </li>
+                    <li>
+                        <h3>Inclusivité</h3>
+                        <p>Tarifs solidaires, LSF et accès PMR sur l'ensemble de la programmation.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- NEWSLETTER -->
+        <section id="newsletter" class="section newsletter" aria-labelledby="newsletter-title">
+            <div class="container newsletter-box">
+                <header>
+                    <p class="eyebrow">Newsletter hebdo · chaque jeudi</p>
+                    <h2 id="newsletter-title">Reste au courant des prochains événements.</h2>
+                    <p>
+                        Une fois par semaine, notre rédaction vous envoie 7 événements à ne pas manquer. Pas de spam, pas de pub.
+                    </p>
+                </header>
+
+                <form class="newsletter-form" action="newsletter.html" method="post" aria-label="Inscription à la newsletter VillaNova">
+                    <label for="email">Votre adresse email</label>
+                    <div class="newsletter-input">
+                        <input type="email" id="email" name="email" required placeholder="prenom@email.fr">
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
+                    </div>
+                    <p class="newsletter-note">
+                        En vous inscrivant, vous acceptez de recevoir la newsletter de la Ville. Désinscription en un clic, à tout moment.
+                    </p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo logo-footer" aria-label="VillaNova - retour à l'accueil">
+                        <span class="logo-icon" aria-hidden="true">V</span>
+                        <span class="logo-text">VillaNova</span>
+                    </a>
+                    <p>
+                        La plateforme culturelle officielle de la Ville. Centralise concerts, expositions, spectacles et ateliers toute l'année, en accès libre.
+                    </p>
+                    <ul class="socials" aria-label="Réseaux sociaux">
+                        <li><a href="#" aria-label="VillaNova sur Instagram">IG</a></li>
+                        <li><a href="#" aria-label="VillaNova sur Facebook">FB</a></li>
+                        <li><a href="#" aria-label="VillaNova sur YouTube">YT</a></li>
+                        <li><a href="#" aria-label="VillaNova sur Mastodon">@</a></li>
+                    </ul>
+                </div>
+
+                <nav class="footer-cols" aria-label="Liens du pied de page">
+                    <div class="footer-column">
+                        <h3>Découvrir</h3>
+                        <ul>
+                            <li><a href="evenements.html">Tous les événements</a></li>
+                            <li><a href="categories.html">Catégories</a></li>
+                            <li><a href="carte.html">Carte interactive</a></li>
+                            <li><a href="articles.html">Articles & dossiers</a></li>
+                            <li><a href="calendrier.html">Calendrier officiel</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Pratique</h3>
+                        <ul>
+                            <li><a href="compte.html">Mon compte VillaNova</a></li>
+                            <li><a href="tarifs.html">Tarifs solidaires</a></li>
+                            <li><a href="accessibilite.html">Accessibilité</a></li>
+                            <li><a href="pass-jeunes.html">Pass culture jeunes</a></li>
+                            <li><a href="faq.html">Foire aux questions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>La Ville</h3>
+                        <ul>
+                            <li><a href="contact.html">Contact mairie</a></li>
+                            <li><a href="culture.html">Service culturel</a></li>
+                            <li><a href="partenaires.html">Devenir partenaire</a></li>
+                            <li><a href="mecenat.html">Mécénat & subventions</a></li>
+                            <li><a href="presse.html">Presse</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Mentions</h3>
+                        <ul>
+                            <li><a href="mentions.html">Mentions légales</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+                            <li><a href="rgaa.html">Déclaration d'accessibilité</a></li>
+                            <li><a href="cookies.html">Gestion des cookies</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <p class="footer-wordmark" aria-hidden="true">VillaNova<span>.</span></p>
+
+            <div class="footer-bottom">
+                <small>© 2026 Mairie de VillaNova Direction de la Culture</small>
+                <small>● Site éco-conçu · 0,8 g CO₂/page</small>
+                <small><a href="rgaa.html">Accessibilité : conforme RGAA 4.1</a></small>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

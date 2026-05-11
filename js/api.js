@@ -6,17 +6,17 @@ window.VillaNova = window.VillaNova || {};
 (function () {
   'use strict';
 
-  var API_BASE = 'https://api.openagenda.com/v2/agendas/69319016';
-  var API_KEY = '9b8456d08b924cd68820a420f3360c85';
+  const API_BASE = 'https://api.openagenda.com/v2/agendas/69319016';
+  const API_KEY = '9b8456d08b924cd68820a420f3360c85';
 
   /**
    * Construit une URL avec query params.
    * Gere les tableaux (ex: relative[] = ['current','upcoming']).
    */
   function buildUrl(path, params) {
-    var url = new URL(path);
+    const url = new URL(path);
     Object.keys(params).forEach(function (key) {
-      var val = params[key];
+      const val = params[key];
       if (val === undefined || val === null || val === '') return;
       if (Array.isArray(val)) {
         val.forEach(function (v) {
@@ -37,7 +37,7 @@ window.VillaNova = window.VillaNova || {};
    */
   async function fetchEvents(params) {
     params = params || {};
-    var defaults = {
+    const defaults = {
       key: API_KEY,
       detailed: 1,
       'relative[]': ['current', 'upcoming'],
@@ -46,15 +46,15 @@ window.VillaNova = window.VillaNova || {};
     };
 
     // Merge avec les params passes (sauf limit/offset deja geres)
-    var merged = Object.assign({}, defaults);
+    const merged = Object.assign({}, defaults);
     Object.keys(params).forEach(function (key) {
       if (key !== 'limit' && key !== 'offset') {
         merged[key] = params[key];
       }
     });
 
-    var url = buildUrl(API_BASE + '/events', merged);
-    var response = await fetch(url);
+    const url = buildUrl(API_BASE + '/events', merged);
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error('Erreur API : ' + response.status + ' ' + response.statusText);
@@ -69,18 +69,18 @@ window.VillaNova = window.VillaNova || {};
    * @returns {Promise<Object>} L'objet evenement complet
    */
   async function fetchEvent(uid) {
-    var url = buildUrl(API_BASE + '/events/' + uid, {
+    const url = buildUrl(API_BASE + '/events/' + uid, {
       key: API_KEY,
       detailed: 1
     });
 
-    var response = await fetch(url);
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error('Erreur API : ' + response.status + ' ' + response.statusText);
     }
 
-    var data = await response.json();
+    const data = await response.json();
     return data.event || data;
   }
 

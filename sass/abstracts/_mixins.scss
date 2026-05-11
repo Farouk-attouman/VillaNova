@@ -1,11 +1,9 @@
-// =========================================================
-// VilleNova - Mixins
-// Patterns réutilisables : on les écrit une fois.
-// =========================================================
+// VilleNova Mixins
+// Patterns réutilisables
 
 @use 'variables' as *;
 
-// ---------- Responsive (Mobile First) ----------
+// Responsive (Mobile First)
 // On démarre sur mobile, on enrichit avec min-width.
 @mixin respond-to($breakpoint) {
   @if $breakpoint == tablet {
@@ -19,7 +17,7 @@
   }
 }
 
-// ---------- Focus visible (a11y) ----------
+// Focus visible
 @mixin focus-ring($color: $color-forest) {
   &:focus { outline: none; }
   &:focus-visible {
@@ -29,7 +27,7 @@
   }
 }
 
-// ---------- Container ----------
+//  Container
 @mixin container($size: default) {
   width: 100%;
   margin-inline: auto;
@@ -42,7 +40,7 @@
   }
 }
 
-// ---------- Visually hidden (a11y) ----------
+// Visually hidden
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -55,14 +53,14 @@
   border: 0;
 }
 
-// ---------- Hover propre (sans coller sur tactile) ----------
+// Hover propre
 @mixin hover {
   @media (hover: hover) {
     &:hover { @content; }
   }
 }
 
-// ---------- Eyebrow (label mono terracotta au-dessus des titres) ----------
+// Eyebrow (label mono terracotta au-dessus des titres)
 @mixin eyebrow($color: $color-terracotta) {
   font-family: $font-mono;
   font-size: $fs-eyebrow;

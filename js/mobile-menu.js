@@ -1,4 +1,4 @@
-// VillaNova — Menu mobile (hamburger toggle)
+// VillaNova  Menu mobile (hamburger)
 (function () {
   const hamburger = document.querySelector('.hamburger');
   const menu = document.getElementById('mobile-menu');

@@ -4,12 +4,12 @@
 (function () {
   'use strict';
 
-  var params = new URLSearchParams(window.location.search);
-  var uid = params.get('uid');
+  const params = new URLSearchParams(window.location.search);
+  const uid = params.get('uid');
 
-  var loadingEl = document.getElementById('event-loading');
-  var errorEl = document.getElementById('event-error');
-  var pageArticle = document.querySelector('.event-page');
+  const loadingEl = document.getElementById('event-loading');
+  const errorEl = document.getElementById('event-error');
+  const pageArticle = document.querySelector('.event-page');
 
   // Si pas de uid, afficher l'erreur
   if (!uid) {
@@ -23,7 +23,7 @@
 
   async function init() {
     try {
-      var event = await VillaNova.api.fetchEvent(uid);
+      const event = await VillaNova.api.fetchEvent(uid);
       renderEvent(event);
       loadRelatedEvents();
     } catch (err) {
@@ -38,29 +38,29 @@
    */
   function renderEvent(event) {
     try {
-      var title = getText(event.title);
+      const title = getText(event.title);
 
       // Titre de la page
       document.title = title + ' \u2014 VillaNova';
 
       // Meta description
       try {
-        var metaDesc = document.querySelector('meta[name="description"]');
+        const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', getText(event.description));
       } catch (e) { console.warn('meta desc:', e); }
 
       // Breadcrumb : dernier element
       try {
-        var breadcrumbCurrent = document.querySelector('.breadcrumb li[aria-current="page"]');
+        const breadcrumbCurrent = document.querySelector('.breadcrumb li[aria-current="page"]');
         if (breadcrumbCurrent) breadcrumbCurrent.textContent = title;
       } catch (e) { console.warn('breadcrumb:', e); }
 
       // Image cover
       try {
-        var coverImg = document.getElementById('event-cover-img');
-        var coverFigure = document.getElementById('event-cover');
+        const coverImg = document.getElementById('event-cover-img');
+        const coverFigure = document.getElementById('event-cover');
         if (coverImg) {
-          var imgUrl = VillaNova.getImageUrl(event, 'full');
+          const imgUrl = VillaNova.getImageUrl(event, 'full');
           if (imgUrl) {
             coverImg.src = imgUrl;
             coverImg.alt = title;
@@ -72,13 +72,13 @@
 
       // Tags
       try {
-        var tagsContainer = document.getElementById('event-tags');
+        const tagsContainer = document.getElementById('event-tags');
         if (tagsContainer) {
           VillaNova.clearChildren(tagsContainer);
-          var keywords = (event.keywords && event.keywords.fr) || [];
+          const keywords = (event.keywords && event.keywords.fr) || [];
           if (keywords.length > 0) {
             keywords.slice(0, 3).forEach(function (kw) {
-              var span = document.createElement('span');
+              const span = document.createElement('span');
               span.className = 'tag';
               span.textContent = kw;
               tagsContainer.appendChild(span);
@@ -89,16 +89,16 @@
 
       // Titre principal
       try {
-        var titleEl = document.getElementById('event-title');
+        const titleEl = document.getElementById('event-title');
         if (titleEl) titleEl.textContent = title;
       } catch (e) { console.warn('title:', e); }
 
       // Meta : Date
       try {
-        var dateEl = document.getElementById('event-date');
+        const dateEl = document.getElementById('event-date');
         if (dateEl && event.firstTiming) {
           VillaNova.clearChildren(dateEl);
-          var timeEl = document.createElement('time');
+          const timeEl = document.createElement('time');
           timeEl.setAttribute('datetime', event.firstTiming.begin);
           timeEl.textContent = VillaNova.formatEventDate(event.firstTiming);
           dateEl.appendChild(timeEl);
@@ -107,32 +107,32 @@
 
       // Meta : Lieu
       try {
-        var lieuEl = document.getElementById('event-lieu');
+        const lieuEl = document.getElementById('event-lieu');
         if (lieuEl) lieuEl.textContent = (event.location && event.location.name) || 'Lieu \u00e0 confirmer';
       } catch (e) { console.warn('lieu:', e); }
 
       // Meta : Tarif
       try {
-        var tarifEl = document.getElementById('event-tarif');
+        const tarifEl = document.getElementById('event-tarif');
         if (tarifEl) {
-          var price = VillaNova.extractPrice(event);
+          const price = VillaNova.extractPrice(event);
           tarifEl.textContent = price.label;
         }
       } catch (e) { console.warn('tarif:', e); }
 
       // Description longue (avec support markdown)
       try {
-        var descSection = document.getElementById('event-description');
+        const descSection = document.getElementById('event-description');
         if (descSection) {
-          var longDesc = getText(event.longDescription) || getText(event.description);
+          const longDesc = getText(event.longDescription) || getText(event.description);
           if (longDesc) {
             VillaNova.clearChildren(descSection);
-            var h2 = document.createElement('h2');
+            const h2 = document.createElement('h2');
             h2.id = 'presentation-title';
             h2.textContent = 'L\'\u00e9v\u00e9nement';
             descSection.appendChild(h2);
 
-            var contentNodes = markdownToDOM(longDesc);
+            const contentNodes = markdownToDOM(longDesc);
             contentNodes.forEach(function (node) {
               descSection.appendChild(node);
             });
@@ -144,10 +144,10 @@
 
       // Sidebar : adresse
       try {
-        var addressEl = document.getElementById('event-address');
+        const addressEl = document.getElementById('event-address');
         if (addressEl && event.location) {
           VillaNova.clearChildren(addressEl);
-          var strong = document.createElement('strong');
+          const strong = document.createElement('strong');
           strong.textContent = event.location.name || '';
           addressEl.appendChild(strong);
 
@@ -175,28 +175,28 @@
    * Charge les evenements voisins pour la sidebar.
    */
   async function loadRelatedEvents() {
-    var relatedList = document.getElementById('event-related');
+    const relatedList = document.getElementById('event-related');
     if (!relatedList) return;
 
     try {
-      var data = await VillaNova.api.fetchEvents({ limit: 4 });
+      const data = await VillaNova.api.fetchEvents({ limit: 4 });
       VillaNova.clearChildren(relatedList);
 
       data.events.forEach(function (ev) {
         if (String(ev.uid) === String(uid)) return;
 
-        var li = document.createElement('li');
-        var a = document.createElement('a');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
         a.href = 'evenements.html?uid=' + ev.uid;
 
         if (ev.firstTiming) {
-          var time = document.createElement('time');
+          const time = document.createElement('time');
           time.setAttribute('datetime', ev.firstTiming.begin);
           time.textContent = VillaNova.formatEventDate(ev.firstTiming);
           a.appendChild(time);
         }
 
-        var span = document.createElement('span');
+        const span = document.createElement('span');
         span.textContent = getText(ev.title);
         a.appendChild(span);
 
@@ -222,7 +222,7 @@
   function markdownToDOM(text) {
     if (!text) return [];
 
-    var html = text
+    let html = text
       .replace(/^[_\-]{3,}$/gm, '<hr>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/__(.+?)__/g, '<strong>$1</strong>')
@@ -234,13 +234,13 @@
     html = html.replace(/<p>\s*<\/p>/g, '');
     html = html.replace(/<p>\s*<hr>\s*<\/p>/g, '<hr>');
 
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(html, 'text/html');
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-    var nodes = [];
-    var children = doc.body.childNodes;
-    for (var i = 0; i < children.length; i++) {
-      var node = children[i];
+    const nodes = [];
+    const children = doc.body.childNodes;
+    for (let i = 0; i < children.length; i++) {
+      const node = children[i];
       if (node.nodeType === Node.ELEMENT_NODE) {
         nodes.push(document.importNode(node, true));
       }

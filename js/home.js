@@ -5,15 +5,15 @@
 (function () {
   'use strict';
 
-  var featuredGrid = document.querySelector('.featured-grid');
-  var catFilters = document.querySelectorAll('.cat-filter');
-  var heroSearch = document.getElementById('hero-search');
-  var loadMoreBtn = document.getElementById('load-more');
-  var countLink = document.querySelector('.section__header--featured .link-btn');
+  const featuredGrid = document.querySelector('.featured-grid');
+  const catFilters = document.querySelectorAll('.cat-filter');
+  const heroSearch = document.getElementById('hero-search');
+  const loadMoreBtn = document.getElementById('load-more');
+  const countLink = document.querySelector('.section__header--featured .link-btn');
 
-  var currentOffset = 0;
-  var currentSearch = '';
-  var PAGE_SIZE = 5;
+  let currentOffset = 0;
+  let currentSearch = '';
+  const PAGE_SIZE = 5;
 
   if (!featuredGrid) return;
 
@@ -28,15 +28,15 @@
     VillaNova.clearChildren(featuredGrid);
 
     // Placeholder de chargement
-    var loadingLi = document.createElement('li');
+    const loadingLi = document.createElement('li');
     loadingLi.className = 'featured-grid__loading';
-    var loadingP = document.createElement('p');
+    const loadingP = document.createElement('p');
     loadingP.textContent = 'Chargement des événements…';
     loadingLi.appendChild(loadingP);
     featuredGrid.appendChild(loadingLi);
 
     try {
-      var data = await VillaNova.api.fetchEvents({
+      const data = await VillaNova.api.fetchEvents({
         limit: PAGE_SIZE,
         offset: 0,
         search: params.search || undefined
@@ -49,7 +49,7 @@
       if (countLink && data.total) {
         VillaNova.clearChildren(countLink);
         countLink.appendChild(document.createTextNode('Voir les ' + data.total + ' événements '));
-        var arrow = document.createElement('img');
+        const arrow = document.createElement('img');
         arrow.src = 'assets/icons/arrow-right.svg';
         arrow.alt = '';
         arrow.width = 14;
@@ -82,7 +82,7 @@
    */
   function renderEvents(events, firstLarge) {
     events.forEach(function (event, i) {
-      var card = VillaNova.createEventCard(event, {
+      const card = VillaNova.createEventCard(event, {
         large: firstLarge && i === 0
       });
       featuredGrid.appendChild(card);
@@ -98,7 +98,7 @@
     loadMoreBtn.textContent = 'Chargement…';
 
     try {
-      var data = await VillaNova.api.fetchEvents({
+      const data = await VillaNova.api.fetchEvents({
         limit: PAGE_SIZE,
         offset: currentOffset,
         search: currentSearch || undefined
@@ -125,11 +125,11 @@
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       // Toggle actif
-      var active = document.querySelector('.cat-filter--active');
+      const active = document.querySelector('.cat-filter--active');
       if (active) active.classList.remove('cat-filter--active');
       btn.classList.add('cat-filter--active');
 
-      var category = btn.textContent.trim();
+      const category = btn.textContent.trim();
       if (category === 'Tout') {
         loadFeaturedEvents();
       } else {
@@ -143,12 +143,12 @@
   if (heroSearch) {
     heroSearch.addEventListener('submit', function (e) {
       e.preventDefault();
-      var formData = new FormData(heroSearch);
-      var search = formData.get('category') || formData.get('date') || '';
+      const formData = new FormData(heroSearch);
+      const search = formData.get('category') || formData.get('date') || '';
       loadFeaturedEvents({ search: search });
 
       // Scroll vers la section featured
-      var section = document.getElementById('evenements');
+      const section = document.getElementById('evenements');
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
@@ -164,17 +164,17 @@
   // Helpers
 
   function showGridError(message) {
-    var li = document.createElement('li');
+    const li = document.createElement('li');
     li.className = 'featured-grid__loading';
     li.setAttribute('role', 'alert');
-    var p = document.createElement('p');
+    const p = document.createElement('p');
     p.textContent = message;
     li.appendChild(p);
     featuredGrid.appendChild(li);
   }
 
   function announceToSR(message) {
-    var el = document.createElement('p');
+    const el = document.createElement('p');
     el.className = 'visually-hidden';
     el.setAttribute('role', 'status');
     el.textContent = message;
