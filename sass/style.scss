@@ -1,15 +1,10 @@
-// =========================================================
-// VilleNova - Feuille de style principale
-// Compile vers css/style.css avec Live Sass Compiler.
-//
-// Architecture :
-//   abstracts → variables et mixins (rien d'imprimé en CSS)
-//   base      → reset, typo, utilitaires globaux
-//   components → boutons, tags, filtres, cartes, formulaires
-//   layout    → header, hero, sections, fiche événement, footer
-// =========================================================
+//Feuille de style principale
 
-// 1. Abstracts
+
+// 0. Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+// 1. Abstracts (variables, mixins)
 @use 'abstracts/variables' as *;
 @use 'abstracts/mixins' as *;
 
