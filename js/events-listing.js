@@ -1,5 +1,4 @@
-// VillaNova - Page listing
-// Chargement dynamique, filtres categorie, pagination.
+//page tous les evenements
 
 (function () {
   'use strict';
@@ -15,8 +14,7 @@
 
   if (!listingGrid) return;
 
-  // Chargement des evenements
-
+  // charge les evenements
   async function loadEvents(params) {
     params = params || {};
     currentOffset = 0;
@@ -25,7 +23,7 @@
     listingGrid.setAttribute('aria-busy', 'true');
     VillaNova.clearChildren(listingGrid);
 
-    // Placeholder de chargement
+    // message de chargement
     const loadingLi = document.createElement('li');
     loadingLi.className = 'listing-grid__loading';
     const loadingP = document.createElement('p');
@@ -43,41 +41,35 @@
       VillaNova.clearChildren(listingGrid);
       renderEvents(data.events);
 
-      // Compteur
+      // compteur
       if (countEl) {
         countEl.textContent = data.total + ' événement' + (data.total > 1 ? 's' : '');
       }
 
-      // Bouton "Voir plus"
       if (loadMoreBtn) {
         loadMoreBtn.hidden = data.events.length >= data.total;
       }
 
-      // Annonce accessibilite
       announceToSR(data.events.length + ' événements chargés');
 
     } catch (err) {
       VillaNova.clearChildren(listingGrid);
       showGridError('Impossible de charger les événements. Veuillez réessayer.');
-      console.error('VillaNova API:', err);
+      console.error('Erreur chargement:', err);
     } finally {
       listingGrid.setAttribute('aria-busy', 'false');
     }
   }
 
-  /**
-   *les cartes evenement dans la grille.
-   */
+  // affiche les cartes
   function renderEvents(events) {
-    events.forEach(function (event) {
-      const card = VillaNova.createEventCard(event, { large: false });
+    for (let i = 0; i < events.length; i++) {
+      const card = VillaNova.createEventCard(events[i], { large: false });
       listingGrid.appendChild(card);
-    });
+    }
   }
 
-  /**
-   * Charge plus d'evenements
-   */
+  // charger la suite
   async function loadMore() {
     currentOffset += PAGE_SIZE;
     loadMoreBtn.disabled = true;
@@ -99,15 +91,14 @@
       announceToSR(data.events.length + ' événements supplémentaires chargés');
 
     } catch (err) {
-      console.error('VillaNova API:', err);
+      console.error('Erreur pagination:', err);
     } finally {
       loadMoreBtn.disabled = false;
       loadMoreBtn.textContent = 'Voir plus d\'événements';
     }
   }
 
-  // Filtres categorie
-
+  // filtres categorie
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       const active = document.querySelector('.cat-filter--active');
@@ -123,13 +114,9 @@
     });
   });
 
-  // Bouton "Voir plus"
-
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadMore);
   }
-
-  // Helpers
 
   function showGridError(message) {
     const li = document.createElement('li');
@@ -152,7 +139,6 @@
     }, 3000);
   }
 
-  // Init
   loadEvents();
 
 })();

@@ -1,6 +1,4 @@
-// VillaNova - Homepage (index.html)
-// Chargement dynamique de la section "A l'affiche",
-// filtres categorie, recherche hero.
+// page d'accueil
 
 (function () {
   'use strict';
@@ -17,8 +15,7 @@
 
   if (!featuredGrid) return;
 
-  // Chargement des evenements
-
+  // charge les evenements a l'affiche
   async function loadFeaturedEvents(params) {
     params = params || {};
     currentOffset = 0;
@@ -27,7 +24,7 @@
     featuredGrid.setAttribute('aria-busy', 'true');
     VillaNova.clearChildren(featuredGrid);
 
-    // Placeholder de chargement
+    // message de chargement
     const loadingLi = document.createElement('li');
     loadingLi.className = 'featured-grid__loading';
     const loadingP = document.createElement('p');
@@ -45,7 +42,7 @@
       VillaNova.clearChildren(featuredGrid);
       renderEvents(data.events, true);
 
-      // Mettre a jour le compteur
+      // mise a jour du compteur total
       if (countLink && data.total) {
         VillaNova.clearChildren(countLink);
         countLink.appendChild(document.createTextNode('Voir les ' + data.total + ' événements '));
@@ -58,40 +55,33 @@
         countLink.appendChild(arrow);
       }
 
-      // Bouton "Voir plus"
+      // on cache le bouton si tout est deja affiche
       if (loadMoreBtn) {
         loadMoreBtn.hidden = data.events.length >= data.total;
       }
 
-      // Annonce accessibilite
       announceToSR(data.events.length + ' événements chargés');
 
     } catch (err) {
       VillaNova.clearChildren(featuredGrid);
       showGridError('Impossible de charger les événements. Veuillez réessayer.');
-      console.error('VillaNova API:', err);
+      console.error('Erreur chargement:', err);
     } finally {
       featuredGrid.setAttribute('aria-busy', 'false');
     }
   }
 
-  /**
-   * Rend les cartes evenement dans la grille.
-   * @param {Array} events
-   * @param {boolean} firstLarge - la premiere carte est grande
-   */
+  // affiche les cartes dans la grille
   function renderEvents(events, firstLarge) {
-    events.forEach(function (event, i) {
-      const card = VillaNova.createEventCard(event, {
+    for (let i = 0; i < events.length; i++) {
+      const card = VillaNova.createEventCard(events[i], {
         large: firstLarge && i === 0
       });
       featuredGrid.appendChild(card);
-    });
+    }
   }
 
-  /**
-   * Charge plus d'evenements (pagination).
-   */
+  // pagination : charger la suite
   async function loadMore() {
     currentOffset += PAGE_SIZE;
     loadMoreBtn.disabled = true;
@@ -113,18 +103,16 @@
       announceToSR(data.events.length + ' événements supplémentaires chargés');
 
     } catch (err) {
-      console.error('VillaNova API:', err);
+      console.error('Erreur pagination:', err);
     } finally {
       loadMoreBtn.disabled = false;
       loadMoreBtn.textContent = 'Voir plus d\'événements';
     }
   }
 
-  // Filtres categorie
-
+  // gestion des filtres de categorie
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      // Toggle actif
       const active = document.querySelector('.cat-filter--active');
       if (active) active.classList.remove('cat-filter--active');
       btn.classList.add('cat-filter--active');
@@ -138,8 +126,7 @@
     });
   });
 
-  // Recherche hero
-
+  // formulaire de recherche du hero
   if (heroSearch) {
     heroSearch.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -147,7 +134,7 @@
       const search = formData.get('category') || formData.get('date') || '';
       loadFeaturedEvents({ search: search });
 
-      // Scroll vers la section featured
+      // scroll vers les resultats
       const section = document.getElementById('evenements');
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
@@ -155,14 +142,11 @@
     });
   }
 
-  // Bouton "Voir plus"
-
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadMore);
   }
 
-  // Helpers
-
+  // affiche un message d'erreur dans la grille
   function showGridError(message) {
     const li = document.createElement('li');
     li.className = 'featured-grid__loading';
@@ -173,19 +157,19 @@
     featuredGrid.appendChild(li);
   }
 
+  // annonce pour les lecteurs d'ecran
   function announceToSR(message) {
     const el = document.createElement('p');
     el.className = 'visually-hidden';
     el.setAttribute('role', 'status');
     el.textContent = message;
     featuredGrid.appendChild(el);
-    // Retirer apres annonce
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
     }, 3000);
   }
 
-  // Init
+  // lancement au chargement de la page
   loadFeaturedEvents();
 
 })();

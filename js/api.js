@@ -1,43 +1,39 @@
-// VillaNova - API OpenAgenda
-// Configuration et fonctions fetch async/await.
+// gestion des appels a l'api OpenAgenda
 
 window.VillaNova = window.VillaNova || {};
 
 (function () {
   'use strict';
 
+  // cle publique
   const API_BASE = 'https://api.openagenda.com/v2/agendas/69319016';
   const API_KEY = '9b8456d08b924cd68820a420f3360c85';
 
-  /**
-   * Construit une URL avec query params.
-   * Gere les tableaux (ex: relative[] = ['current','upcoming']).
-   */
+  // construit l'url
   function buildUrl(path, params) {
     const url = new URL(path);
-    Object.keys(params).forEach(function (key) {
+
+    for (const key in params) {
       const val = params[key];
-      if (val === undefined || val === null || val === '') return;
+      if (val === undefined || val === null || val === '') continue;
+
       if (Array.isArray(val)) {
-        val.forEach(function (v) {
-          url.searchParams.append(key, v);
-        });
+        for (let i = 0; i < val.length; i++) {
+          url.searchParams.append(key, val[i]);
+        }
       } else {
         url.searchParams.set(key, val);
       }
-    });
+    }
+
     return url.toString();
   }
 
-  /**
-   * Recupere une liste d'evenements.
-   * @param {Object} params - Parametres optionnels :
-   *   limit, offset, search, relative[], timings[gte], timings[lte]
-   * @returns {Promise<{events: Array, total: number}>}
-   */
+  // recupere la liste des evenement avec pagination et recherche
   async function fetchEvents(params) {
     params = params || {};
-    const defaults = {
+
+    const query = {
       key: API_KEY,
       detailed: 1,
       'relative[]': ['current', 'upcoming'],
@@ -45,29 +41,24 @@ window.VillaNova = window.VillaNova || {};
       offset: params.offset || 0
     };
 
-    // Merge avec les params passes (sauf limit/offset deja geres)
-    const merged = Object.assign({}, defaults);
-    Object.keys(params).forEach(function (key) {
+    // parametres supplementaires (search, etc)
+    for (const key in params) {
       if (key !== 'limit' && key !== 'offset') {
-        merged[key] = params[key];
+        query[key] = params[key];
       }
-    });
+    }
 
-    const url = buildUrl(API_BASE + '/events', merged);
+    const url = buildUrl(API_BASE + '/events', query);
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error('Erreur API : ' + response.status + ' ' + response.statusText);
+      throw new Error('Erreur API : ' + response.status);
     }
 
     return response.json();
   }
 
-  /**
-   * Recupere un evenement par son UID.
-   * @param {number|string} uid
-   * @returns {Promise<Object>} L'objet evenement complet
-   */
+  // recupere un seul evenement grace a l'uid
   async function fetchEvent(uid) {
     const url = buildUrl(API_BASE + '/events/' + uid, {
       key: API_KEY,
@@ -77,14 +68,13 @@ window.VillaNova = window.VillaNova || {};
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error('Erreur API : ' + response.status + ' ' + response.statusText);
+      throw new Error('Erreur API : ' + response.status);
     }
 
     const data = await response.json();
     return data.event || data;
   }
 
-  // Expose sur le namespace
   VillaNova.api = {
     fetchEvents: fetchEvents,
     fetchEvent: fetchEvent

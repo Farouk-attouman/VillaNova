@@ -1,5 +1,4 @@
-// VillaNova - Page detail evenement (evenements.html)
-// Lit ?uid= dans l'URL, fetch l'evenement, peuple le DOM.
+// page de detail d'un evenement
 
 (function () {
   'use strict';
@@ -11,13 +10,11 @@
   const errorEl = document.getElementById('event-error');
   const pageArticle = document.querySelector('.event-page');
 
-  // Si pas de uid, afficher l'erreur
+  // si pas d'uid dans l'url on affiche l'erreur
   if (!uid) {
     showError();
     return;
   }
-
-  // Chargement
 
   init();
 
@@ -27,35 +24,32 @@
       renderEvent(event);
       loadRelatedEvents();
     } catch (err) {
-      console.error('VillaNova API:', err);
+      console.error('Erreur chargement evenement:', err);
       showError();
     }
   }
 
-  /**
-   * Peuple tous les elements de la page avec les donnees de l'evenement.
-   * Utilise try/finally pour TOUJOURS masquer le loading.
-   */
+  // rempli la page avec les donnees de l'evenement
   function renderEvent(event) {
     try {
       const title = getText(event.title);
 
-      // Titre de la page
-      document.title = title + ' \u2014 VillaNova';
+      // titre dans l'onglet
+      document.title = title + ' — VillaNova';
 
-      // Meta description
+      // description
       try {
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', getText(event.description));
       } catch (e) { console.warn('meta desc:', e); }
 
-      // Breadcrumb : dernier element
+      // chemin
       try {
         const breadcrumbCurrent = document.querySelector('.breadcrumb li[aria-current="page"]');
         if (breadcrumbCurrent) breadcrumbCurrent.textContent = title;
       } catch (e) { console.warn('breadcrumb:', e); }
 
-      // Image cover
+      // image de couverture
       try {
         const coverImg = document.getElementById('event-cover-img');
         const coverFigure = document.getElementById('event-cover');
@@ -70,13 +64,14 @@
         }
       } catch (e) { console.warn('cover:', e); }
 
-      // Tags
+      // tags
       try {
         const tagsContainer = document.getElementById('event-tags');
         if (tagsContainer) {
           VillaNova.clearChildren(tagsContainer);
           const keywords = (event.keywords && event.keywords.fr) || [];
           if (keywords.length > 0) {
+            // on affiche max 3 tags
             keywords.slice(0, 3).forEach(function (kw) {
               const span = document.createElement('span');
               span.className = 'tag';
@@ -87,13 +82,13 @@
         }
       } catch (e) { console.warn('tags:', e); }
 
-      // Titre principal
+      // titre principal
       try {
         const titleEl = document.getElementById('event-title');
         if (titleEl) titleEl.textContent = title;
       } catch (e) { console.warn('title:', e); }
 
-      // Meta : Date
+      // date
       try {
         const dateEl = document.getElementById('event-date');
         if (dateEl && event.firstTiming) {
@@ -105,13 +100,13 @@
         }
       } catch (e) { console.warn('date:', e); }
 
-      // Meta : Lieu
+      // lieu
       try {
         const lieuEl = document.getElementById('event-lieu');
-        if (lieuEl) lieuEl.textContent = (event.location && event.location.name) || 'Lieu \u00e0 confirmer';
+        if (lieuEl) lieuEl.textContent = (event.location && event.location.name) || 'Lieu à confirmer';
       } catch (e) { console.warn('lieu:', e); }
 
-      // Meta : Tarif
+      // tarif
       try {
         const tarifEl = document.getElementById('event-tarif');
         if (tarifEl) {
@@ -120,33 +115,35 @@
         }
       } catch (e) { console.warn('tarif:', e); }
 
-      // Description longue (avec support markdown)
+      // description longue
       try {
         const descSection = document.getElementById('event-description');
         if (descSection) {
           const longDesc = getText(event.longDescription) || getText(event.description);
           if (longDesc) {
             VillaNova.clearChildren(descSection);
+
             const h2 = document.createElement('h2');
             h2.id = 'presentation-title';
-            h2.textContent = 'L\'\u00e9v\u00e9nement';
+            h2.textContent = 'L\'événement';
             descSection.appendChild(h2);
 
             const contentNodes = markdownToDOM(longDesc);
-            contentNodes.forEach(function (node) {
-              descSection.appendChild(node);
-            });
+            for (let i = 0; i < contentNodes.length; i++) {
+              descSection.appendChild(contentNodes[i]);
+            }
 
             descSection.removeAttribute('hidden');
           }
         }
       } catch (e) { console.warn('description:', e); }
 
-      // Sidebar : adresse
+      // adresse dans la sidebar
       try {
         const addressEl = document.getElementById('event-address');
         if (addressEl && event.location) {
           VillaNova.clearChildren(addressEl);
+
           const strong = document.createElement('strong');
           strong.textContent = event.location.name || '';
           addressEl.appendChild(strong);
@@ -165,15 +162,13 @@
       } catch (e) { console.warn('address:', e); }
 
     } finally {
-      // TOUJOURS masquer le loading et montrer le contenu
+      // loading
       if (loadingEl) loadingEl.hidden = true;
       if (pageArticle) pageArticle.removeAttribute('hidden');
     }
   }
 
-  /**
-   * Charge les evenements voisins pour la sidebar.
-   */
+  // evenements "à l'affiche" à droite
   async function loadRelatedEvents() {
     const relatedList = document.getElementById('event-related');
     if (!relatedList) return;
@@ -182,8 +177,10 @@
       const data = await VillaNova.api.fetchEvents({ limit: 4 });
       VillaNova.clearChildren(relatedList);
 
-      data.events.forEach(function (ev) {
-        if (String(ev.uid) === String(uid)) return;
+      for (let i = 0; i < data.events.length; i++) {
+        const ev = data.events[i];
+
+        if (String(ev.uid) === String(uid)) continue;
 
         const li = document.createElement('li');
         const a = document.createElement('a');
@@ -202,26 +199,24 @@
 
         li.appendChild(a);
         relatedList.appendChild(li);
-      });
+      }
     } catch (err) {
-      console.error('VillaNova related events:', err);
+      console.error('Erreur evenements lies:', err);
     }
   }
 
-  // Helpers
-
+  // recupere le texte en francais d'un champ multilingue
   function getText(field) {
     if (!field) return '';
     if (typeof field === 'string') return field;
     return field.fr || field.en || '';
   }
 
-  /**
-   * Convertit du texte markdown en elements DOM securises.
-   */
+  // transforme du markdown basique en elements DOM
   function markdownToDOM(text) {
     if (!text) return [];
 
+    // on remplace les syntaxes markdown par du HTML
     let html = text
       .replace(/^[_\-]{3,}$/gm, '<hr>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -234,15 +229,15 @@
     html = html.replace(/<p>\s*<\/p>/g, '');
     html = html.replace(/<p>\s*<hr>\s*<\/p>/g, '<hr>');
 
+    // on parse le HTML de maniere securisee avec DOMParser
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
     const nodes = [];
     const children = doc.body.childNodes;
     for (let i = 0; i < children.length; i++) {
-      const node = children[i];
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        nodes.push(document.importNode(node, true));
+      if (children[i].nodeType === Node.ELEMENT_NODE) {
+        nodes.push(document.importNode(children[i], true));
       }
     }
 

@@ -1,12 +1,11 @@
-// VillaNova - Event Card Builder
-// Construit les cartes evenement via createElement (anti-XSS).
+// event-card.js - creation des cartes evenement en JS pur (createElement)
 
 window.VillaNova = window.VillaNova || {};
 
 (function () {
   'use strict';
 
-  // Mapping mots-cles → classe CSS du tag
+  // on associe les mots-cles aux categories CSS
   const TAG_MAP = {
     'concert': { css: 'tag--concert', label: 'Concert' },
     'musique': { css: 'tag--concert', label: 'Concert' },
@@ -26,10 +25,7 @@ window.VillaNova = window.VillaNova || {};
     'visite': { css: 'tag--expo', label: 'Visite' }
   };
 
-  /**
-   * Formate une date ISO en format francais court.
-   * Ex: "2026-05-09T20:00:00" → "Sam. 9 mai · 20h00"
-   */
+  // formate la date en francais : "Sam. 9 mai · 20h00"
   function formatEventDate(timing) {
     if (!timing || !timing.begin) return '';
 
@@ -40,7 +36,7 @@ window.VillaNova = window.VillaNova || {};
       month: 'short'
     }).format(date);
 
-    // Capitaliser la premiere lettre
+    // premiere lettre en majuscule
     dayStr = dayStr.charAt(0).toUpperCase() + dayStr.slice(1);
 
     const hours = date.getHours();
@@ -50,55 +46,43 @@ window.VillaNova = window.VillaNova || {};
     return dayStr + ' · ' + timeStr;
   }
 
-  /**
-   * Tronque un texte a N caracteres.
-   */
+  // coupe un texte trop long
   function truncate(text, max) {
     if (!text || text.length <= max) return text || '';
     return text.substring(0, max).replace(/\s+\S*$/, '') + '…';
   }
 
-  /**
-   * Vide tous les enfants d'un element.
-   */
+  // vide le contenu d'un element
   function clearChildren(el) {
     while (el.firstChild) {
       el.removeChild(el.firstChild);
     }
   }
 
-  /**
-   * Determine le tag (categorie) d'un evenement.
-   * Cherche dans keywords, title, description.
-   */
+  // cherche la categorie de l'evenement dans ses mots-cles, titre, description
   function resolveTag(event) {
-    let searchTexts = [];
+    let textes = [];
 
-    // Keywords
     if (event.keywords && event.keywords.fr) {
-      searchTexts = searchTexts.concat(event.keywords.fr);
+      textes = textes.concat(event.keywords.fr);
     }
+    if (event.title && event.title.fr) textes.push(event.title.fr);
+    if (event.description && event.description.fr) textes.push(event.description.fr);
 
-    // Title et description
-    if (event.title && event.title.fr) searchTexts.push(event.title.fr);
-    if (event.description && event.description.fr) searchTexts.push(event.description.fr);
-
-    const combined = searchTexts.join(' ').toLowerCase();
+    const combined = textes.join(' ').toLowerCase();
 
     const keys = Object.keys(TAG_MAP);
     for (let i = 0; i < keys.length; i++) {
-      if (combined.indexOf(keys[i]) !== -1) {
+      if (combined.includes(keys[i])) {
         return TAG_MAP[keys[i]];
       }
     }
 
+    // par defaut
     return { css: 'tag--concert', label: 'Événement' };
   }
 
-  /**
-   * Extrait le prix depuis le champ conditions.
-   * Retourne { label, free }.
-   */
+  // recupere le prix depuis les conditions
   function extractPrice(event) {
     const conditions = (event.conditions && event.conditions.fr) || '';
     if (!conditions) {
@@ -106,18 +90,14 @@ window.VillaNova = window.VillaNova || {};
     }
 
     const lower = conditions.toLowerCase();
-    if (lower.indexOf('gratuit') !== -1 || lower.indexOf('libre') !== -1 || lower.indexOf('free') !== -1) {
+    if (lower.includes('gratuit') || lower.includes('libre') || lower.includes('free')) {
       return { label: 'Gratuit', free: true };
     }
 
     return { label: truncate(conditions, 20), free: false };
   }
 
-  /**
-   * Construit l'URL de l'image d'un evenement.
-   * @param {Object} event
-   * @param {string} size - 'base', 'full' ou 'thumbnail'
-   */
+  // construit l'url de l'image selon la taille voulue
   function getImageUrl(event, size) {
     if (!event.image || !event.image.base) return null;
 
@@ -125,6 +105,7 @@ window.VillaNova = window.VillaNova || {};
       return event.image.base + event.image.filename;
     }
 
+    // on cherche la bonne variante
     if (event.image.variants) {
       for (let i = 0; i < event.image.variants.length; i++) {
         if (event.image.variants[i].type === size) {
@@ -136,12 +117,7 @@ window.VillaNova = window.VillaNova || {};
     return event.image.base + event.image.filename;
   }
 
-  /**
-   * Cree un element de carte evenement (DOM pur).
-   * @param {Object} event
-   * @param {Object} options
-   * @returns {HTMLElement}
-   */
+  // cree la carte HTML d'un evenement
   function createEventCard(event, options) {
     options = options || {};
     const large = options.large || false;
@@ -152,7 +128,7 @@ window.VillaNova = window.VillaNova || {};
     const article = document.createElement('article');
     article.className = large ? 'event-card event-card--large' : 'event-card';
 
-    // Media
+    // --- partie image ---
     const media = document.createElement('div');
     media.className = large ? 'event-card__media' : 'event-card__media event-card__media--small';
 
@@ -166,14 +142,14 @@ window.VillaNova = window.VillaNova || {};
     img.decoding = 'async';
     media.appendChild(img);
 
-    // Tag categorie
+    // tag de categorie
     const tagInfo = resolveTag(event);
     const tag = document.createElement('span');
     tag.className = 'tag ' + tagInfo.css;
     tag.textContent = '● ' + tagInfo.label;
     media.appendChild(tag);
 
-    // Date sur l'image (carte large uniquement)
+    // date sur l'image (seulement carte large)
     if (large && event.firstTiming) {
       const dateSpan = document.createElement('span');
       dateSpan.className = 'event-card__date';
@@ -183,11 +159,11 @@ window.VillaNova = window.VillaNova || {};
 
     article.appendChild(media);
 
-    // Body
+    // partie texte
     const body = document.createElement('div');
     body.className = 'event-card__body';
 
-    // Date dans le body
+    // date (petites cartes)
     if (!large && event.firstTiming) {
       const dateP = document.createElement('p');
       dateP.className = 'event-card__date';
@@ -195,7 +171,7 @@ window.VillaNova = window.VillaNova || {};
       body.appendChild(dateP);
     }
 
-    // Titre avec lien
+    // titre cliquable
     const h3 = document.createElement('h3');
     const link = document.createElement('a');
     link.href = 'evenements.html?uid=' + event.uid;
@@ -203,7 +179,7 @@ window.VillaNova = window.VillaNova || {};
     h3.appendChild(link);
     body.appendChild(h3);
 
-    // Description (carte large uniquement)
+    // description (carte large)
     if (large && event.description && event.description.fr) {
       const desc = document.createElement('p');
       desc.className = 'event-card__desc';
@@ -211,7 +187,7 @@ window.VillaNova = window.VillaNova || {};
       body.appendChild(desc);
     }
 
-    // Footer : lieu + prix
+    // footer avec lieu + prix
     const footer = document.createElement('p');
     footer.className = 'event-card__footer';
 
@@ -241,7 +217,7 @@ window.VillaNova = window.VillaNova || {};
     return li;
   }
 
-  // Expose
+  // on rend les fonctions accessibles depuis les autres fichiers
   VillaNova.createEventCard = createEventCard;
   VillaNova.formatEventDate = formatEventDate;
   VillaNova.clearChildren = clearChildren;
