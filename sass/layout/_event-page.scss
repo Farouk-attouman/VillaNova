@@ -1,4 +1,4 @@
-// VilleNova - Fiche événement (evenement.html)
+// evenement.html
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -29,7 +29,7 @@
   }
 }
 
-// Méta : date / lieu / durée / tarif
+// date / lieu / durée / tarif
 .event-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -64,7 +64,7 @@
   }
 }
 
-// ---------- Image principale ----------
+// Image principale
 .event-cover {
   margin: 0 0 $space-5;
   overflow: hidden;
@@ -82,7 +82,7 @@
   }
 }
 
-// ---------- Corps : article + sidebar ----------
+// article
 .event-body {
   display: grid;
   grid-template-columns: 1fr;
@@ -137,7 +137,6 @@
   }
 }
 
-// Vidéo teaser 
 .event-video {
   border-radius: $radius-card;
   overflow: hidden;
@@ -209,7 +208,7 @@
   }
 }
 
-// ---------- Engagement éco (variante claire) ----------
+// Engagement éco
 .event-eco-block {
   background: $color-eco-bg;
   border: 1px solid $color-eco-border;
@@ -220,7 +219,7 @@
   ul li { color: $color-eco-text; }
 }
 
-// ---------- Accessibilité section ----------
+// Accessibilité section
 .event-access {
   background: $color-bg-elev;
   border: 1px solid $color-line;
@@ -228,7 +227,7 @@
   padding: $space-6;
 }
 
-// ---------- Aside / sidebar ----------
+// Aside / sidebar
 .event-aside {
   position: sticky;
   top: 5rem;
@@ -262,7 +261,7 @@
   }
 }
 
-// ---------- Etats dynamiques (chargement / erreur) ----------
+// chargement / erreur
 .event-loading {
   display: flex;
   justify-content: center;

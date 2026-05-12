@@ -1,7 +1,4 @@
-// =========================================================
-// VilleNova - Footer
-// Fond crème avec wordmark VilleNova énorme en bas.
-// =========================================================
+// Footer
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -12,7 +9,7 @@
   padding-top: $space-8;
   border-top: 1px solid $color-line;
 
-  // ---------- Bloc supérieur ----------
+  // Bloc supérieur
   &__top {
     display: grid;
     grid-template-columns: 1fr;
@@ -35,7 +32,7 @@
     }
   }
 
-  // ---------- Colonnes ----------
+  // Colonnes 
   &__cols {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -69,7 +66,7 @@
     }
   }
 
-  // ---------- Wordmark décoratif ----------
+  // Logo
   &__wordmark {
     font-family: $font-serif;
     font-weight: $weight-bold;
@@ -88,7 +85,7 @@
     color: $color-terracotta;
   }
 
-  // ---------- Mentions du bas ----------
+  // Mentions du bas
   &__bottom {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +107,7 @@
   }
 }
 
-// ---------- Réseaux sociaux ----------
+// Réseaux sociaux 
 .socials {
   display: flex;
   gap: $space-2;

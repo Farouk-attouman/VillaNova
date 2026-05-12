@@ -1,6 +1,4 @@
-// =========================================================
-// VilleNova - Header
-// =========================================================
+// Header
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -41,7 +39,7 @@
   }
 }
 
-// ---------- Bouton hamburger (mobile) ----------
+// Bouton hamburger smartphone
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -58,7 +56,7 @@
   }
 }
 
-// ---------- Menu mobile (panneau latéral) ----------
+// Menu mobile lateral
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -171,7 +169,7 @@
   to { transform: translateX(0); }
 }
 
-// ---------- Bottom navigation (mobile) ----------
+// Bottom navigation (mobile)
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -220,13 +218,13 @@
   }
 }
 
-// ---------- Bouton pleine largeur ----------
+// Bouton pleine largeur
 .btn--full {
   width: 100%;
   justify-content: center;
 }
 
-// ---------- Logo ----------
+// Logo 
 .logo {
   display: inline-flex;
   align-items: center;
@@ -258,7 +256,7 @@
   }
 }
 
-// ---------- Navigation principale ----------
+// Navigation principale
 .primary-nav {
   display: none;
 

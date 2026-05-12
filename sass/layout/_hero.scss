@@ -1,8 +1,4 @@
-// =========================================================
-// VilleNova - Hero
-// Image de fond pleine largeur, overlay sombre,
-// contenu centré, badges aux coins, crédit en bas.
-// =========================================================
+// Hero
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -18,7 +14,7 @@
   color: white;
   overflow: hidden;
   padding: $space-6 clamp(1rem, 4vw, 3rem);
-  // Pleine largeur sauf petite gouttière crème pour le côté "carte XXL arrondie"
+  // Pleine largeur
   margin: $hero-gutter $hero-gutter 0;
   border-radius: $radius-card;
 
@@ -45,7 +41,7 @@
     }
   }
 
-  // Overlay vert pour la lisibilité
+  // Overlay
   &__overlay {
     position: absolute;
     inset: 0;
@@ -58,7 +54,7 @@
     );
   }
 
-  // Coins décoratifs (mono uppercase)
+  // Coins décoratifs
   &__corner {
     position: absolute;
     top: $space-5;
@@ -91,7 +87,7 @@
     color: rgba(white, 0.6);
   }
 
-  // ---------- Contenu central ----------
+  // Contenu principal
   &__content {
     position: relative;
     z-index: 3;
@@ -151,7 +147,7 @@
     }
   }
 
-  // ---------- CTA mobile (2 boutons côte à côte) ----------
+  // CTA mobile
   &__cta-mobile {
     display: flex;
     gap: $space-3;

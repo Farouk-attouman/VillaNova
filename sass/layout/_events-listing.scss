@@ -1,11 +1,9 @@
-// =========================================================
-// VilleNova - Page listing événements (tous-les-evenements.html)
-// =========================================================
+// tous-les-evenements.html
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- En-tete de page ----------
+// Header 
 .listing-page {
   padding-block: $space-5 $space-8;
 
@@ -41,7 +39,7 @@
   }
 }
 
-// ---------- Grille listing (uniforme, pas de bento) ----------
+// Grille
 .listing-grid {
   display: grid;
   grid-template-columns: 1fr;
