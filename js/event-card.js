@@ -1,11 +1,11 @@
-// event-card.js - creation des cartes evenement en JS pur (createElement)
+// creation des cartes evenement
 
 window.VillaNova = window.VillaNova || {};
 
 (function () {
   'use strict';
 
-  // on associe les mots-cles aux categories CSS
+  // associé les mots-cles aux categories CSS
   const TAG_MAP = {
     'concert': { css: 'tag--concert', label: 'Concert' },
     'musique': { css: 'tag--concert', label: 'Concert' },
@@ -25,7 +25,7 @@ window.VillaNova = window.VillaNova || {};
     'visite': { css: 'tag--expo', label: 'Visite' }
   };
 
-  // formate la date en francais : "Sam. 9 mai · 20h00"
+  // formate la date en francais
   function formatEventDate(timing) {
     if (!timing || !timing.begin) return '';
 
@@ -59,7 +59,7 @@ window.VillaNova = window.VillaNova || {};
     }
   }
 
-  // cherche la categorie de l'evenement dans ses mots-cles, titre, description
+  // cherche la categorie de l'evenement dans les mots-cles, titre, description
   function resolveTag(event) {
     let textes = [];
 
@@ -217,7 +217,7 @@ window.VillaNova = window.VillaNova || {};
     return li;
   }
 
-  // on rend les fonctions accessibles depuis les autres fichiers
+  // fonctions accessibles depuis les autres fichiers
   VillaNova.createEventCard = createEventCard;
   VillaNova.formatEventDate = formatEventDate;
   VillaNova.clearChildren = clearChildren;
