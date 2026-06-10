@@ -7,6 +7,17 @@
     <meta name="theme-color" content="#1B4D3E">
     <title>VillaNova - La culture vit ici</title>
 
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://villanova.fr/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VillaNova - La culture vit ici">
+    <meta property="og:description" content="VillaNova : la plateforme culturelle officielle de la Ville. Concerts, expositions, théâtre, ateliers et festivals.">
+    <meta property="og:image" content="https://villanova.fr/assets/img/hero-festival-bouge.webp">
+    <meta property="og:url" content="https://villanova.fr/">
+    <meta property="og:locale" content="fr_FR">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -141,7 +152,7 @@
 
                 <h1 id="hero-title" class="hero__title">
                     La culture<br>
-                    <i class="italic">vit</i> ici.
+                    <span class="italic">vit</span> ici.
                 </h1>
 
                 <p class="hero__lede">
@@ -162,12 +173,12 @@
 
                 <!--Recherche principale (desktop)-->
                 <form id="hero-search" class="search-bar" role="search" action="evenements.html" method="get" aria-label="Rechercher un événement">
-                    <label class="search-bar__field">
+                    <label for="search-date" class="search-bar__field">
                         <span class="search-bar__label">
                             <img src="assets/icons/calendar.svg" alt="Date" width="14" height="14" aria-hidden="true">
                             Date
                         </span>
-                        <select name="date">
+                        <select id="search-date" name="date">
                             <option value="">Tous</option>
                             <option value="aujourdhui">Aujourd'hui</option>
                             <option value="demain">Demain</option>
@@ -176,12 +187,12 @@
                         </select>
                     </label>
 
-                    <label class="search-bar__field">
+                    <label for="search-category" class="search-bar__field">
                         <span class="search-bar__label">
                             <img src="assets/icons/tag.svg" alt="Catégorie" width="14" height="14" aria-hidden="true">
                             Catégorie
                         </span>
-                        <select name="category">
+                        <select id="search-category" name="category">
                             <option value="">Tous</option>
                             <option value="concerts">Concerts</option>
                             <option value="expos">Expositions</option>
@@ -191,12 +202,12 @@
                         </select>
                     </label>
 
-                    <label class="search-bar__field">
+                    <label for="search-location" class="search-bar__field">
                         <span class="search-bar__label">
                             <img src="assets/icons/location.svg" alt="Lieu" width="14" height="14" aria-hidden="true">
                             Lieu
                         </span>
-                        <select name="location">
+                        <select id="search-location" name="location">
                             <option value="">Tous</option>
                             <option value="centre">Centre-ville</option>
                             <option value="berges">Quartier des Berges</option>
@@ -309,7 +320,7 @@
                 <header class="section__header section__header--featured">
                     <div>
                         <p class="eyebrow">— À l'affiche cette semaine</p>
-                        <h2 id="featured-title">Sélection <i class="italic">de la rédac'</i></h2>
+                        <h2 id="featured-title">Sélection <span class="italic">de la rédac'</span></h2>
                     </div>
                     <a href="tous-les-evenements.html" class="link-btn">
                         Voir les 128 événements
@@ -326,7 +337,7 @@
                     <li><button type="button" class="cat-filter">Ateliers</button></li>
                 </ul>
 
-                <ul class="featured-grid" role="list" aria-live="polite" aria-busy="true">
+                <ul class="featured-grid" role="list" aria-live="polite" aria-busy="false">
                     <li class="featured-grid__loading">
                         <p>Chargement des événements…</p>
                     </li>
@@ -345,7 +356,7 @@
                 <header class="section__header section__header--split">
                     <div>
                         <p class="eyebrow">— Explorer par catégorie</p>
-                        <h2 id="categories-title">Huit univers, <i class="italic">une seule</i> ville.</h2>
+                        <h2 id="categories-title">Huit univers, <span class="italic">une seule</span> ville.</h2>
                     </div>
                     <p class="section__lede">
                         De l'opéra à la sérigraphie en passant par le hip-hop. Plongez par genre.
@@ -442,7 +453,7 @@
                             <picture>
                                 <source type="image/avif" srcset="assets/img/categories/cat-patrimoine.avif">
                                 <source type="image/webp" srcset="assets/img/categories/cat-patrimoine.webp">
-                                <img src="assets/img/categories/cat-patrimoine.webp" alt="Image d'un pont" width="500" height="500" loading="lazy" decoding="async">
+                                <img src="assets/img/categories/cat-patrimoine.webp" alt="Pont de VillaNova" width="500" height="500" loading="lazy" decoding="async">
                             </picture>
                             <span class="cat-card__num">08</span>
                             <span class="cat-card__label">Patrimoine</span>
@@ -457,12 +468,12 @@
         <!--GRATUIT CETTE SEMAINE-->
         <section id="gratuit" class="free-week" aria-labelledby="free-title">
             <div class="container free-week__layout">
-                <aside class="free-week__intro">
+                <div class="free-week__intro">
                     <span class="pill pill--terracotta">
                         <img src="assets/icons/heart.svg" alt="Cœur" width="14" height="14" aria-hidden="true">
                         Gratuit cette semaine
                     </span>
-                    <h2 id="free-title">La culture <i class="italic">pour tous</i>, sans ticket d'entrée.</h2>
+                    <h2 id="free-title">La culture <span class="italic">pour tous</span>, sans ticket d'entrée.</h2>
                     <p>
                         Chaque semaine, la Ville sélectionne plusieurs événements ouverts à toutes et tous, gratuitement. Parce que la culture appartient d'abord à celles et ceux qui la vivent.
                     </p>
@@ -470,7 +481,7 @@
                         Voir tous les événements gratuits
                         <img src="assets/icons/arrow-right.svg" alt="Flèche vers la droite" width="14" height="14" aria-hidden="true">
                     </a>
-                </aside>
+                </div>
 
                 <ol class="free-list">
                     <li>
@@ -523,7 +534,7 @@
 
 
         <!--ENGAGEMENTS ECO-->
-        <section id="eco" class="eco-band-wrap">
+        <section id="eco" class="eco-band-wrap" aria-labelledby="eco-title">
             <div class="container">
                 <article class="eco-band" aria-labelledby="eco-title">
                     <header class="eco-band__intro">
@@ -531,7 +542,7 @@
                             <img src="assets/icons/leaf.svg" alt="Feuille" width="14" height="14" aria-hidden="true">
                             Engagements 2026
                         </span>
-                        <h2 id="eco-title">Une culture <i class="italic">responsable</i>, par défaut.</h2>
+                        <h2 id="eco-title">Une culture <span class="italic">responsable</span>, par défaut.</h2>
                         <p>
                             VillaNova s'engage pour une scène culturelle accessible, inclusive et sobre en carbone.
                         </p>
@@ -685,7 +696,7 @@
     <!--BOTTOM NAV (mobile)-->
     <nav class="bottom-nav" aria-label="Navigation rapide">
         <a href="index.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
-            <img src="assets/icons/home.svg" alt="Image maison accueil" width="18" height="18" aria-hidden="true">
+            <img src="assets/icons/home.svg" alt="Accueil" width="18" height="18" aria-hidden="true">
             <span>Accueil</span>
         </a>
         <a href="evenements.html" class="bottom-nav__item">
