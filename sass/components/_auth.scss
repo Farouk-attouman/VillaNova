@@ -1,0 +1,184 @@
+// VilleNova - Authentification
+// auth-section : page connexion/inscription
+// auth-card    : conteneur formulaire
+// auth-form    : champs de formulaire
+// auth-tabs    : onglets connexion/inscription
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---------- Section ----------
+.auth-section {
+  padding-block: $space-7 $space-9;
+  min-height: 60vh;
+
+  &__container {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+// ---------- Card ----------
+.auth-card {
+  background: $color-bg-elev;
+  border: 1px solid $color-line;
+  border-radius: $radius-card;
+  padding: clamp($space-5, 5vw, $space-7);
+  box-shadow: $shadow-sm;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-6;
+  }
+
+  &__title {
+    font-size: $fs-h3;
+    margin-bottom: $space-2;
+  }
+
+  &__lede {
+    font-size: $fs-small;
+    color: $color-ink-soft;
+  }
+}
+
+// ---------- Tabs ----------
+.auth-tabs {
+  display: flex;
+  border: 1px solid $color-line;
+  border-radius: $radius-btn;
+  margin-bottom: $space-5;
+  overflow: hidden;
+
+  &__tab {
+    flex: 1;
+    padding: $space-3 $space-4;
+    font-family: $font-sans;
+    font-size: $fs-small;
+    font-weight: $weight-medium;
+    background: transparent;
+    border: none;
+    color: $color-ink-soft;
+    cursor: pointer;
+    transition: background $transition-base, color $transition-base;
+
+    @include focus-ring;
+
+    &--active {
+      background: $color-forest;
+      color: $color-bg;
+    }
+  }
+}
+
+// ---------- Form ----------
+.auth-form {
+  &__field {
+    margin-bottom: $space-4;
+  }
+
+  &__label {
+    display: block;
+    font-size: $fs-small;
+    font-weight: $weight-medium;
+    margin-bottom: $space-2;
+    color: $color-ink;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $space-3 $space-4;
+    border: 1px solid $color-line-strong;
+    border-radius: $radius-btn;
+    font-family: $font-sans;
+    font-size: $fs-body;
+    color: $color-ink;
+    background: $color-bg;
+    transition: border-color $transition-base;
+
+    @include focus-ring;
+
+    &::placeholder {
+      color: $color-ink-soft;
+    }
+
+    &:focus {
+      border-color: $color-forest;
+    }
+  }
+
+  &__error {
+    font-size: $fs-small;
+    color: $color-terracotta;
+    margin-top: $space-2;
+
+    &--global {
+      text-align: center;
+      margin-bottom: $space-4;
+      padding: $space-3;
+      background: $color-terracotta-bg;
+      border-radius: $radius-btn;
+    }
+  }
+
+  &__success {
+    font-size: $fs-small;
+    color: $color-eco-text;
+    text-align: center;
+    margin-bottom: $space-4;
+    padding: $space-3;
+    background: $color-eco-bg;
+    border: 1px solid $color-eco-border;
+    border-radius: $radius-btn;
+  }
+
+  &__hint {
+    font-size: $fs-tiny;
+    color: $color-ink-soft;
+    margin-top: $space-1;
+  }
+}
+
+// ---------- Divider ----------
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  margin-block: $space-5;
+  color: $color-ink-soft;
+  font-size: $fs-small;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $color-line;
+  }
+}
+
+// ---------- Google button ----------
+.auth-google {
+  gap: $space-3;
+}
+
+// ---------- User display in header ----------
+.auth-user {
+  font-size: $fs-small;
+  font-weight: $weight-medium;
+  color: $color-ink;
+  padding: $space-2 $space-3;
+  display: none;
+
+  @include respond-to(tablet) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &--mobile {
+    display: block;
+    padding: $space-3 $space-4;
+    font-weight: $weight-semibold;
+    font-size: $fs-body;
+  }
+}

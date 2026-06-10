@@ -56,7 +56,16 @@
   }
 }
 
-// ---------- Mood Picker : 4 cartes uniformes ----------
+// ---------- Mood Picker ----------
+.mood {
+  padding-bottom: $space-5;
+
+  @include respond-to(desktop) {
+    padding-bottom: $space-7;
+  }
+}
+
+// Mood Picker : 4 cartes uniformes
 .mood-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -116,6 +125,11 @@
       grid-row: span 2;
       grid-column: 1;
     }
+  }
+
+  // Espacement avant le bouton "Voir plus"
+  + .btn {
+    margin-top: $space-6;
   }
 
   // Etat de chargement / erreur

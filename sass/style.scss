@@ -1,8 +1,5 @@
 //Feuille de style
 
-// Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
 // 1. Abstracts (variables, mixins)
 @use 'abstracts/variables' as *;
 @use 'abstracts/mixins' as *;
@@ -17,6 +14,7 @@
 @use 'components/filters';
 @use 'components/cards';
 @use 'components/forms';
+@use 'components/auth';
 
 // 4. Layout
 @use 'layout/header';
@@ -25,3 +23,6 @@
 @use 'layout/event-page';
 @use 'layout/events-listing';
 @use 'layout/footer';
+
+// Google Fonts (apres les @use pour compatibilite Sass)
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
