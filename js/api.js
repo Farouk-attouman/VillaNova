@@ -33,13 +33,20 @@ window.VillaNova = window.VillaNova || {};
   async function fetchEvents(params) {
     params = params || {};
 
+    // si des filtres de date sont presents, on ne met pas relative[]
+    var hasTimings = params['timings[gte]'] || params['timings[lte]'];
+
     const query = {
       key: API_KEY,
       detailed: 1,
-      'relative[]': ['current', 'upcoming'],
       limit: params.limit || 10,
       offset: params.offset || 0
     };
+
+    // ajouter relative[] seulement si pas de filtre de timing
+    if (!hasTimings) {
+      query['relative[]'] = ['current', 'upcoming'];
+    }
 
     // parametres supplementaires (search, etc)
     for (const key in params) {

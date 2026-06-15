@@ -159,6 +159,34 @@
   }
 }
 
+// ---------- Resultats par categorie ----------
+.categories-results {
+  padding-top: 0;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    margin-bottom: $space-5;
+
+    @include respond-to(desktop) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-7;
+    }
+
+    h2 { font-size: $fs-h2; }
+  }
+
+  &__count {
+    font-family: $font-mono;
+    font-size: $fs-small;
+    color: $color-ink-soft;
+    white-space: nowrap;
+  }
+}
+
 // ---------- Gratuit cette semaine ----------
 .free-week {
   background: $color-terracotta-bg;
@@ -282,6 +310,14 @@
         border-color: $color-terracotta;
       }
     }
+  }
+
+  &__loading {
+    padding: $space-5;
+    text-align: center;
+    color: $color-ink-soft;
+    font-family: $font-mono;
+    font-size: $fs-small;
   }
 }
 

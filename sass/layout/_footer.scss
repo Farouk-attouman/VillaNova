@@ -43,11 +43,12 @@
     }
   }
 
+  &__heading {
+    @include eyebrow($color-ink-soft);
+    margin-bottom: $space-4;
+  }
+
   &__col {
-    h3 {
-      @include eyebrow($color-ink-soft);
-      margin-bottom: $space-4;
-    }
 
     ul {
       display: flex;

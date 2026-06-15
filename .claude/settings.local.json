@@ -3,7 +3,8 @@
     "allow": [
       "Bash(where:*)",
       "Bash(npx sass:*)",
-      "Bash(npx sass@1.77.0:*)"
+      "Bash(npx sass@1.77.0:*)",
+      "Bash(ls:*)"
     ]
   }
 }

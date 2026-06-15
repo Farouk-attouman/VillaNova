@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Connectez-vous ou créez votre compte VillaNova pour sauvegarder vos favoris et personnaliser votre agenda culturel.">
+    <meta name="description" content="Explorez les événements culturels de VillaNova par catégorie : concerts, expositions, théâtre, festivals, ateliers, cinéma, danse et patrimoine.">
     <meta name="theme-color" content="#1B4D3E">
-    <title>Connexion - VillaNova</title>
+    <title>Catégories — VillaNova</title>
 
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
@@ -30,7 +30,7 @@
                 <ul class="primary-nav__list">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="tous-les-evenements.html">Événements</a></li>
-                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="categories.html" aria-current="page">Catégories</a></li>
                     <li><a href="carte.html">Carte</a></li>
                 </ul>
             </nav>
@@ -67,11 +67,11 @@
                         <img src="assets/icons/home.svg" alt="" width="16" height="16">
                         Accueil
                     </a></li>
-                    <li><a href="evenements.html">
+                    <li><a href="tous-les-evenements.html">
                         <img src="assets/icons/calendar.svg" alt="" width="16" height="16">
                         Événements
                     </a></li>
-                    <li><a href="categories.html">
+                    <li><a href="categories.html" aria-current="page">
                         <img src="assets/icons/tag.svg" alt="" width="16" height="16">
                         Catégories
                     </a></li>
@@ -96,98 +96,151 @@
 
     <main id="main">
 
-        <section class="section auth-section" aria-labelledby="auth-title">
-            <div class="container auth-section__container">
+        <section class="section categories-page" aria-labelledby="categories-title">
+            <div class="container">
 
-                <nav class="breadcrumb" aria-label="Fil d'Ariane">
+                <nav class="breadcrumb breadcrumb--inline" aria-label="Fil d'Ariane">
                     <ol>
                         <li><a href="index.html">Accueil</a></li>
-                        <li aria-current="page">Connexion</li>
+                        <li aria-current="page">Catégories</li>
                     </ol>
                 </nav>
 
-                <div class="auth-card">
-                    <header class="auth-card__header">
-                        <h1 id="auth-title" class="auth-card__title">Mon espace VillaNova</h1>
-                        <p class="auth-card__lede">Connectez-vous pour sauvegarder vos favoris et personnaliser votre agenda.</p>
-                    </header>
+                <header class="section__header section__header--split">
+                    <div>
+                        <p class="eyebrow">— Explorer par catégorie</p>
+                        <h1 id="categories-title">Huit univers, <span class="italic">une seule</span> ville.</h1>
+                    </div>
+                    <p class="section__lede">
+                        De l'opéra à la sérigraphie en passant par le hip-hop. Plongez par genre.
+                    </p>
+                </header>
 
-                    <div class="auth-tabs" role="tablist" aria-label="Connexion ou inscription">
-                        <button role="tab" id="tab-login" class="auth-tabs__tab auth-tabs__tab--active"
-                                aria-selected="true" aria-controls="panel-login">
-                            Connexion
+                <ul class="categories-grid" role="list">
+                    <li>
+                        <button type="button" class="cat-card" data-category="Concerts">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-concerts.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-concerts.webp">
+                                <img src="assets/img/categories/cat-concerts.webp" alt="Chanteur devant une scène" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">01</span>
+                            <span class="cat-card__label">Concerts</span>
+                            <span class="cat-card__cta">Voir ↗</span>
                         </button>
-                        <button role="tab" id="tab-signup" class="auth-tabs__tab"
-                                aria-selected="false" aria-controls="panel-signup">
-                            Inscription
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Expos">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-expos.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-expos.webp">
+                                <img src="assets/img/categories/cat-expos.webp" alt="Exposition d'art" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">02</span>
+                            <span class="cat-card__label">Expos</span>
+                            <span class="cat-card__cta">Voir ↗</span>
                         </button>
-                    </div>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Théâtre">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-theatre.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-theatre.webp">
+                                <img src="assets/img/categories/cat-theatre.webp" alt="Spectacle de théâtre" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">03</span>
+                            <span class="cat-card__label">Théâtre</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Festivals">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-festivals.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-festivals.webp">
+                                <img src="assets/img/categories/cat-festivals.webp" alt="Festival de musique" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">04</span>
+                            <span class="cat-card__label">Festivals</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Ateliers">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-ateliers.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-ateliers.webp">
+                                <img src="assets/img/categories/cat-ateliers.webp" alt="Atelier de création" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">05</span>
+                            <span class="cat-card__label">Ateliers</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Cinéma">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-cinema.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-cinema.webp">
+                                <img src="assets/img/categories/cat-cinema.webp" alt="Séance de cinéma" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">06</span>
+                            <span class="cat-card__label">Cinéma</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Danse">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-danse.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-danse.webp">
+                                <img src="assets/img/categories/cat-danse.webp" alt="Spectacle de danse" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">07</span>
+                            <span class="cat-card__label">Danse</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="cat-card" data-category="Patrimoine">
+                            <picture>
+                                <source type="image/avif" srcset="assets/img/categories/cat-patrimoine.avif">
+                                <source type="image/webp" srcset="assets/img/categories/cat-patrimoine.webp">
+                                <img src="assets/img/categories/cat-patrimoine.webp" alt="Pont de VillaNova" width="500" height="500" loading="lazy" decoding="async">
+                            </picture>
+                            <span class="cat-card__num">08</span>
+                            <span class="cat-card__label">Patrimoine</span>
+                            <span class="cat-card__cta">Voir ↗</span>
+                        </button>
+                    </li>
+                </ul>
 
-                    <div role="tabpanel" id="panel-login" class="auth-panel" aria-labelledby="tab-login">
-                        <form id="login-form" class="auth-form" novalidate>
-                            <div class="auth-form__field">
-                                <label for="login-email" class="auth-form__label">Adresse email</label>
-                                <input type="email" id="login-email" name="email" required
-                                       autocomplete="email" placeholder="prenom@email.fr"
-                                       class="auth-form__input" aria-describedby="login-email-error">
-                                <p id="login-email-error" class="auth-form__error" role="alert" hidden></p>
-                            </div>
-                            <div class="auth-form__field">
-                                <label for="login-password" class="auth-form__label">Mot de passe</label>
-                                <input type="password" id="login-password" name="password" required
-                                       autocomplete="current-password" minlength="6"
-                                       class="auth-form__input" aria-describedby="login-password-error">
-                                <p id="login-password-error" class="auth-form__error" role="alert" hidden></p>
-                            </div>
-                            <p id="login-global-error" class="auth-form__error auth-form__error--global" role="alert" hidden></p>
-                            <button type="submit" class="btn btn--primary btn--block" id="login-submit">
-                                Se connecter
-                            </button>
-                        </form>
-                    </div>
+            </div>
+        </section>
 
-                    <div role="tabpanel" id="panel-signup" class="auth-panel" aria-labelledby="tab-signup" hidden>
-                        <form id="signup-form" class="auth-form" novalidate>
-                            <div class="auth-form__field">
-                                <label for="signup-name" class="auth-form__label">Prénom</label>
-                                <input type="text" id="signup-name" name="name" required
-                                       autocomplete="given-name" placeholder="Votre prénom"
-                                       class="auth-form__input" aria-describedby="signup-name-error">
-                                <p id="signup-name-error" class="auth-form__error" role="alert" hidden></p>
-                            </div>
-                            <div class="auth-form__field">
-                                <label for="signup-email" class="auth-form__label">Adresse email</label>
-                                <input type="email" id="signup-email" name="email" required
-                                       autocomplete="email" placeholder="prenom@email.fr"
-                                       class="auth-form__input" aria-describedby="signup-email-error">
-                                <p id="signup-email-error" class="auth-form__error" role="alert" hidden></p>
-                            </div>
-                            <div class="auth-form__field">
-                                <label for="signup-password" class="auth-form__label">Mot de passe</label>
-                                <input type="password" id="signup-password" name="password" required
-                                       autocomplete="new-password" minlength="6"
-                                       class="auth-form__input" aria-describedby="signup-password-error">
-                                <p id="signup-password-error" class="auth-form__error" role="alert" hidden></p>
-                                <p class="auth-form__hint">Minimum 6 caractères</p>
-                            </div>
-                            <p id="signup-global-error" class="auth-form__error auth-form__error--global" role="alert" hidden></p>
-                            <p id="signup-success" class="auth-form__success" role="status" hidden></p>
-                            <button type="submit" class="btn btn--primary btn--block" id="signup-submit">
-                                Créer mon compte
-                            </button>
-                        </form>
+        <section id="categories-results" class="section categories-results" aria-labelledby="results-title" hidden>
+            <div class="container">
+                <header class="categories-results__header">
+                    <div>
+                        <h2 id="results-title">Événements</h2>
+                        <p class="categories-results__count" id="results-count" aria-live="polite"></p>
                     </div>
+                    <button type="button" id="results-reset" class="btn btn--ghost btn--sm">
+                        Tout afficher
+                    </button>
+                </header>
 
-                    <div class="auth-divider" aria-hidden="true">
-                        <span>ou</span>
-                    </div>
+                <ul class="listing-grid" id="results-grid" role="list" aria-live="polite" aria-busy="false">
+                    <li class="listing-grid__loading">
+                        <p>Chargement des événements…</p>
+                    </li>
+                </ul>
 
-                    <button type="button" id="google-login" class="btn btn--ghost btn--block auth-google">
-                        <img src="assets/icons/google.svg" alt="" width="18" height="18">
-                        Continuer avec Google
+                <div class="listing-page__actions">
+                    <button id="load-more" class="btn btn--ghost btn--block" type="button" hidden>
+                        Voir plus d'événements
                     </button>
                 </div>
-
             </div>
         </section>
 
@@ -225,7 +278,7 @@
                     <div class="site-footer__col">
                         <p class="site-footer__heading">Découvrir</p>
                         <ul>
-                            <li><a href="evenements.html">Tous les événements</a></li>
+                            <li><a href="tous-les-evenements.html">Tous les événements</a></li>
                             <li><a href="categories.html">Catégories</a></li>
                             <li><a href="carte.html">Carte interactive</a></li>
                         </ul>
@@ -279,7 +332,7 @@
             <img src="assets/icons/home.svg" alt="" width="18" height="18">
             <span>Accueil</span>
         </a>
-        <a href="evenements.html" class="bottom-nav__item">
+        <a href="tous-les-evenements.html" class="bottom-nav__item">
             <img src="assets/icons/compass.svg" alt="" width="18" height="18">
             <span>Explorer</span>
         </a>
@@ -291,7 +344,7 @@
             <img src="assets/icons/heart-nav.svg" alt="" width="18" height="18">
             <span>Favoris</span>
         </a>
-        <a href="connexion.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
+        <a href="connexion.html" class="bottom-nav__item">
             <img src="assets/icons/user.svg" alt="" width="18" height="18">
             <span>Compte</span>
         </a>
@@ -299,6 +352,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/event-card.js"></script>
+    <script src="js/categories.js"></script>
     <script src="js/mobile-menu.js"></script>
 </body>
 </html>

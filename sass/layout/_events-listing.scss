@@ -39,6 +39,46 @@
   }
 }
 
+// Filtres actifs
+.active-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-4;
+  padding: $space-3;
+  background: rgba($color-forest, 0.06);
+  border-radius: $radius-btn;
+  font-size: $fs-small;
+
+  &__label {
+    color: $color-ink-soft;
+    font-family: $font-mono;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: $color-forest;
+    color: $color-bg;
+    border-radius: $radius-pill;
+    font-size: $fs-small;
+    font-weight: 500;
+  }
+
+  &__clear {
+    margin-left: auto;
+    color: $color-terracotta;
+    font-size: $fs-small;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 // Grille
 .listing-grid {
   display: grid;
