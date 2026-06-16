@@ -4,7 +4,17 @@
       "Bash(where:*)",
       "Bash(npx sass:*)",
       "Bash(npx sass@1.77.0:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(sort:*)",
+      "Bash(pip show:*)",
+      "Bash(pip3 show:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(for f in js/*.js)",
+      "Bash(do echo -n \"$f: \")",
+      "Bash(node --check:*)",
+      "Bash(done)"
     ]
   }
 }

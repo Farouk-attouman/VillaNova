@@ -1,4 +1,4 @@
-// Menu mobile hamburger
+// menu mobile
 (function () {
   const hamburger = document.querySelector('.hamburger');
   const menu = document.getElementById('mobile-menu');
@@ -7,26 +7,23 @@
   const overlay = menu.querySelector('.mobile-menu__overlay');
   const closeBtn = menu.querySelector('.mobile-menu__close');
 
-  function openMenu() {
+  function open() {
     menu.hidden = false;
     hamburger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeMenu() {
+  function close() {
     menu.hidden = true;
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
-  hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
+  hamburger.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
 
-  // Fermer avec Echap
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !menu.hidden) {
-      closeMenu();
-    }
+    if (e.key === 'Escape' && !menu.hidden) close();
   });
 })();

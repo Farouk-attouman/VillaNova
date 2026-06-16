@@ -1,10 +1,6 @@
-// VilleNova Mixins
-// Patterns réutilisables
-
 @use 'variables' as *;
 
-// Responsive (Mobile First)
-// On démarre sur mobile, on enrichit avec min-width.
+// Responsive (mobile first)
 @mixin respond-to($breakpoint) {
   @if $breakpoint == tablet {
     @media (min-width: $bp-tablet) { @content; }
@@ -17,7 +13,6 @@
   }
 }
 
-// Focus visible
 @mixin focus-ring($color: $color-forest) {
   &:focus { outline: none; }
   &:focus-visible {
@@ -27,20 +22,13 @@
   }
 }
 
-//  Container
-@mixin container($size: default) {
+@mixin container {
   width: 100%;
+  max-width: $container-max;
   margin-inline: auto;
   padding-inline: $container-pad;
-
-  @if $size == wide {
-    max-width: $container-max-wide;
-  } @else {
-    max-width: $container-max;
-  }
 }
 
-// Visually hidden
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -53,14 +41,13 @@
   border: 0;
 }
 
-// Hover propre
 @mixin hover {
   @media (hover: hover) {
     &:hover { @content; }
   }
 }
 
-// Eyebrow (label mono terracotta au-dessus des titres)
+// Label mono au-dessus des titres
 @mixin eyebrow($color: $color-terracotta) {
   font-family: $font-mono;
   font-size: $fs-eyebrow;

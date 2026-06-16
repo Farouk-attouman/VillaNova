@@ -1,10 +1,6 @@
-// VilleNova - Tags & Pills
-// .tag = badge sur les cartes (Concert, Expo, Éco)
-// .pill = pastille décorative (Engagements, Gratuit cette semaine)
-
 @use '../abstracts/variables' as *;
 
-// ---------- Tag (sur les cartes événement) ----------
+// Badge sur les cartes (Concert, Expo, Éco)
 .tag {
   display: inline-flex;
   align-items: center;
@@ -21,7 +17,6 @@
   border: 1px solid $color-line;
   white-space: nowrap;
 
-  // Catégories pleines
   &--concert,
   &--theatre,
   &--atelier,
@@ -37,7 +32,6 @@
     border-color: transparent;
   }
 
-  // Éco (vert pâle)
   &--eco {
     background: $color-eco-bg;
     color: $color-eco-text;
@@ -45,7 +39,7 @@
   }
 }
 
-// ---------- Pill (badges décoratifs sections) ----------
+// Pastille décorative (Engagements, Gratuit cette semaine)
 .pill {
   display: inline-flex;
   align-items: center;

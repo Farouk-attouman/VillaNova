@@ -1,8 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Page Carte ----------
-
 .map-section {
   padding-bottom: $space-7;
 
@@ -27,14 +25,12 @@
   }
 }
 
-// conteneur elargi pour la carte
 .container--wide {
-  max-width: $container-max-wide;
+  max-width: $container-max;
   margin-inline: auto;
   padding-inline: $container-pad;
 }
 
-// carte Leaflet
 #map {
   height: 65vh;
   min-height: 400px;
@@ -48,7 +44,6 @@
   }
 }
 
-// ---------- Marqueurs personnalises ----------
 .map-marker {
   background: none;
   border: none;
@@ -69,7 +64,7 @@
   }
 }
 
-// ---------- Popups personnalises ----------
+// Popups Leaflet
 .map-popup-wrapper {
   .leaflet-popup-content-wrapper {
     border-radius: $radius-card;

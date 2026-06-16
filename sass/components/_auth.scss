@@ -1,13 +1,6 @@
-// VilleNova - Authentification
-// auth-section : page connexion/inscription
-// auth-card    : conteneur formulaire
-// auth-form    : champs de formulaire
-// auth-tabs    : onglets connexion/inscription
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Section ----------
 .auth-section {
   padding-block: $space-7 $space-9;
   min-height: 60vh;
@@ -18,7 +11,6 @@
   }
 }
 
-// ---------- Card ----------
 .auth-card {
   background: $color-bg-elev;
   border: 1px solid $color-line;
@@ -42,7 +34,6 @@
   }
 }
 
-// ---------- Tabs ----------
 .auth-tabs {
   display: flex;
   border: 1px solid $color-line;
@@ -71,7 +62,6 @@
   }
 }
 
-// ---------- Form ----------
 .auth-form {
   &__field {
     margin-bottom: $space-4;
@@ -139,7 +129,6 @@
   }
 }
 
-// ---------- Divider ----------
 .auth-divider {
   display: flex;
   align-items: center;
@@ -157,12 +146,11 @@
   }
 }
 
-// ---------- Google button ----------
 .auth-google {
   gap: $space-3;
 }
 
-// ---------- User display in header ----------
+// Nom utilisateur dans le header
 .auth-user {
   font-size: $fs-small;
   font-weight: $weight-medium;

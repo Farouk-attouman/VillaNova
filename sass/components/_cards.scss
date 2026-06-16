@@ -1,13 +1,6 @@
-// VilleNova - Cartes
-//   .event-card   = carte événement (À l'affiche)
-//   .cat-card     = vignette catégorie (Concerts, Expos…)
-//   .mood-card    = mood picker
-//   .aside-card   = sidebar fiche événement
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Carte événement ----------
 .event-card {
   position: relative;
   display: flex;
@@ -43,13 +36,11 @@
       &:nth-of-type(2) { right: $space-3; }
     }
 
-    // Petites cartes : image = 66% de la hauteur de la carte
     &--small {
       aspect-ratio: 6.5 / 3.9;
     }
   }
 
-  // Date affichée en bas de l'image (sur les cartes large)
   &__date {
     position: absolute;
     bottom: $space-3;
@@ -64,7 +55,6 @@
     backdrop-filter: blur(8px);
   }
 
-  // Sur les cartes "small", la date est en haut du body, pas sur l'image
   &__body {
     display: flex;
     flex-direction: column;
@@ -74,6 +64,7 @@
     min-height: 0;
     overflow: hidden;
 
+    // Date en haut du body sur les petites cartes
     .event-card__date {
       position: static;
       align-self: flex-start;
@@ -96,7 +87,7 @@
         @include focus-ring;
         @include hover { color: $color-forest; }
 
-        // Etend la zone cliquable a toute la carte
+        // Zone cliquable étendue à toute la carte
         &::after {
           content: '';
           position: absolute;
@@ -138,7 +129,6 @@
     &--free { color: $color-forest; }
   }
 
-  // ---------- Variante carte large ----------
   &--large {
     .event-card__media {
       aspect-ratio: 9.1 / 7.8;
@@ -154,7 +144,7 @@
   }
 }
 
-// ---------- Carte catégorie (vignette) ----------
+// Vignette catégorie
 .cat-card {
   position: relative;
   display: block;
@@ -174,7 +164,6 @@
     opacity: 0.8;
   }
 
-  // Voile sombre pour la lisibilité du texte blanc
   &::after {
     content: '';
     position: absolute;
@@ -202,10 +191,9 @@
     letter-spacing: 0.08em;
   }
 
-  // Label : "Concerts" en gros, en bas-gauche
   &__label {
     position: absolute;
-    bottom: 2.5rem;        // place le label assez haut pour laisser place au CTA dessous
+    bottom: 2.5rem;
     left: $space-4;
     right: $space-4;
     z-index: 1;
@@ -217,10 +205,9 @@
     line-height: $lh-tight;
   }
 
-  // CTA : "Voir ↗" sous le label
   &__cta {
     position: absolute;
-    bottom: $space-4;      // collé en bas avec une vraie marge
+    bottom: $space-4;
     left: $space-4;
     z-index: 1;
     font-family: $font-sans;
@@ -233,7 +220,6 @@
     .cat-card__cta { color: white; }
   }
 
-  // etat actif (categorie selectionnee)
   &--active {
     outline: 3px solid $color-yellow;
     outline-offset: -3px;
@@ -246,7 +232,7 @@
   }
 }
 
-// ---------- Carte mood ----------
+// Mood picker
 .mood-card {
   position: relative;
   display: flex;
@@ -255,7 +241,7 @@
   min-height: 18rem;
   padding: $space-5;
   border-radius: $radius-card;
-  background: $color-forest;   // par défaut : vert (mood "Me poser")
+  background: $color-forest;
   color: white;
   text-decoration: none;
   transition: transform $transition-base, box-shadow $transition-base;
@@ -313,14 +299,14 @@
     opacity: 0.85;
   }
 
-  // ---------- Variantes par humeur ----------
-  &--poser     { background: $color-forest;    color: white; }
-  &--vibrer    { background: $color-terracotta; color: white; }
-  &--decouvrir { background: $color-yellow;     color: $color-ink; }
+  // Variantes par humeur
+  &--poser     { background: $color-forest;     color: white; }
+  &--vibrer    { background: $color-terracotta;  color: white; }
+  &--decouvrir { background: $color-yellow;      color: $color-ink; }
   &--apprendre { background: $color-line-strong; color: $color-ink; }
 }
 
-// ---------- Aside-card (sidebar fiche événement) ----------
+// Sidebar fiche événement
 .aside-card {
   background: $color-bg-elev;
   border: 1px solid $color-line;

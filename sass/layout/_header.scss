@@ -1,5 +1,3 @@
-// Header
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -13,7 +11,7 @@
   padding-block: $space-4;
 
   &__inner {
-    @include container(wide);
+    @include container;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,7 +37,6 @@
   }
 }
 
-// Bouton hamburger smartphone
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -56,7 +53,7 @@
   }
 }
 
-// Menu mobile lateral
+// Menu mobile
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -169,7 +166,7 @@
   to { transform: translateX(0); }
 }
 
-// Bottom navigation (mobile)
+// Bottom nav mobile
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -218,13 +215,11 @@
   }
 }
 
-// Bouton pleine largeur
 .btn--full {
   width: 100%;
   justify-content: center;
 }
 
-// Logo 
 .logo {
   display: inline-flex;
   align-items: center;
@@ -256,7 +251,6 @@
   }
 }
 
-// Navigation principale
 .primary-nav {
   display: none;
 

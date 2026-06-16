@@ -1,5 +1,3 @@
-// Hero
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -14,7 +12,6 @@
   color: white;
   overflow: hidden;
   padding: $space-6 clamp(1rem, 4vw, 3rem);
-  // Pleine largeur
   margin: $hero-gutter $hero-gutter 0;
   border-radius: $radius-card;
 
@@ -28,7 +25,6 @@
     padding-block: $space-9;
   }
 
-  // Image de fond
   &__bg {
     position: absolute;
     inset: 0;
@@ -41,7 +37,6 @@
     }
   }
 
-  // Overlay
   &__overlay {
     position: absolute;
     inset: 0;
@@ -54,7 +49,6 @@
     );
   }
 
-  // Coins décoratifs
   &__corner {
     position: absolute;
     top: $space-5;
@@ -74,7 +68,6 @@
     &--right { right: clamp(1.5rem, 3vw, 2.5rem); }
   }
 
-  // Crédit photo en bas
   &__credit {
     position: relative;
     z-index: 3;
@@ -87,7 +80,6 @@
     color: rgba(white, 0.6);
   }
 
-  // Contenu principal
   &__content {
     position: relative;
     z-index: 3;
@@ -147,7 +139,6 @@
     }
   }
 
-  // CTA mobile
   &__cta-mobile {
     display: flex;
     gap: $space-3;

@@ -1,12 +1,6 @@
-// =========================================================
-// VilleNova - Sections
-// Layouts spécifiques de chaque grande section de l'accueil.
-// =========================================================
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Section générique ----------
 .section {
   padding-block: $space-8;
 
@@ -38,7 +32,6 @@
       }
     }
 
-    // Variante "À l'affiche" : intro à gauche, bouton "Voir 128 événements" à droite
     &--featured {
       @include respond-to(desktop) {
         flex-direction: row;
@@ -56,7 +49,7 @@
   }
 }
 
-// ---------- Mood Picker ----------
+// Mood Picker
 .mood {
   padding-bottom: $space-5;
 
@@ -65,7 +58,6 @@
   }
 }
 
-// Mood Picker : 4 cartes uniformes
 .mood-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -81,9 +73,8 @@
   }
 }
 
-// ---------- À l'affiche : grille bento (1 grande + 4 petites en 2x2) ----------
+// Grille bento (1 grande + 4 petites en 2x2)
 .featured-grid {
-  // Mobile : scroll horizontal
   display: flex;
   gap: $space-3;
   list-style: none;
@@ -91,8 +82,6 @@
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   padding-bottom: $space-2;
-
-  // Masquer la scrollbar
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 
@@ -119,7 +108,6 @@
     gap: 15px;
   }
 
-  // La carte large prend toute la hauteur, à gauche
   &__hero {
     @include respond-to(desktop) {
       grid-row: span 2;
@@ -127,12 +115,10 @@
     }
   }
 
-  // Espacement avant le bouton "Voir plus"
   + .btn {
     margin-top: $space-6;
   }
 
-  // Etat de chargement / erreur
   &__loading {
     grid-column: 1 / -1;
     display: flex;
@@ -146,7 +132,7 @@
   }
 }
 
-// ---------- Catégories : grille de vignettes ----------
+// Grille catégories
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -159,7 +145,7 @@
   }
 }
 
-// ---------- Resultats par categorie ----------
+// Résultats par catégorie
 .categories-results {
   padding-top: 0;
 
@@ -187,7 +173,7 @@
   }
 }
 
-// ---------- Gratuit cette semaine ----------
+// Gratuit cette semaine
 .free-week {
   background: $color-terracotta-bg;
   padding-block: $space-8;
@@ -220,7 +206,7 @@
   }
 }
 
-// ---------- Liste des événements gratuits ----------
+// Liste événements gratuits
 .free-list {
   list-style: none;
   display: flex;
@@ -321,7 +307,7 @@
   }
 }
 
-// ---------- Engagements éco (bande verte arrondie) ----------
+// Engagements éco (bande verte)
 .eco-band-wrap {
   padding-block: $space-7;
 
@@ -403,7 +389,7 @@
   }
 }
 
-// ---------- Fil d'Ariane (fiche événement) ----------
+// Fil d'Ariane
 .breadcrumb {
   border-bottom: 1px solid $color-line;
   background: $color-bg;
@@ -438,7 +424,6 @@
     }
   }
 
-  // Variante inline (dans un container, sans bordure)
   &--inline {
     border: none;
     background: none;

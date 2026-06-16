@@ -1,4 +1,5 @@
-// VilleNova Reset
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -48,24 +49,15 @@ a {
 
 address { font-style: normal; }
 
-// Classe utilitaire a11y : masque visuellement mais reste lisible par les lecteurs d'ecran
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  @include visually-hidden;
 }
 
-// Espace en bas du main pour la bottom-nav mobile
+// Place pour la bottom-nav mobile
 main {
   padding-bottom: 5rem;
 
-  @media (min-width: 960px) {
+  @include respond-to(desktop) {
     padding-bottom: 0;
   }
 }

@@ -1,11 +1,7 @@
-// VilleNova - Filtres
-// quick-filters : pills sous le hero (Aujourd'hui, Cette semaine...)
-// cat-filters   : pills sous "Sélection de la rédac'"
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Filtres rapides du hero (verre dépoli) ----------
+// Filtres rapides sous le hero (verre dépoli)
 .quick-filters {
   display: none;
   flex-wrap: wrap;
@@ -44,7 +40,7 @@
   }
 }
 
-// ---------- Filtres catégorie (section featured) ----------
+// Filtres catégorie (section featured)
 .cat-filters {
   display: flex;
   flex-wrap: wrap;

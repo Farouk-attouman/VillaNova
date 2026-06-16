@@ -156,9 +156,9 @@ p {
 
 .container {
   width: 100%;
+  max-width: 1440px;
   margin-inline: auto;
   padding-inline: clamp(1rem, 3vw, 2.5rem);
-  max-width: 1440px;
 }
 
 ::selection {
@@ -1127,9 +1127,9 @@ p {
 }
 .site-header__inner {
   width: 100%;
+  max-width: 1440px;
   margin-inline: auto;
   padding-inline: clamp(1rem, 3vw, 2.5rem);
-  max-width: 1440px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1997,9 +1997,9 @@ p {
 
 .event-article {
   width: 100%;
+  max-width: 1440px;
   margin-inline: auto;
   padding-inline: clamp(1rem, 3vw, 2.5rem);
-  max-width: 1480px;
   padding-block: 2rem 4rem;
 }
 .event-article__tags {

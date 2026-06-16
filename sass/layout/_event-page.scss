@@ -1,5 +1,3 @@
-// evenement.html
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -7,7 +5,6 @@
   background: $color-bg;
 }
 
-// Contenu article
 .event-article {
   @include container;
   padding-block: $space-6 $space-8;
@@ -29,7 +26,6 @@
   }
 }
 
-// date / lieu / durée / tarif
 .event-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -64,7 +60,6 @@
   }
 }
 
-// Image principale
 .event-cover {
   margin: 0 0 $space-5;
   overflow: hidden;
@@ -82,7 +77,6 @@
   }
 }
 
-// article
 .event-body {
   display: grid;
   grid-template-columns: 1fr;
@@ -157,7 +151,6 @@
   }
 }
 
-// Programmation : ligne d'artistes
 .lineup-list {
   list-style: none !important;
   padding: 0 !important;
@@ -208,7 +201,6 @@
   }
 }
 
-// Engagement éco
 .event-eco-block {
   background: $color-eco-bg;
   border: 1px solid $color-eco-border;
@@ -219,7 +211,6 @@
   ul li { color: $color-eco-text; }
 }
 
-// Accessibilité section
 .event-access {
   background: $color-bg-elev;
   border: 1px solid $color-line;
@@ -227,7 +218,6 @@
   padding: $space-6;
 }
 
-// Aside / sidebar
 .event-aside {
   position: sticky;
   top: 5rem;
@@ -261,7 +251,6 @@
   }
 }
 
-// chargement / erreur
 .event-loading {
   display: flex;
   justify-content: center;

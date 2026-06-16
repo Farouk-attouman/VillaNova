@@ -1,16 +1,14 @@
-// VilleNova Variables
-
 // Palette
-$color-forest:        #1B4D3E;  
-$color-forest-deep:   #143A2E;  
-$color-terracotta:    #E76F51;  
-$color-terracotta-bg: #FBE9E2; 
-$color-yellow:        #F4D35E; 
+$color-forest:        #1B4D3E;
+$color-forest-deep:   #143A2E;
+$color-terracotta:    #E76F51;
+$color-terracotta-bg: #FBE9E2;
+$color-yellow:        #F4D35E;
 
-$color-bg:            #FAF7F2;  
-$color-bg-elev:       #FFFFFF;  
-$color-ink:           #1A1A1A;  
-$color-ink-soft:      #6B7280; 
+$color-bg:            #FAF7F2;
+$color-bg-elev:       #FFFFFF;
+$color-ink:           #1A1A1A;
+$color-ink-soft:      #6B7280;
 $color-line:          #E7E2D7;
 $color-line-strong:   #CFC8B8;
 
@@ -19,20 +17,19 @@ $color-eco-bg:     #E6F0E5;
 $color-eco-text:   #1B4D3E;
 $color-eco-border: #C9DEC4;
 
-// Typographies 
+// Typo
 $font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 $font-sans:  'Inter', system-ui, -apple-system, sans-serif;
 $font-mono:  'JetBrains Mono', ui-monospace, 'Courier New', monospace;
 
-// Poids
 $weight-regular:  400;
 $weight-medium:   500;
 $weight-semibold: 600;
 $weight-bold:     700;
 
-// Tailles fluides (min, idéal-en-vw, max)
-$fs-display: clamp(3rem, 7vw, 5.5rem);     
-$fs-h1:      clamp(2.25rem, 5vw, 4rem);    
+// Tailles fluides
+$fs-display: clamp(3rem, 7vw, 5.5rem);
+$fs-h1:      clamp(2.25rem, 5vw, 4rem);
 $fs-h2:      clamp(1.875rem, 3.6vw, 3rem);
 $fs-h3:      clamp(1.125rem, 1.5vw, 1.375rem);
 $fs-lead:    clamp(1rem, 1.15vw, 1.0625rem);
@@ -41,47 +38,43 @@ $fs-small:   0.875rem;
 $fs-eyebrow: 0.75rem;
 $fs-tiny:    0.6875rem;
 
-// Hauteurs de ligne
 $lh-tight:  1;
 $lh-snug:   1.15;
 $lh-normal: 1.55;
 $lh-loose:  1.75;
 
-//
-$space-1: 0.25rem;   //  4px
-$space-2: 0.5rem;    //  8px
-$space-3: 0.75rem;   // 12px
-$space-4: 1rem;      // 16px
-$space-5: 1.5rem;    // 24px
-$space-6: 2rem;      // 32px
-$space-7: 3rem;      // 48px
-$space-8: 4rem;      // 64px
-$space-9: 6rem;      // 96px
+// Espacement
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.5rem;
+$space-6: 2rem;
+$space-7: 3rem;
+$space-8: 4rem;
+$space-9: 6rem;
 
 // Layout
-$container-max:      1480px;   
-$container-max-wide: 1440px; 
-$container-pad:      clamp(1rem, 3vw, 2.5rem);
-
-// Marge latérale extérieure du hero
-$hero-gutter: clamp(0.75rem, 1.5vw, 1.25rem);
+$container-max:  1440px;
+$container-pad:  clamp(1rem, 3vw, 2.5rem);
+$hero-gutter:    clamp(0.75rem, 1.5vw, 1.25rem);
 
 // Bordures
-$radius-btn:   8px;
-$radius-card:  16px;
-$radius-pill:  999px;
+$radius-btn:  8px;
+$radius-card: 16px;
+$radius-pill: 999px;
 
 // Ombres
-$shadow-sm: 0 1px 2px rgba(20,30,25,.04), 0 2px 6px rgba(20,30,25,.04);
-$shadow-md: 0 6px 16px rgba(20,30,25,.08);
-$shadow-lg: 0 24px 48px rgba(20,30,25,.14);
+$shadow-sm: 0 1px 2px rgba(20, 30, 25, .04), 0 2px 6px rgba(20, 30, 25, .04);
+$shadow-md: 0 6px 16px rgba(20, 30, 25, .08);
+$shadow-lg: 0 24px 48px rgba(20, 30, 25, .14);
 
 // Transitions
 $transition-fast: 0.15s ease;
 $transition-base: 0.2s ease;
 $transition-slow: 0.3s ease;
 
-// Breakpoints (Mobile First)
+// Breakpoints
 $bp-tablet:  640px;
 $bp-desktop: 960px;
 $bp-wide:    1280px;

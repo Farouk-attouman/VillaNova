@@ -1,11 +1,7 @@
-// VilleNova - Formulaires
-// search-bar : barre de recherche du hero (3 selects + bouton)
-// newsletter  : inscription mail
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// ---------- Barre de recherche hero ----------
+// Barre de recherche hero
 .search-bar {
   display: none;
   grid-template-columns: 1fr;
@@ -83,7 +79,7 @@
   }
 }
 
-// ---------- Newsletter ----------
+// Newsletter
 .newsletter-wrap {
   padding-block: $space-9;
 }

@@ -1,9 +1,6 @@
-// tous-les-evenements.html
-
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// Header 
 .listing-page {
   padding-block: $space-5 $space-8;
 
@@ -39,7 +36,6 @@
   }
 }
 
-// Filtres actifs
 .active-filters {
   display: flex;
   align-items: center;
@@ -79,7 +75,6 @@
   }
 }
 
-// Grille
 .listing-grid {
   display: grid;
   grid-template-columns: 1fr;
