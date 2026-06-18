@@ -222,6 +222,7 @@ window.VillaNova = window.VillaNova || {};
   updateAuthUI();
   initAuthForms();
 
+  VillaNova.supabase = supabase;
   VillaNova.auth = {
     signUp: signUp,
     signIn: signIn,
