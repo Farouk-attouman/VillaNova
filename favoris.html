@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vos événements culturels favoris sauvegardés sur VillaNova.">
+    <meta name="theme-color" content="#1B4D3E">
+    <title>Mes favoris — VillaNova</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+                <img src="assets/icons/menu.svg" alt="" width="20" height="20">
+            </button>
+
+            <a href="index.html" class="logo" aria-label="VillaNova - retour à l'accueil">
+                <span class="logo__icon" aria-hidden="true">V</span>
+                <span class="logo__text">VillaNova</span>
+            </a>
+
+            <nav class="primary-nav" aria-label="Navigation principale">
+                <ul class="primary-nav__list">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="tous-les-evenements.html">Événements</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="carte.html">Carte</a></li>
+                    <li><a href="favoris.html" aria-current="page">Favoris</a></li>
+                </ul>
+            </nav>
+
+            <div class="site-header__actions">
+                <a href="creer-compte.html" class="btn btn--ghost btn--sm">
+                    <img src="assets/icons/user.svg" alt="" width="14" height="14">
+                    Créer un compte
+                </a>
+                <a href="connexion.html" class="btn btn--primary btn--sm">
+                    <img src="assets/icons/login.svg" alt="" width="14" height="14">
+                    Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu principal" hidden>
+        <div class="mobile-menu__overlay"></div>
+        <aside class="mobile-menu__panel">
+            <div class="mobile-menu__header">
+                <a href="index.html" class="logo" aria-label="VillaNova - retour à l'accueil">
+                    <span class="logo__icon" aria-hidden="true">V</span>
+                    <span class="logo__text">VillaNova</span>
+                </a>
+                <button class="mobile-menu__close" aria-label="Fermer le menu">
+                    <img src="assets/icons/close.svg" alt="" width="18" height="18">
+                </button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <ul>
+                    <li><a href="index.html">
+                        <img src="assets/icons/home.svg" alt="" width="16" height="16">
+                        Accueil
+                    </a></li>
+                    <li><a href="tous-les-evenements.html">
+                        <img src="assets/icons/calendar.svg" alt="" width="16" height="16">
+                        Événements
+                    </a></li>
+                    <li><a href="categories.html">
+                        <img src="assets/icons/tag.svg" alt="" width="16" height="16">
+                        Catégories
+                    </a></li>
+                    <li><a href="carte.html">
+                        <img src="assets/icons/map.svg" alt="" width="16" height="16">
+                        Carte
+                    </a></li>
+                    <li><a href="favoris.html">
+                        <img src="assets/icons/heart.svg" alt="" width="16" height="16">
+                        Favoris
+                    </a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu__actions">
+                <a href="creer-compte.html" class="btn btn--primary btn--full">
+                    <img src="assets/icons/user.svg" alt="" width="14" height="14">
+                    Créer un compte
+                </a>
+                <a href="connexion.html" class="btn btn--ghost btn--full">
+                    <img src="assets/icons/login.svg" alt="" width="14" height="14">
+                    Se connecter
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <main id="main">
+
+        <section class="section listing-page" aria-labelledby="favoris-title">
+            <div class="container">
+
+                <nav class="breadcrumb breadcrumb--inline" aria-label="Fil d'Ariane">
+                    <ol>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li aria-current="page">Mes favoris</li>
+                    </ol>
+                </nav>
+
+                <header class="listing-page__header">
+                    <div>
+                        <p class="eyebrow">— Mes favoris</p>
+                        <h1 id="favoris-title">Événements sauvegardés</h1>
+                    </div>
+                    <p class="listing-page__count" id="favoris-count" aria-live="polite"></p>
+                </header>
+
+                <ul class="listing-grid" id="favoris-grid" role="list" aria-live="polite">
+                    <li class="listing-grid__loading">
+                        <p>Chargement de vos favoris…</p>
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer__top">
+                <div class="site-footer__brand">
+                    <a href="index.html" class="logo logo--footer" aria-label="VillaNova - retour à l'accueil">
+                        <span class="logo__icon" aria-hidden="true">V</span>
+                        <span class="logo__text">VillaNova</span>
+                    </a>
+                    <p>La plateforme culturelle officielle de la Ville. Centralise concerts, expositions, spectacles et ateliers toute l'année, en accès libre.</p>
+                    <ul class="socials" aria-label="Réseaux sociaux">
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="VillaNova sur Instagram">
+                            <img src="assets/icons/instagram.svg" alt="Instagram" width="16" height="16">
+                        </a></li>
+                        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="VillaNova sur Facebook">
+                            <img src="assets/icons/facebook.svg" alt="Facebook" width="16" height="16">
+                        </a></li>
+                        <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="VillaNova sur YouTube">
+                            <img src="assets/icons/youtube.svg" alt="YouTube" width="16" height="16">
+                        </a></li>
+                        <li><a href="https://mastodon.social" target="_blank" rel="noopener noreferrer" aria-label="VillaNova sur Mastodon">
+                            <img src="assets/icons/mastodon.svg" alt="Mastodon" width="16" height="16">
+                        </a></li>
+                    </ul>
+                </div>
+                <nav class="site-footer__cols" aria-label="Liens du pied de page">
+                    <div class="site-footer__col">
+                        <p class="site-footer__heading">Découvrir</p>
+                        <ul>
+                            <li><a href="tous-les-evenements.html">Tous les événements</a></li>
+                            <li><a href="categories.html">Catégories</a></li>
+                            <li><a href="carte.html">Carte interactive</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <p class="site-footer__heading">Pratique</p>
+                        <ul>
+                            <li><a href="#">Mon compte VillaNova</a></li>
+                            <li><a href="#">Tarifs solidaires</a></li>
+                            <li><a href="#">Accessibilité</a></li>
+                            <li><a href="#">Pass culture jeunes</a></li>
+                            <li><a href="#">Foire aux questions</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <p class="site-footer__heading">La Ville</p>
+                        <ul>
+                            <li><a href="#">Contact mairie</a></li>
+                            <li><a href="#">Service culturel</a></li>
+                            <li><a href="#">Devenir partenaire</a></li>
+                            <li><a href="#">Mécénat & subventions</a></li>
+                            <li><a href="#">Presse</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <p class="site-footer__heading">Mentions</p>
+                        <ul>
+                            <li><a href="#">Mentions légales</a></li>
+                            <li><a href="#">CGU</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Déclaration d'accessibilité</a></li>
+                            <li><a href="#">Gestion des cookies</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <p class="site-footer__wordmark" aria-hidden="true">VillaNova<span class="site-footer__wordmark-dot">.</span></p>
+            <div class="site-footer__bottom">
+                <small>© 2026 Mairie de VillaNova - Direction de la Culture</small>
+                <small>● Site éco-conçu · 0,8 g CO₂/page</small>
+                <small><a href="#">Accessibilité : conforme RGAA 4.1</a></small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Nav mobile -->
+    <nav class="bottom-nav" aria-label="Navigation rapide">
+        <a href="index.html" class="bottom-nav__item">
+            <img src="assets/icons/home.svg" alt="" width="18" height="18">
+            <span>Accueil</span>
+        </a>
+        <a href="tous-les-evenements.html" class="bottom-nav__item">
+            <img src="assets/icons/compass.svg" alt="" width="18" height="18">
+            <span>Explorer</span>
+        </a>
+        <a href="carte.html" class="bottom-nav__item">
+            <img src="assets/icons/map.svg" alt="" width="18" height="18">
+            <span>Carte</span>
+        </a>
+        <a href="favoris.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
+            <img src="assets/icons/heart-nav.svg" alt="" width="18" height="18">
+            <span>Favoris</span>
+        </a>
+        <a href="connexion.html" class="bottom-nav__item">
+            <img src="assets/icons/user.svg" alt="" width="18" height="18">
+            <span>Compte</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/event-card.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/favoris-page.js"></script>
+    <script src="js/mobile-menu.js"></script>
+</body>
+</html>
