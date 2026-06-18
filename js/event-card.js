@@ -121,6 +121,20 @@ window.VillaNova = window.VillaNova || {};
       media.appendChild(dateSpan);
     }
 
+    // bouton favori
+    const favBtn = document.createElement('button');
+    favBtn.type = 'button';
+    favBtn.className = 'event-card__fav';
+    favBtn.setAttribute('data-uid', String(event.uid));
+    favBtn.textContent = '♡';
+    favBtn.setAttribute('aria-label', 'Ajouter aux favoris');
+    favBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (VillaNova.favorites) VillaNova.favorites.toggle(event.uid);
+    });
+    media.appendChild(favBtn);
+
     article.appendChild(media);
 
     // corps
