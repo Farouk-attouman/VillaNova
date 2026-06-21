@@ -231,6 +231,12 @@
     @include hover {
       transform: translateX(4px);
       box-shadow: $shadow-sm;
+
+      .free-list__arrow {
+        background: $color-terracotta;
+        color: white;
+        border-color: $color-terracotta;
+      }
     }
 
     @include respond-to(tablet) {
@@ -273,10 +279,6 @@
 
   &__arrow {
     display: none;
-
-    @include respond-to(tablet) {
-      display: inline-flex;
-    }
     align-items: center;
     justify-content: center;
     width: 2rem;
@@ -286,15 +288,9 @@
     border: 1px solid $color-line;
     color: $color-ink-soft;
     transition: background $transition-base, color $transition-base;
-  }
 
-  &__item {
-    @include hover {
-      .free-list__arrow {
-        background: $color-terracotta;
-        color: white;
-        border-color: $color-terracotta;
-      }
+    @include respond-to(tablet) {
+      display: inline-flex;
     }
   }
 
@@ -358,14 +354,15 @@
     li {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: $space-4;
+      gap: 0 $space-4;
       align-items: start;
     }
 
     h3 {
       color: white;
       font-size: 1rem;
-      margin-bottom: $space-2;
+      margin-bottom: $space-1;
+      padding-top: 0.45rem;
     }
 
     p {

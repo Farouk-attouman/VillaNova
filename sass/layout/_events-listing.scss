@@ -59,7 +59,7 @@
     color: $color-bg;
     border-radius: $radius-pill;
     font-size: $fs-small;
-    font-weight: 500;
+    font-weight: $weight-medium;
   }
 
   &__clear {
@@ -67,9 +67,9 @@
     color: $color-terracotta;
     font-size: $fs-small;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: $weight-medium;
 
-    &:hover {
+    @include hover {
       text-decoration: underline;
     }
   }

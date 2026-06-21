@@ -131,19 +131,19 @@
       @include focus-ring;
       @include hover { background: rgba($color-forest, 0.05); }
 
-      img {
-        width: 36px;
-        height: 36px;
-        padding: 10px;
-        background: $color-bg-elev;
-        border: 1px solid $color-line;
-        border-radius: $radius-btn;
-      }
-
       &[aria-current="page"] {
         color: $color-forest;
         font-weight: $weight-semibold;
       }
+    }
+
+    a img {
+      width: 36px;
+      height: 36px;
+      padding: 10px;
+      background: $color-bg-elev;
+      border: 1px solid $color-line;
+      border-radius: $radius-btn;
     }
   }
 

@@ -59,8 +59,10 @@
     transition: transform $transition-fast;
   }
 
-  &:hover .map-marker__dot {
-    transform: scale(1.3);
+  @include hover {
+    .map-marker__dot {
+      transform: scale(1.3);
+    }
   }
 }
 
@@ -133,7 +135,7 @@
     text-decoration: none;
     margin-top: $space-2;
 
-    &:hover {
+    @include hover {
       text-decoration: underline;
     }
   }

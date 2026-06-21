@@ -24,28 +24,46 @@ window.VillaNova = window.VillaNova || {};
     'visite': { css: 'tag--expo', label: 'Visite' }
   };
 
+  // --- Petit utilitaire pour créer un élément HTML ---
+
+  function createEl(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  // --- Utilitaires de mise en forme ---
+
+  // Transforme un horaire en texte du genre "Sam. 12 oct · 20h30".
   function formatEventDate(timing) {
     if (!timing || !timing.begin) return '';
     const date = new Date(timing.begin);
+
     let dayStr = new Intl.DateTimeFormat('fr-FR', {
       weekday: 'short', day: 'numeric', month: 'short'
     }).format(date);
     dayStr = dayStr.charAt(0).toUpperCase() + dayStr.slice(1);
 
-    const h = date.getHours();
-    const m = date.getMinutes();
-    return dayStr + ' · ' + h + 'h' + (m < 10 ? '0' : '') + m;
+    const hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return dayStr + ' · ' + hours + 'h' + minutes;
   }
 
+  // Coupe un texte trop long sans casser le dernier mot.
   function truncate(text, max) {
     if (!text || text.length <= max) return text || '';
     return text.substring(0, max).replace(/\s+\S*$/, '') + '…';
   }
 
+  // Vide un élément de tous ses enfants.
   function clearChildren(el) {
     while (el.firstChild) el.removeChild(el.firstChild);
   }
 
+  // --- Déductions à partir des données de l'événement ---
+
+  // Devine la catégorie (Concert, Expo…) à partir des mots-clés / titre / description.
   function resolveTag(event) {
     let textes = [];
     if (event.keywords && event.keywords.fr) textes = textes.concat(event.keywords.fr);
@@ -53,16 +71,18 @@ window.VillaNova = window.VillaNova || {};
     if (event.description && event.description.fr) textes.push(event.description.fr);
 
     const combined = textes.join(' ').toLowerCase();
-    const keys = Object.keys(TAG_MAP);
-    for (let i = 0; i < keys.length; i++) {
-      if (combined.includes(keys[i])) return TAG_MAP[keys[i]];
+
+    for (const key of Object.keys(TAG_MAP)) {
+      if (combined.includes(key)) return TAG_MAP[key];
     }
     return { css: 'tag--concert', label: 'Événement' };
   }
 
+  // Détermine si l'événement est gratuit et le texte du prix à afficher.
   function extractPrice(event) {
     const conditions = (event.conditions && event.conditions.fr) || '';
     if (!conditions) return { label: 'Voir tarifs', free: false };
+
     const lower = conditions.toLowerCase();
     if (lower.includes('gratuit') || lower.includes('libre') || lower.includes('free')) {
       return { label: 'Gratuit', free: true };
@@ -70,35 +90,50 @@ window.VillaNova = window.VillaNova || {};
     return { label: truncate(conditions, 20), free: false };
   }
 
+  // Construit l'URL de l'image dans la taille demandée.
   function getImageUrl(event, size) {
     if (!event.image || !event.image.base) return null;
-    if (size === 'base' || !size) return event.image.base + event.image.filename;
 
-    if (event.image.variants) {
-      for (let i = 0; i < event.image.variants.length; i++) {
-        if (event.image.variants[i].type === size) {
-          return event.image.base + event.image.variants[i].filename;
-        }
-      }
+    // Par défaut : l'image de base.
+    if (size === 'base' || !size) {
+      return event.image.base + event.image.filename;
     }
+
+    // Sinon, on cherche la variante demandée (ex : "full").
+    if (event.image.variants) {
+      const variant = event.image.variants.find(function (v) {
+        return v.type === size;
+      });
+      if (variant) return event.image.base + variant.filename;
+    }
+
+    // Variante introuvable : on retombe sur l'image de base.
     return event.image.base + event.image.filename;
   }
 
-  function createEventCard(event, options) {
-    options = options || {};
-    const large = options.large || false;
+  // --- Construction d'une carte événement ---
 
-    const li = document.createElement('li');
-    if (large) li.className = 'featured-grid__hero';
+  // Le bouton "cœur" pour mettre en favori.
+  function buildFavButton(event) {
+    const btn = createEl('button', 'event-card__fav', '♡');
+    btn.type = 'button';
+    btn.setAttribute('data-uid', String(event.uid));
+    btn.setAttribute('aria-label', 'Ajouter aux favoris');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (VillaNova.favorites) VillaNova.favorites.toggle(event.uid);
+    });
+    return btn;
+  }
 
-    const article = document.createElement('article');
-    article.className = large ? 'event-card event-card--large' : 'event-card';
+  // La partie image : photo + étiquette + (date) + bouton favori.
+  function buildMedia(event, large) {
+    const media = createEl('div', large
+      ? 'event-card__media'
+      : 'event-card__media event-card__media--small');
 
-    // image
-    const media = document.createElement('div');
-    media.className = large ? 'event-card__media' : 'event-card__media event-card__media--small';
-
-    const img = document.createElement('img');
+    const img = createEl('img');
     img.src = getImageUrl(event, large ? 'full' : 'base') || 'assets/img/featured/event-nuit-sons.webp';
     img.alt = (event.title && event.title.fr) || 'Événement';
     img.width = large ? 900 : 600;
@@ -108,104 +143,91 @@ window.VillaNova = window.VillaNova || {};
     media.appendChild(img);
 
     const tagInfo = resolveTag(event);
-    const tag = document.createElement('span');
-    tag.className = 'tag ' + tagInfo.css;
-    tag.textContent = '● ' + tagInfo.label;
-    media.appendChild(tag);
+    media.appendChild(createEl('span', 'tag ' + tagInfo.css, '● ' + tagInfo.label));
 
-    // date sur l'image (carte large uniquement)
+    // Date sur l'image : uniquement sur la grande carte.
     if (large && event.firstTiming) {
-      const dateSpan = document.createElement('span');
-      dateSpan.className = 'event-card__date';
-      dateSpan.textContent = formatEventDate(event.firstTiming);
-      media.appendChild(dateSpan);
+      media.appendChild(createEl('span', 'event-card__date', formatEventDate(event.firstTiming)));
     }
 
-    // bouton favori
-    const favBtn = document.createElement('button');
-    favBtn.type = 'button';
-    favBtn.className = 'event-card__fav';
-    favBtn.setAttribute('data-uid', String(event.uid));
-    favBtn.textContent = '♡';
-    favBtn.setAttribute('aria-label', 'Ajouter aux favoris');
-    favBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (VillaNova.favorites) VillaNova.favorites.toggle(event.uid);
-    });
-    media.appendChild(favBtn);
+    media.appendChild(buildFavButton(event));
+    return media;
+  }
 
-    article.appendChild(media);
+  // Le bas de carte : lieu + prix.
+  function buildFooter(event) {
+    const footer = createEl('p', 'event-card__footer');
 
-    // corps
-    const body = document.createElement('div');
-    body.className = 'event-card__body';
-
-    if (!large && event.firstTiming) {
-      const dateP = document.createElement('p');
-      dateP.className = 'event-card__date';
-      dateP.textContent = formatEventDate(event.firstTiming);
-      body.appendChild(dateP);
-    }
-
-    const h3 = document.createElement('h3');
-    const link = document.createElement('a');
-    link.href = 'evenements.html?uid=' + event.uid;
-    link.textContent = (event.title && event.title.fr) || 'Événement';
-    h3.appendChild(link);
-    body.appendChild(h3);
-
-    if (large && event.description && event.description.fr) {
-      const desc = document.createElement('p');
-      desc.className = 'event-card__desc';
-      desc.textContent = truncate(event.description.fr, 120);
-      body.appendChild(desc);
-    }
-
-    // footer : lieu + prix
-    const footer = document.createElement('p');
-    footer.className = 'event-card__footer';
-
-    const location = document.createElement('span');
-    location.className = 'event-card__location';
-    const locIcon = document.createElement('img');
+    const location = createEl('span', 'event-card__location');
+    const locIcon = createEl('img');
     locIcon.src = 'assets/icons/location.svg';
     locIcon.alt = '';
     locIcon.width = 12;
     locIcon.height = 12;
     locIcon.setAttribute('aria-hidden', 'true');
     location.appendChild(locIcon);
-    location.appendChild(document.createTextNode(' ' + ((event.location && event.location.name) || 'Lieu à confirmer')));
+    const locName = (event.location && event.location.name) || 'Lieu à confirmer';
+    location.appendChild(document.createTextNode(' ' + locName));
     footer.appendChild(location);
 
     const priceInfo = extractPrice(event);
-    const price = document.createElement('span');
-    price.className = priceInfo.free ? 'event-card__price event-card__price--free' : 'event-card__price';
-    price.textContent = priceInfo.label;
-    footer.appendChild(price);
+    footer.appendChild(createEl('span',
+      priceInfo.free ? 'event-card__price event-card__price--free' : 'event-card__price',
+      priceInfo.label));
 
-    body.appendChild(footer);
-    article.appendChild(body);
+    return footer;
+  }
+
+  // La partie texte : (date) + titre + (description) + footer.
+  function buildBody(event, large) {
+    const body = createEl('div', 'event-card__body');
+
+    // Date au-dessus du titre : uniquement sur la petite carte.
+    if (!large && event.firstTiming) {
+      body.appendChild(createEl('p', 'event-card__date', formatEventDate(event.firstTiming)));
+    }
+
+    const h3 = createEl('h3');
+    const link = createEl('a', null, (event.title && event.title.fr) || 'Événement');
+    link.href = 'evenements.html?uid=' + event.uid;
+    h3.appendChild(link);
+    body.appendChild(h3);
+
+    // Description : uniquement sur la grande carte.
+    if (large && event.description && event.description.fr) {
+      body.appendChild(createEl('p', 'event-card__desc', truncate(event.description.fr, 120)));
+    }
+
+    body.appendChild(buildFooter(event));
+    return body;
+  }
+
+  // Assemble la carte complète.
+  function createEventCard(event, options) {
+    options = options || {};
+    const large = options.large || false;
+
+    const li = createEl('li', large ? 'featured-grid__hero' : null);
+    const article = createEl('article', large ? 'event-card event-card--large' : 'event-card');
+
+    article.appendChild(buildMedia(event, large));
+    article.appendChild(buildBody(event, large));
     li.appendChild(article);
     return li;
   }
 
-  // utilitaires partages entre les pages (grilles)
+  // --- Utilitaires partagés entre les pages (grilles) ---
+
   function showGridError(grid, message) {
-    const li = document.createElement('li');
-    li.className = 'listing-grid__loading';
+    const li = createEl('li', 'listing-grid__loading');
     li.setAttribute('role', 'alert');
-    const p = document.createElement('p');
-    p.textContent = message;
-    li.appendChild(p);
+    li.appendChild(createEl('p', null, message));
     grid.appendChild(li);
   }
 
   function announceToSR(container, message) {
-    const el = document.createElement('p');
-    el.className = 'visually-hidden';
+    const el = createEl('p', 'visually-hidden', message);
     el.setAttribute('role', 'status');
-    el.textContent = message;
     container.appendChild(el);
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);

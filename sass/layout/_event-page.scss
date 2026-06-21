@@ -16,13 +16,29 @@
     margin-bottom: $space-4;
   }
 
+  &__title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    margin-bottom: $space-5;
+  }
+
   &__title {
     font-family: $font-serif;
     font-weight: $weight-semibold;
     font-size: clamp(1.75rem, 5vw, 3rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    margin-bottom: $space-5;
+    flex: 1;
+  }
+
+  &__fav {
+    position: static;
+    flex-shrink: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.4rem;
+    margin-top: 0.3rem;
   }
 }
 
@@ -60,6 +76,17 @@
   }
 }
 
+.event-registration {
+  margin-bottom: $space-5;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 1rem;
+  }
+}
+
 .event-cover {
   margin: 0 0 $space-5;
   overflow: hidden;
@@ -94,21 +121,18 @@
     flex-direction: column;
     gap: $space-7;
 
-    section {
-      h2 {
-        font-size: $fs-h2;
-        margin-bottom: $space-4;
-      }
+    section h2 {
+      font-size: $fs-h2;
+      margin-bottom: $space-4;
+    }
 
-      p {
-        margin-bottom: $space-4;
-      }
+    section p { margin-bottom: $space-4; }
 
-      ul, ol {
-        padding-left: $space-5;
+    section ul,
+    section ol {
+      padding-left: $space-5;
 
-        li { margin-bottom: $space-2; }
-      }
+      li { margin-bottom: $space-2; }
     }
 
     abbr {

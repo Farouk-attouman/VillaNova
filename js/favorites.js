@@ -3,11 +3,14 @@
 window.VillaNova = window.VillaNova || {};
 
 (function () {
-  // set local pour eviter des requetes repetees
-  const favSet = new Set();
-  let loaded = false;
+  'use strict';
 
-  // charge tous les favoris de l'utilisateur au demarrage
+  // Liste locale des favoris (des uid), pour éviter de réinterroger la base sans arrêt.
+  const favSet = new Set();
+
+  // --- Chargement initial ---
+
+  // Récupère les favoris de l'utilisateur connecté et remplit favSet.
   async function loadUserFavorites() {
     const session = await VillaNova.auth.getSession();
     if (!session) return;
@@ -23,16 +26,16 @@ window.VillaNova = window.VillaNova || {};
     }
 
     favSet.clear();
-    for (let i = 0; i < data.length; i++) {
-      favSet.add(data[i].event_uid);
-    }
-    loaded = true;
+    data.forEach(function (row) {
+      favSet.add(row.event_uid);
+    });
 
-    // met a jour les boutons coeur deja affiches
     updateAllHearts();
   }
 
-  // ajoute ou retire un favori
+  // --- Ajout / retrait ---
+
+  // Ajoute ou retire un favori selon qu'il y est déjà ou non.
   async function toggle(uid) {
     const session = await VillaNova.auth.getSession();
     if (!session) {
@@ -43,54 +46,61 @@ window.VillaNova = window.VillaNova || {};
     uid = String(uid);
 
     if (favSet.has(uid)) {
-      // retirer
-      const { error } = await VillaNova.supabase
-        .from('favorites')
-        .delete()
-        .eq('user_id', session.user.id)
-        .eq('event_uid', uid);
-
-      if (!error) favSet.delete(uid);
+      await removeFavorite(session.user.id, uid);
     } else {
-      // ajouter
-      const { error } = await VillaNova.supabase
-        .from('favorites')
-        .insert({ user_id: session.user.id, event_uid: uid });
-
-      if (!error) favSet.add(uid);
+      await addFavorite(session.user.id, uid);
     }
 
     updateAllHearts();
   }
 
-  // verifie si un evenement est en favori (lecture locale)
+  // Enregistre un favori dans la base.
+  async function addFavorite(userId, uid) {
+    const { error } = await VillaNova.supabase
+      .from('favorites')
+      .insert({ user_id: userId, event_uid: uid });
+
+    if (!error) favSet.add(uid);
+  }
+
+  // Supprime un favori de la base.
+  async function removeFavorite(userId, uid) {
+    const { error } = await VillaNova.supabase
+      .from('favorites')
+      .delete()
+      .eq('user_id', userId)
+      .eq('event_uid', uid);
+
+    if (!error) favSet.delete(uid);
+  }
+
+  // --- Lecture ---
+
+  // Vrai si l'événement est en favori (lecture locale, sans requête).
   function isInList(uid) {
     return favSet.has(String(uid));
   }
 
-  // retourne tous les UIDs en favori
+  // Renvoie la liste de tous les uid en favori.
   function getAll() {
     return Array.from(favSet);
   }
 
-  // met a jour l'apparence de tous les boutons coeur sur la page
+  // --- Affichage des cœurs ---
+
+  // Met chaque bouton cœur de la page dans le bon état (plein / vide).
   function updateAllHearts() {
     const buttons = document.querySelectorAll('.event-card__fav');
-    for (let i = 0; i < buttons.length; i++) {
-      const uid = buttons[i].getAttribute('data-uid');
-      if (favSet.has(uid)) {
-        buttons[i].classList.add('event-card__fav--active');
-        buttons[i].textContent = '♥';
-        buttons[i].setAttribute('aria-label', 'Retirer des favoris');
-      } else {
-        buttons[i].classList.remove('event-card__fav--active');
-        buttons[i].textContent = '♡';
-        buttons[i].setAttribute('aria-label', 'Ajouter aux favoris');
-      }
-    }
+    buttons.forEach(function (btn) {
+      const isFav = favSet.has(btn.getAttribute('data-uid'));
+
+      btn.classList.toggle('event-card__fav--active', isFav);
+      btn.textContent = isFav ? '♥' : '♡';
+      btn.setAttribute('aria-label', isFav ? 'Retirer des favoris' : 'Ajouter aux favoris');
+    });
   }
 
-  // on charge les favoris au demarrage
+  // On charge les favoris au démarrage.
   loadUserFavorites();
 
   VillaNova.favorites = {

@@ -9,24 +9,52 @@
   const loadMoreBtn = document.getElementById('load-more');
   const countLink = document.querySelector('.section__header--featured .link-btn');
 
-  let currentOffset = 0;
-  let currentSearch = '';
-  const PAGE_SIZE = 5;
-
   if (!featuredGrid) return;
 
+  const PAGE_SIZE = 5;
+  let currentOffset = 0;
+  let currentSearch = '';
+
+  // --- Petits utilitaires ---
+
+  function createEl(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function addDays(date, n) {
+    const copy = new Date(date);
+    copy.setDate(copy.getDate() + n);
+    return copy;
+  }
+
+  function showLoading() {
+    VillaNova.clearChildren(featuredGrid);
+    const loadingLi = createEl('li', 'featured-grid__loading');
+    loadingLi.innerHTML = '<p>Chargement des événements…</p>';
+    featuredGrid.appendChild(loadingLi);
+  }
+
+  // --- Grille en vedette ---
+
+  function renderEvents(events, firstLarge) {
+    events.forEach(function (event, i) {
+      featuredGrid.appendChild(VillaNova.createEventCard(event, {
+        large: firstLarge && i === 0
+      }));
+    });
+  }
+
+  // Premier chargement (on repart de zéro).
   async function loadFeaturedEvents(params) {
     params = params || {};
     currentOffset = 0;
     currentSearch = params.search || '';
 
     featuredGrid.setAttribute('aria-busy', 'true');
-    VillaNova.clearChildren(featuredGrid);
-
-    const loadingLi = document.createElement('li');
-    loadingLi.className = 'featured-grid__loading';
-    loadingLi.innerHTML = '<p>Chargement des événements…</p>';
-    featuredGrid.appendChild(loadingLi);
+    showLoading();
 
     try {
       const data = await VillaNova.api.fetchEvents({
@@ -44,7 +72,6 @@
       }
 
       VillaNova.announceToSR(featuredGrid, data.events.length + ' événements chargés');
-
     } catch (err) {
       VillaNova.clearChildren(featuredGrid);
       showFeaturedError('Impossible de charger les événements. Veuillez réessayer.');
@@ -54,27 +81,7 @@
     }
   }
 
-  function renderEvents(events, firstLarge) {
-    for (let i = 0; i < events.length; i++) {
-      featuredGrid.appendChild(VillaNova.createEventCard(events[i], {
-        large: firstLarge && i === 0
-      }));
-    }
-  }
-
-  function updateCountLink(total) {
-    if (!countLink || !total) return;
-    VillaNova.clearChildren(countLink);
-    countLink.appendChild(document.createTextNode('Voir les ' + total + ' événements '));
-    const arrow = document.createElement('img');
-    arrow.src = 'assets/icons/arrow-right.svg';
-    arrow.alt = '';
-    arrow.width = 14;
-    arrow.height = 14;
-    arrow.setAttribute('aria-hidden', 'true');
-    countLink.appendChild(arrow);
-  }
-
+  // Bouton "Voir plus" : page suivante, même recherche.
   async function loadMore() {
     currentOffset += PAGE_SIZE;
     loadMoreBtn.disabled = true;
@@ -102,7 +109,31 @@
     }
   }
 
-  // filtres categorie
+  // Met à jour le lien "Voir les N événements".
+  function updateCountLink(total) {
+    if (!countLink || !total) return;
+
+    VillaNova.clearChildren(countLink);
+    countLink.appendChild(document.createTextNode('Voir les ' + total + ' événements '));
+
+    const arrow = createEl('img');
+    arrow.src = 'assets/icons/arrow-right.svg';
+    arrow.alt = '';
+    arrow.width = 14;
+    arrow.height = 14;
+    arrow.setAttribute('aria-hidden', 'true');
+    countLink.appendChild(arrow);
+  }
+
+  function showFeaturedError(message) {
+    const li = createEl('li', 'featured-grid__loading');
+    li.setAttribute('role', 'alert');
+    li.innerHTML = '<p>' + message + '</p>';
+    featuredGrid.appendChild(li);
+  }
+
+  // --- Filtres par catégorie ---
+
   catFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       const active = document.querySelector('.cat-filter--active');
@@ -114,21 +145,29 @@
     });
   });
 
-  // recherche hero → redirige vers tous-les-evenements.html
+  if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMore);
+
+  // --- Recherche du hero : redirige vers la page "tous les événements" ---
+
   if (heroSearch) {
     heroSearch.addEventListener('submit', function (e) {
       e.preventDefault();
+
       const fd = new FormData(heroSearch);
       const p = new URLSearchParams();
-      if (fd.get('date')) p.set('date', fd.get('date'));
-      if (fd.get('category')) p.set('category', fd.get('category'));
-      if (fd.get('location')) p.set('location', fd.get('location'));
+
+      ['date', 'category', 'location'].forEach(function (field) {
+        const value = fd.get(field);
+        if (value) p.set(field, value);
+      });
+
       const q = p.toString();
       window.location.href = 'tous-les-evenements.html' + (q ? '?' + q : '');
     });
   }
 
-  // filtres rapides du hero
+  // --- Filtres rapides du hero ---
+
   const quickFilters = document.querySelectorAll('.quick-filter');
   const quickMap = {
     "Aujourd'hui": 'date=aujourdhui',
@@ -137,6 +176,7 @@
     'En famille': 'category=famille',
     'Éco-responsable': 'category=eco'
   };
+
   quickFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       const q = quickMap[btn.textContent.trim()];
@@ -144,16 +184,7 @@
     });
   });
 
-  if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMore);
-
-  // erreur dans la grille featured (classe differente de listing-grid)
-  function showFeaturedError(message) {
-    const li = document.createElement('li');
-    li.className = 'featured-grid__loading';
-    li.setAttribute('role', 'alert');
-    li.innerHTML = '<p>' + message + '</p>';
-    featuredGrid.appendChild(li);
-  }
+  // --- Compteur d'événements (badge du hero) ---
 
   async function updateEventCount() {
     try {
@@ -170,23 +201,29 @@
     }
   }
 
+  // --- Libellé "Semaine du … au …" ---
+
   function updateHeroWeek() {
     const el = document.getElementById('hero-week');
     if (!el) return;
 
     const now = new Date();
     const day = now.getDay();
-    const monday = new Date(now);
-    monday.setDate(now.getDate() + (day === 0 ? -6 : 1 - day));
-    const sunday = new Date(monday);
-    sunday.setDate(monday.getDate() + 6);
+    const monday = addDays(now, day === 0 ? -6 : 1 - day);
+    const sunday = addDays(monday, 6);
 
-    const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+      'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+
     let text = 'Semaine du ' + monday.getDate();
+    // Si début et fin sont dans deux mois différents, on précise le mois de début.
     if (monday.getMonth() !== sunday.getMonth()) text += ' ' + mois[monday.getMonth()];
     text += ' au ' + sunday.getDate() + ' ' + mois[sunday.getMonth()];
+
     el.textContent = text;
   }
+
+  // --- Démarrage ---
 
   updateHeroWeek();
   loadFeaturedEvents();

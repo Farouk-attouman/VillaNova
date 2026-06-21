@@ -41,6 +41,35 @@
     }
   }
 
+  &__fav {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+    z-index: 2;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(white, 0.85);
+    backdrop-filter: blur(6px);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform $transition-base, background $transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include hover {
+      transform: scale(1.15);
+      background: rgba(white, 1);
+    }
+
+    &--active {
+      color: $color-terracotta;
+    }
+  }
+
   &__date {
     position: absolute;
     bottom: $space-3;
@@ -80,19 +109,19 @@
     h3 {
       font-size: 1.1rem;
       line-height: $lh-snug;
+    }
 
-      a {
-        color: $color-ink;
-        transition: color $transition-base;
-        @include focus-ring;
-        @include hover { color: $color-forest; }
+    h3 a {
+      color: $color-ink;
+      transition: color $transition-base;
+      @include focus-ring;
+      @include hover { color: $color-forest; }
 
-        // Zone cliquable étendue à toute la carte
-        &::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-        }
+      // Zone cliquable étendue à toute la carte
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
       }
     }
   }
@@ -174,10 +203,13 @@
 
   @include hover {
     transform: translateY(-2px);
+
     img {
       transform: scale(1.05);
       opacity: 0.6;
     }
+
+    .cat-card__cta { color: white; }
   }
 
   &__num {
@@ -214,10 +246,6 @@
     font-size: $fs-small;
     color: rgba(white, 0.85);
     transition: color $transition-base;
-  }
-
-  @include hover {
-    .cat-card__cta { color: white; }
   }
 
   &--active {

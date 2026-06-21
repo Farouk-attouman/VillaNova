@@ -13,19 +13,46 @@
 
   if (!catCards.length || !resultsSection) return;
 
+  const PAGE_SIZE = 12;
   let currentOffset = 0;
   let currentCategory = '';
-  const PAGE_SIZE = 12;
 
+  // --- Sélection de la carte active ---
+
+  // Enlève la carte active actuelle et active celle passée en paramètre.
+  function setActiveCard(card) {
+    const active = document.querySelector('.cat-card--active');
+    if (active) active.classList.remove('cat-card--active');
+    if (card) card.classList.add('cat-card--active');
+  }
+
+  // Clic sur une carte de catégorie.
   catCards.forEach(function (card) {
     card.addEventListener('click', function () {
-      const active = document.querySelector('.cat-card--active');
-      if (active) active.classList.remove('cat-card--active');
-      card.classList.add('cat-card--active');
+      setActiveCard(card);
       loadCategoryEvents(card.getAttribute('data-category'));
     });
   });
 
+  // --- Affichage des événements ---
+
+  // Affiche un message "Chargement…" dans la grille.
+  function showLoading() {
+    VillaNova.clearChildren(resultsGrid);
+    const loadingLi = document.createElement('li');
+    loadingLi.className = 'listing-grid__loading';
+    loadingLi.innerHTML = '<p>Chargement des événements…</p>';
+    resultsGrid.appendChild(loadingLi);
+  }
+
+  // Ajoute une carte d'événement par événement reçu.
+  function renderEvents(events) {
+    for (const event of events) {
+      resultsGrid.appendChild(VillaNova.createEventCard(event, { large: false }));
+    }
+  }
+
+  // Premier chargement d'une catégorie (on repart de zéro).
   async function loadCategoryEvents(category) {
     currentCategory = category;
     currentOffset = 0;
@@ -33,13 +60,7 @@
     resultsSection.hidden = false;
     resultsTitle.textContent = 'Événements : ' + category;
     resultsGrid.setAttribute('aria-busy', 'true');
-    VillaNova.clearChildren(resultsGrid);
-
-    const loadingLi = document.createElement('li');
-    loadingLi.className = 'listing-grid__loading';
-    loadingLi.innerHTML = '<p>Chargement des événements…</p>';
-    resultsGrid.appendChild(loadingLi);
-
+    showLoading();
     resultsSection.scrollIntoView({ behavior: 'smooth' });
 
     try {
@@ -58,7 +79,6 @@
       }
 
       VillaNova.announceToSR(resultsGrid, data.events.length + ' événements chargés pour ' + category);
-
     } catch (err) {
       VillaNova.clearChildren(resultsGrid);
       VillaNova.showGridError(resultsGrid, 'Impossible de charger les événements. Veuillez réessayer.');
@@ -68,12 +88,7 @@
     }
   }
 
-  function renderEvents(events) {
-    for (let i = 0; i < events.length; i++) {
-      resultsGrid.appendChild(VillaNova.createEventCard(events[i], { large: false }));
-    }
-  }
-
+  // Bouton "Voir plus" : ajoute la page suivante à la suite.
   async function loadMore() {
     currentOffset += PAGE_SIZE;
     loadMoreBtn.disabled = true;
@@ -96,29 +111,27 @@
     }
   }
 
+  // --- Boutons ---
+
+  if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMore);
+
   if (resetBtn) {
     resetBtn.addEventListener('click', function () {
       resultsSection.hidden = true;
-      const active = document.querySelector('.cat-card--active');
-      if (active) active.classList.remove('cat-card--active');
+      setActiveCard(null);
       currentCategory = '';
       currentOffset = 0;
     });
   }
 
-  if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMore);
+  // --- Pré-filtrage via ?cat= dans l'URL ---
 
-  // pre-filtrage via ?cat= dans l'URL
   const catParam = new URLSearchParams(window.location.search).get('cat');
   if (catParam) {
-    let matched = false;
-    catCards.forEach(function (card) {
-      if (card.getAttribute('data-category') === catParam) {
-        card.classList.add('cat-card--active');
-        loadCategoryEvents(catParam);
-        matched = true;
-      }
+    const card = Array.from(catCards).find(function (c) {
+      return c.getAttribute('data-category') === catParam;
     });
-    if (!matched) loadCategoryEvents(catParam);
+    setActiveCard(card || null);
+    loadCategoryEvents(catParam);
   }
 })();

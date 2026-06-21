@@ -5,20 +5,23 @@ window.VillaNova = window.VillaNova || {};
 (function () {
   'use strict';
 
-  const SUPABASE_URL = 'https://vqnyrjxnsyndnvmxoqzr.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_BjjvJlNPGP1mT_ypqaAvYA_B_0yyr8F';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const supabase = window.supabase.createClient(
+    VillaNova.config.supabaseUrl,
+    VillaNova.config.supabaseAnonKey
+  );
+
+  // --- Appels à Supabase ---
 
   async function signUp(email, password, name) {
     return supabase.auth.signUp({
-      email: email,
-      password: password,
+      email,
+      password,
       options: { data: { display_name: name } }
     });
   }
 
   async function signIn(email, password) {
-    return supabase.auth.signInWithPassword({ email: email, password: password });
+    return supabase.auth.signInWithPassword({ email, password });
   }
 
   async function signInWithGoogle() {
@@ -38,6 +41,7 @@ window.VillaNova = window.VillaNova || {};
     return result.data.session;
   }
 
+  // Trouve un nom à afficher pour l'utilisateur connecté.
   function getUserName(session) {
     if (!session || !session.user) return null;
     const meta = session.user.user_metadata || {};
@@ -45,157 +49,185 @@ window.VillaNova = window.VillaNova || {};
            || session.user.email.split('@')[0];
   }
 
-  // met a jour le header sur toutes les pages si connecte
+  // --- Petit utilitaire pour créer un élément HTML ---
+
+  function createEl(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text) el.textContent = text;
+    return el;
+  }
+
+  // --- Mise à jour de l'affichage quand on est connecté ---
+
   async function updateAuthUI() {
     const session = await getSession();
     if (!session) return;
 
     const name = getUserName(session);
 
+    updateHeaderActions(name);
+    updateMobileMenu(name);
+    updateBottomNav();
+  }
+
+  // En-tête du haut (version bureau).
+  function updateHeaderActions(name) {
     const actions = document.querySelector('.site-header__actions');
-    if (actions) {
-      const ghostBtn = actions.querySelector('.btn--ghost');
-      const primaryBtn = actions.querySelector('.btn--primary');
-      if (ghostBtn) ghostBtn.remove();
-      if (primaryBtn) primaryBtn.remove();
+    if (!actions) return;
 
-      const userSpan = document.createElement('span');
-      userSpan.className = 'auth-user';
-      userSpan.textContent = name;
+    // On enlève les boutons "Connexion / Inscription".
+    const ghostBtn = actions.querySelector('.btn--ghost');
+    const primaryBtn = actions.querySelector('.btn--primary');
+    if (ghostBtn) ghostBtn.remove();
+    if (primaryBtn) primaryBtn.remove();
 
-      const logoutBtn = document.createElement('button');
-      logoutBtn.type = 'button';
-      logoutBtn.className = 'btn btn--ghost btn--sm';
-      logoutBtn.textContent = 'Déconnexion';
-      logoutBtn.addEventListener('click', signOut);
+    // On affiche le nom + un bouton de déconnexion.
+    const userSpan = createEl('span', 'auth-user', name);
 
-      actions.appendChild(userSpan);
-      actions.appendChild(logoutBtn);
-    }
+    const logoutBtn = createEl('button', 'btn btn--ghost btn--sm', 'Déconnexion');
+    logoutBtn.type = 'button';
+    logoutBtn.addEventListener('click', signOut);
 
-    // menu mobile
+    actions.appendChild(userSpan);
+    actions.appendChild(logoutBtn);
+  }
+
+  // Menu mobile.
+  function updateMobileMenu(name) {
     const mobileActions = document.querySelector('.mobile-menu__actions');
-    if (mobileActions) {
-      VillaNova.clearChildren(mobileActions);
+    if (!mobileActions) return;
 
-      const userP = document.createElement('p');
-      userP.className = 'auth-user auth-user--mobile';
-      userP.textContent = 'Bonjour, ' + name;
-      mobileActions.appendChild(userP);
+    VillaNova.clearChildren(mobileActions);
 
-      const logoutLink = document.createElement('a');
-      logoutLink.href = '#';
-      logoutLink.className = 'btn btn--ghost btn--full';
-      logoutLink.textContent = 'Déconnexion';
-      logoutLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        signOut();
-      });
-      mobileActions.appendChild(logoutLink);
-    }
+    const userP = createEl('p', 'auth-user auth-user--mobile', 'Bonjour, ' + name);
+    mobileActions.appendChild(userP);
 
+    const logoutLink = createEl('a', 'btn btn--ghost btn--full', 'Déconnexion');
+    logoutLink.href = '#';
+    logoutLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      signOut();
+    });
+    mobileActions.appendChild(logoutLink);
+  }
+
+  // Barre du bas : le lien "Connexion" devient "Compte".
+  function updateBottomNav() {
     const bottomAccount = document.querySelector('.bottom-nav__item[href="connexion.html"]');
     if (bottomAccount) bottomAccount.href = 'compte.html';
   }
 
-  // formulaires de la page connexion.html
+  // --- Page connexion.html ---
+
   function initAuthForms() {
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
     if (!loginForm && !signupForm) return;
 
+    // Déjà connecté ? On repart vers l'accueil.
     getSession().then(function (session) {
       if (session) window.location.href = 'index.html';
     });
 
-    // onglets
-    const tabLogin = document.getElementById('tab-login');
-    const tabSignup = document.getElementById('tab-signup');
-    const panelLogin = document.getElementById('panel-login');
-    const panelSignup = document.getElementById('panel-signup');
-
-    if (tabLogin && tabSignup) {
-      tabLogin.addEventListener('click', function () {
-        tabLogin.classList.add('auth-tabs__tab--active');
-        tabLogin.setAttribute('aria-selected', 'true');
-        tabSignup.classList.remove('auth-tabs__tab--active');
-        tabSignup.setAttribute('aria-selected', 'false');
-        panelLogin.hidden = false;
-        panelSignup.hidden = true;
-      });
-
-      tabSignup.addEventListener('click', function () {
-        tabSignup.classList.add('auth-tabs__tab--active');
-        tabSignup.setAttribute('aria-selected', 'true');
-        tabLogin.classList.remove('auth-tabs__tab--active');
-        tabLogin.setAttribute('aria-selected', 'false');
-        panelSignup.hidden = false;
-        panelLogin.hidden = true;
-      });
-
-      if (window.location.hash === '#inscription') tabSignup.click();
-    }
-
-    if (loginForm) {
-      loginForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        clearFormErrors(loginForm);
-
-        const email = document.getElementById('login-email').value.trim();
-        const password = document.getElementById('login-password').value;
-
-        if (!email || !password) {
-          showMsg('login-global-error', 'Veuillez remplir tous les champs.');
-          return;
-        }
-
-        setLoading('login-submit', true, 'Se connecter');
-        const result = await signIn(email, password);
-        setLoading('login-submit', false, 'Se connecter');
-
-        if (result.error) {
-          showMsg('login-global-error', 'Email ou mot de passe incorrect.');
-        } else {
-          window.location.href = 'index.html';
-        }
-      });
-    }
-
-    if (signupForm) {
-      signupForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        clearFormErrors(signupForm);
-
-        const name = document.getElementById('signup-name').value.trim();
-        const email = document.getElementById('signup-email').value.trim();
-        const password = document.getElementById('signup-password').value;
-
-        if (!name || !email || !password) {
-          showMsg('signup-global-error', 'Veuillez remplir tous les champs.');
-          return;
-        }
-        if (password.length < 6) {
-          showMsg('signup-password-error', 'Le mot de passe doit contenir au moins 6 caractères.');
-          return;
-        }
-
-        setLoading('signup-submit', true, 'Créer mon compte');
-        const result = await signUp(email, password, name);
-        setLoading('signup-submit', false, 'Créer mon compte');
-
-        if (result.error) {
-          showMsg('signup-global-error', result.error.message);
-        } else if (result.data.session) {
-          window.location.href = 'index.html';
-        } else {
-          showMsg('signup-success', 'Compte créé ! Vérifiez votre email pour confirmer votre inscription.');
-        }
-      });
-    }
+    initTabs();
+    initLoginForm(loginForm);
+    initSignupForm(signupForm);
 
     const googleBtn = document.getElementById('google-login');
     if (googleBtn) googleBtn.addEventListener('click', signInWithGoogle);
   }
+
+  // Bascule entre les onglets "Connexion" et "Inscription".
+  function initTabs() {
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const panelLogin = document.getElementById('panel-login');
+    const panelSignup = document.getElementById('panel-signup');
+    if (!tabLogin || !tabSignup) return;
+
+    tabLogin.addEventListener('click', function () {
+      showTab(tabLogin, panelLogin, tabSignup, panelSignup);
+    });
+    tabSignup.addEventListener('click', function () {
+      showTab(tabSignup, panelSignup, tabLogin, panelLogin);
+    });
+
+    if (window.location.hash === '#inscription') tabSignup.click();
+  }
+
+  // Active un onglet + son panneau, désactive l'autre.
+  function showTab(activeTab, activePanel, otherTab, otherPanel) {
+    activeTab.classList.add('auth-tabs__tab--active');
+    activeTab.setAttribute('aria-selected', 'true');
+    otherTab.classList.remove('auth-tabs__tab--active');
+    otherTab.setAttribute('aria-selected', 'false');
+    activePanel.hidden = false;
+    otherPanel.hidden = true;
+  }
+
+  function initLoginForm(loginForm) {
+    if (!loginForm) return;
+
+    loginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearFormErrors(loginForm);
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showMsg('login-global-error', 'Veuillez remplir tous les champs.');
+        return;
+      }
+
+      setLoading('login-submit', true, 'Se connecter');
+      const result = await signIn(email, password);
+      setLoading('login-submit', false, 'Se connecter');
+
+      if (result.error) {
+        showMsg('login-global-error', 'Email ou mot de passe incorrect.');
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+  }
+
+  function initSignupForm(signupForm) {
+    if (!signupForm) return;
+
+    signupForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearFormErrors(signupForm);
+
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+
+      if (!name || !email || !password) {
+        showMsg('signup-global-error', 'Veuillez remplir tous les champs.');
+        return;
+      }
+      if (password.length < 6) {
+        showMsg('signup-password-error', 'Le mot de passe doit contenir au moins 6 caractères.');
+        return;
+      }
+
+      setLoading('signup-submit', true, 'Créer mon compte');
+      const result = await signUp(email, password, name);
+      setLoading('signup-submit', false, 'Créer mon compte');
+
+      if (result.error) {
+        showMsg('signup-global-error', result.error.message);
+      } else if (result.data.session) {
+        window.location.href = 'index.html';
+      } else {
+        showMsg('signup-success', 'Compte créé ! Vérifiez votre email pour confirmer votre inscription.');
+      }
+    });
+  }
+
+  // --- Affichage des messages ---
 
   function showMsg(id, message) {
     const el = document.getElementById(id);
@@ -206,9 +238,9 @@ window.VillaNova = window.VillaNova || {};
 
   function clearFormErrors(form) {
     const errors = form.querySelectorAll('.auth-form__error, .auth-form__success');
-    for (let i = 0; i < errors.length; i++) {
-      errors[i].hidden = true;
-      errors[i].textContent = '';
+    for (const error of errors) {
+      error.hidden = true;
+      error.textContent = '';
     }
   }
 
@@ -218,6 +250,8 @@ window.VillaNova = window.VillaNova || {};
     btn.disabled = loading;
     btn.textContent = loading ? 'Chargement…' : label;
   }
+
+  // --- Démarrage ---
 
   updateAuthUI();
   initAuthForms();
