@@ -51,7 +51,7 @@
     return html;
   }
 
-  // Crée un marqueur pour un événement, ou null s'il n'a pas de coordonnées.
+  // Crée un marqueur pour un événement
   function createMarker(event) {
     const loc = event.location;
     if (!loc || !loc.latitude || !loc.longitude) return null;

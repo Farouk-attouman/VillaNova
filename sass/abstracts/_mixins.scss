@@ -48,7 +48,7 @@
 }
 
 // Label mono au-dessus des titres
-@mixin eyebrow($color: $color-terracotta) {
+@mixin eyebrow($color: #AD4C33) {
   font-family: $font-mono;
   font-size: $fs-eyebrow;
   font-weight: $weight-semibold;

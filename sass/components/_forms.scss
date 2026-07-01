@@ -103,7 +103,7 @@
       margin-block: $space-3 $space-4;
       line-height: $lh-snug;
     }
-    p { color: rgba($color-ink, 0.75); }
+    p { color: rgba($color-ink, 0.85); }
   }
 
   &__form {
@@ -153,7 +153,7 @@
 
   &__note {
     font-size: $fs-small;
-    color: rgba($color-ink, 0.7);
+    color: rgba($color-ink, 0.85);
     margin-top: $space-4;
     max-width: none;
   }

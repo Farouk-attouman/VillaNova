@@ -42,6 +42,7 @@
   // --- Lecture des filtres dans l'URL ---
 
   // Calcule la période (début / fin) selon le mot-clé de date choisi.
+  // La date de début ne recule jamais avant aujourd'hui (évite les événements passés).
   function getDateRange(keyword) {
     const now = new Date();
 
@@ -57,7 +58,9 @@
       // Lundi de la semaine en cours (dimanche = 0, d'où le cas particulier).
       const monday = addDays(now, day === 0 ? -6 : 1 - day);
       const sunday = addDays(monday, 6);
-      return { start: monday, end: sunday };
+      // Ne pas remonter avant aujourd'hui
+      const start = monday < now ? now : monday;
+      return { start: start, end: sunday };
     }
     if (keyword === 'weekend') {
       const day = now.getDay();
@@ -66,7 +69,9 @@
       if (day === 0) daysToSat = -1;  // dimanche : le samedi était hier
       const saturday = addDays(now, daysToSat);
       const sunday = addDays(saturday, 1);
-      return { start: saturday, end: sunday };
+      // Ne pas remonter avant aujourd'hui
+      const start = saturday < now ? now : saturday;
+      return { start: start, end: sunday };
     }
     return null;
   }

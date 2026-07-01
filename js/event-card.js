@@ -50,6 +50,20 @@ window.VillaNova = window.VillaNova || {};
     return dayStr + ' · ' + hours + 'h' + minutes;
   }
 
+  // Parmi tous les timings d'un événement, renvoie le prochain à venir
+  // (ou le dernier en cours). Retombe sur firstTiming si aucun ne convient.
+  function getNextTiming(event) {
+    if (!event.timings || !event.timings.length) return event.firstTiming || null;
+    const now = new Date();
+    // Chercher le premier timing dont la fin est dans le futur
+    for (var i = 0; i < event.timings.length; i++) {
+      var end = new Date(event.timings[i].end);
+      if (end >= now) return event.timings[i];
+    }
+    // Aucun trouvé : renvoyer le dernier
+    return event.timings[event.timings.length - 1];
+  }
+
   // Coupe un texte trop long sans casser le dernier mot.
   function truncate(text, max) {
     if (!text || text.length <= max) return text || '';
@@ -146,8 +160,9 @@ window.VillaNova = window.VillaNova || {};
     media.appendChild(createEl('span', 'tag ' + tagInfo.css, '● ' + tagInfo.label));
 
     // Date sur l'image : uniquement sur la grande carte.
-    if (large && event.firstTiming) {
-      media.appendChild(createEl('span', 'event-card__date', formatEventDate(event.firstTiming)));
+    const mediaTiming = getNextTiming(event);
+    if (large && mediaTiming) {
+      media.appendChild(createEl('span', 'event-card__date', formatEventDate(mediaTiming)));
     }
 
     media.appendChild(buildFavButton(event));
@@ -183,8 +198,9 @@ window.VillaNova = window.VillaNova || {};
     const body = createEl('div', 'event-card__body');
 
     // Date au-dessus du titre : uniquement sur la petite carte.
-    if (!large && event.firstTiming) {
-      body.appendChild(createEl('p', 'event-card__date', formatEventDate(event.firstTiming)));
+    const bodyTiming = getNextTiming(event);
+    if (!large && bodyTiming) {
+      body.appendChild(createEl('p', 'event-card__date', formatEventDate(bodyTiming)));
     }
 
     const h3 = createEl('h3');
@@ -226,8 +242,13 @@ window.VillaNova = window.VillaNova || {};
   }
 
   function announceToSR(container, message) {
-    const el = createEl('p', 'visually-hidden', message);
-    el.setAttribute('role', 'status');
+    const p = createEl('p', 'visually-hidden', message);
+    p.setAttribute('role', 'status');
+
+    // Si le conteneur est une liste, envelopper dans un <li>
+    const el = container.tagName === 'UL' ? createEl('li') : p;
+    if (container.tagName === 'UL') el.appendChild(p);
+
     container.appendChild(el);
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
